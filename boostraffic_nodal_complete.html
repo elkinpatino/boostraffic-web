@@ -142,38 +142,90 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
         
-        /* LOGO MEJORADO */
+        /* LOGO ÉPICO CON RAYO */
         .logo {
             font-family: "Bricolage Grotesque";
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -2px;
             position: relative;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
+            padding: 0.6rem 1.5rem 0.6rem 1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
         
+        /* Icono de rayo animado */
         .logo::before {
+            content: '⚡';
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 15px var(--accent));
+            animation: zapPulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes zapPulse {
+            0%, 100% { 
+                filter: drop-shadow(0 0 15px var(--accent)) brightness(1);
+                transform: scale(1) rotate(0deg);
+            }
+            50% { 
+                filter: drop-shadow(0 0 30px var(--accent)) brightness(1.5);
+                transform: scale(1.1) rotate(-5deg);
+            }
+        }
+        
+        /* Fondo con gradiente holográfico */
+        .logo::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: var(--gradient);
-            opacity: 0.1;
-            border-radius: 12px;
+            background: linear-gradient(45deg, 
+                rgba(0, 242, 255, 0.15) 0%,
+                rgba(0, 102, 255, 0.15) 50%,
+                rgba(0, 242, 255, 0.15) 100%);
+            background-size: 200% 200%;
+            border-radius: 16px;
             z-index: -1;
-            transition: opacity 0.3s ease;
+            opacity: 0.5;
+            animation: gradientShift 3s ease infinite;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            box-shadow: 
+                0 0 20px rgba(0, 242, 255, 0.2),
+                inset 0 0 20px rgba(0, 242, 255, 0.1);
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Efecto hover EXPLOSIVO */
+        .logo:hover {
+            transform: translateY(-4px) scale(1.05);
+            filter: drop-shadow(0 0 40px var(--accent-glow));
         }
         
         .logo:hover::before {
-            opacity: 0.2;
+            animation: zapExplode 0.6s ease-out;
         }
         
-        .logo:hover {
-            transform: translateY(-2px);
-            filter: drop-shadow(0 0 20px var(--accent-glow));
+        @keyframes zapExplode {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(15deg); filter: drop-shadow(0 0 50px var(--accent)) brightness(2); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        
+        .logo:hover::after {
+            opacity: 1;
+            box-shadow: 
+                0 0 40px rgba(0, 242, 255, 0.4),
+                inset 0 0 30px rgba(0, 242, 255, 0.2);
         }
         
         .nav-status {
@@ -557,8 +609,13 @@
             }
             
             .logo {
-                font-size: 1.5rem;
-                padding: 0.4rem 0.8rem;
+                font-size: 1.8rem;
+                padding: 0.5rem 1rem 0.5rem 0.8rem;
+                gap: 0.6rem;
+            }
+            
+            .logo::before {
+                font-size: 1.6rem;
             }
             
             .nav-status {
