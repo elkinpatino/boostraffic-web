@@ -127,12 +127,14 @@
             position: relative;
         }
         
-        /* HEADER MEJORADO */
+        /* HEADER MEJORADO - CENTRADO Y FULL WIDTH */
         header {
             padding: 1.5rem 0;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            gap: 1rem;
             position: sticky;
             top: 0;
             backdrop-filter: blur(20px) saturate(180%);
@@ -140,6 +142,8 @@
             z-index: 100;
             border-bottom: 1px solid var(--border);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
         }
         
         /* LOGO ÉPICO CON RAYO */
@@ -605,7 +609,8 @@
             }
             
             header {
-                padding: 1rem 0;
+                padding: 1.2rem 0;
+                gap: 0.8rem;
             }
             
             .logo {
@@ -619,9 +624,9 @@
             }
             
             .nav-status {
-                font-size: 0.75rem;
-                padding: 0.5rem 1rem;
-                gap: 0.5rem;
+                font-size: 0.7rem;
+                padding: 0.4rem 1rem;
+                gap: 0.4rem;
             }
             
             .hero {
