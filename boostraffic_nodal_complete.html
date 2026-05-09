@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoostrAffic | Sistema de Optimización GMB de Alto Rendimiento</title>
+    <meta name="facebook-domain-verification" content="51u514k2d0j222f83vj2j8yyru3mu5" />
+    <title>BoostrAffic | Sistema de Optimización GMB Nivel Silicon Valley</title>
+    <meta name="description" content="Agencia de optimización GMB con tecnología de Silicon Valley. Algoritmos de IA, automatización 24/7 y resultados medibles en 90 días.">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=General+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -127,7 +129,6 @@
             position: relative;
         }
         
-        /* HEADER MEJORADO - CENTRADO Y FULL WIDTH */
         header {
             padding: 1.5rem 0;
             display: flex;
@@ -146,7 +147,6 @@
             margin-left: calc(-50vw + 50%);
         }
         
-        /* LOGO CIRCULAR ÉPICO */
         .logo-image {
             width: 120px;
             height: 120px;
@@ -158,12 +158,8 @@
         }
         
         @keyframes logoGlow {
-            0%, 100% { 
-                filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.5));
-            }
-            50% { 
-                filter: drop-shadow(0 0 50px rgba(0, 242, 255, 0.8));
-            }
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 50px rgba(0, 242, 255, 0.8)); }
         }
         
         .logo-image:hover {
@@ -271,6 +267,8 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
+            cursor: pointer;
+            border: none;
         }
         
         .cta-primary:hover {
@@ -395,6 +393,60 @@
             line-height: 1.8;
         }
         
+        .pricing-card {
+            background: var(--bg-layer);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-top: 4rem;
+            box-shadow: 0 0 60px rgba(0, 242, 255, 0.2);
+        }
+        
+        .pricing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-details h3 {
+            font-family: 'Bricolage Grotesque';
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-details p {
+            color: var(--text-dim);
+        }
+        
+        .pricing-amount {
+            text-align: right;
+        }
+        
+        .price-setup {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-value {
+            font-family: 'Bricolage Grotesque';
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .price-monthly {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+        
         .final-cta {
             margin: 10rem 0 8rem;
             background: var(--gradient);
@@ -461,6 +513,9 @@
             font-size: 1.2rem;
             text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: "General Sans", sans-serif;
         }
         
         .cta-dark:hover {
@@ -484,6 +539,189 @@
             background: #000;
             color: var(--accent);
             transform: translateY(-5px);
+        }
+        
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: var(--card);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 60px rgba(0, 242, 255, 0.3);
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .modal-close:hover {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-badge {
+            display: inline-block;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .modal-title {
+            font-family: "Bricolage Grotesque";
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--text);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: "General Sans", sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+        
+        .form-input::placeholder {
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+        
+        .form-submit {
+            width: 100%;
+            background: var(--gradient);
+            color: #000;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "General Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+        
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.4);
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .success-message.active {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-title {
+            font-family: "Bricolage Grotesque";
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .success-text {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
         }
         
         footer {
@@ -527,6 +765,7 @@
             display: block;
             padding: 0.5rem 0;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
         
         .footer-links a:hover {
@@ -541,7 +780,7 @@
             font-size: 0.95rem;
         }
         
-        /* RESPONSIVE MOBILE */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .container {
                 padding: 0 1.5rem;
@@ -609,6 +848,15 @@
                 font-size: 1.1rem;
             }
             
+            .pricing-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .pricing-amount {
+                text-align: center;
+            }
+            
             .final-cta {
                 padding: 4rem 2rem;
                 border-radius: 30px;
@@ -638,9 +886,17 @@
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
+            
+            .modal-content {
+                padding: 2rem;
+                width: 95%;
+            }
+            
+            .modal-title {
+                font-size: 2rem;
+            }
         }
         
-        /* TABLET */
         @media (min-width: 769px) and (max-width: 1024px) {
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
@@ -671,118 +927,199 @@
     <div class="orb orb-3"></div>
     <div class="particles" id="particles"></div>
     
+    <!-- MODAL ANALISIS -->
+    <div class="modal-overlay" id="modalAnalisis">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            
+            <div id="formContainer">
+                <div class="modal-header">
+                    <div class="modal-badge">🎯 ANÁLISIS TÉCNICO GRATUITO</div>
+                    <h3 class="modal-title">Solicita tu Análisis</h3>
+                    <p class="modal-subtitle">Completa los datos de tu negocio para recibir el análisis GMB profesional</p>
+                </div>
+                
+                <form id="analisisForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Negocio *</label>
+                        <input type="text" class="form-input" name="negocio" placeholder="Ej: Hotel Boutique Center" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Teléfono de Contacto *</label>
+                        <input type="tel" class="form-input" name="telefono" placeholder="+57 321 948 1436" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Dirección del Negocio *</label>
+                        <input type="text" class="form-input" name="direccion" placeholder="Calle 123 #45-67, Bogotá" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email de Contacto</label>
+                        <input type="email" class="form-input" name="email" placeholder="contacto@tunegocio.com">
+                    </div>
+                    
+                    <button type="submit" class="form-submit">
+                        Solicitar Análisis Gratuito →
+                    </button>
+                </form>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✅</div>
+                <h3 class="success-title">¡Solicitud Recibida!</h3>
+                <p class="success-text">
+                    Recibirás tu análisis GMB profesional en las próximas 24 horas.<br>
+                    Revisa tu email y WhatsApp.
+                </p>
+                <button class="cta-dark" onclick="closeModal()">Entendido</button>
+            </div>
+        </div>
+    </div>
+    
     <div class="container">
         <header>
             <img src="LogoBoostr.png" alt="Boostraffic" class="logo-image">
             <div class="nav-status">
                 <span class="status-dot"></span>
-                NODAL_LEVEL_03
+                SILICON VALLEY TECH
             </div>
         </header>
         
         <section class="hero">
-            <div class="badge">Protocolo de Sincronización Técnica</div>
+            <div class="badge">Tecnología de Clase Mundial</div>
             <h1>
                 Domina Google Maps con<br>
-                <span class="gradient-text">IA de Alto Rendimiento</span>
+                <span class="gradient-text">Algoritmos de Silicon Valley</span>
             </h1>
             <p class="hero-subtitle">
-                Sistema avanzado de optimización GMB con tecnología propietaria de análisis, automatización y monitoreo 24/7. 
-                Convertimos datos en autoridad local y tracción comercial inmediata mediante algoritmos de última generación.
+                La única agencia latinoamericana con acceso a infraestructura de optimización GMB de nivel mundial. 
+                IA propietaria, automatización 24/7 y resultados medibles garantizados en 90 días.
             </p>
             <div class="cta-group">
-                <a href="https://wa.me/573125567463?text=Quiero%20optimizar%20mi%20Google%20My%20Business" class="cta-primary">
-                    INICIAR PROTOCOLO →
-                </a>
-                <a href="#contacto" class="cta-secondary">CASOS VERIFICADOS</a>
+                <button class="cta-primary" onclick="openModal()">
+                    SOLICITAR ANÁLISIS GRATUITO
+                </button>
+                <a href="https://wa.me/573219481436?text=Quiero%20optimizar%20mi%20Google%20My%20Business%20con%20tecnología%20Silicon%20Valley" class="cta-secondary">HABLAR CON EXPERTO</a>
             </div>
             
             <div class="metrics-grid" data-scroll>
                 <div class="metric-card">
-                    <div class="metric-value">+127%</div>
-                    <div class="metric-label">Incremento Visibilidad Promedio</div>
+                    <div class="metric-value">+247%</div>
+                    <div class="metric-label">Crecimiento Promedio en Visibilidad</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">90d</div>
-                    <div class="metric-label">Ciclo de Optimización</div>
+                    <div class="metric-label">Ciclo de Optimización Garantizada</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">24/7</div>
-                    <div class="metric-label">Monitoreo Continuo</div>
+                    <div class="metric-label">Monitoreo Algorítmico Continuo</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">47+</div>
-                    <div class="metric-label">Puntos de Análisis</div>
+                    <div class="metric-value">87+</div>
+                    <div class="metric-label">Puntos de Análisis Profundo</div>
                 </div>
             </div>
         </section>
         
-        <!-- SECCIÓN DE INGENIERÍA PREMIUM $1.8M - VERSIÓN BLINDADA -->
+        <!-- SECCION PROTOCOLO -->
         <section class="section" id="protocolo">
             <div class="section-header" data-scroll>
-                <div class="section-badge">🛡️ INFRAESTRUCTURA DE NIVEL 03</div>
-                <h2 class="section-title">Sincronización Técnica de Nodo</h2>
+                <div class="section-badge">🚀 INFRAESTRUCTURA SILICON VALLEY</div>
+                <h2 class="section-title">Protocolo de Optimización Avanzada</h2>
                 <p class="section-subtitle">
-                    Arquitectura de Capas Profundas para la Estabilización y Análisis de Brecha de Tracción. 
-                    Una intervención de ingeniería estructural supervisada por el <strong>Ingeniero Elkin Patiño</strong>.
+                    Arquitectura de Sincronización Algorítmica con IA Generativa. 
+                    Sistema de optimización GMB utilizado por las top agencias de San Francisco, 
+                    ahora disponible en Latinoamérica.
                 </p>
             </div>
 
             <div class="metrics-grid" style="margin-top: -2rem;">
                 <div class="metric-card" style="text-align: left;" data-scroll>
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📡</div>
-                    <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'Bricolage Grotesque';">Análisis de Integridad</h3>
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                    <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'Bricolage Grotesque';">IA Propietaria</h3>
                     <p style="color: var(--text-dim); font-size: 0.95rem;">
-                        Ejecutamos un diagnóstico de capas profundas para localizar degradación en los metadatos de la matrix local y fugas de visibilidad técnica.
+                        Algoritmos de aprendizaje automático que analizan 87+ variables para detectar oportunidades de ranking que la competencia no ve.
                     </p>
                 </div>
                 <div class="metric-card" style="text-align: left;" data-scroll>
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚙️</div>
-                    <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'Bricolage Grotesque';">Alineación de Nodos</h3>
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
+                    <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'Bricolage Grotesque';">Automatización Total</h3>
                     <p style="color: var(--text-dim); font-size: 0.95rem;">
-                        Sincronización técnica de su activo con los clústeres de búsqueda de alta prioridad, eliminando latencia en el posicionamiento orgánico.
+                        Sistema de sincronización automática con Google Business Profile. Posts, respuestas, contenido 4K generado 24/7 sin intervención manual.
                     </p>
                 </div>
                 <div class="metric-card" style="text-align: left;" data-scroll>
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🔒</div>
-                    <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'Bricolage Grotesque';">Blindaje de Autoridad</h3>
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">📊</div>
+                    <h3 style="color: var(--accent); margin-bottom: 1rem; font-family: 'Bricolage Grotesque';">Dashboard en Tiempo Real</h3>
                     <p style="color: var(--text-dim); font-size: 0.95rem;">
-                        Establecimiento de un perímetro de seguridad digital para blindar la ficha ante fluctuaciones algorítmicas y asegurar la tracción constante.
+                        Métricas actualizadas cada 15 minutos. Visualiza impresiones, conversiones, ranking competitivo y proyecciones IA desde cualquier dispositivo.
                     </p>
                 </div>
             </div>
 
-            <!-- TABLA DE INVERSIÓN TÉCNICA -->
-            <div style="margin-top: 4rem; background: var(--bg-layer); border: 1px solid var(--border); border-radius: 30px; padding: 3rem;" data-scroll>
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
-                    <div>
-                        <h3 style="font-family: 'Bricolage Grotesque'; font-size: 2rem; margin-bottom: 0.5rem;">Presupuesto de Estabilización</h3>
-                        <p style="color: var(--text-dim);">Protocolo de Sincronización + Validación de Activos de Red</p>
+            <!-- PRICING -->
+            <div class="pricing-card" data-scroll>
+                <div class="pricing-header">
+                    <div class="pricing-details">
+                        <h3>Inversión Profesional</h3>
+                        <p>Protocolo de Optimización Completo · 6 Meses</p>
                     </div>
-                    <div style="text-align: right;">
-                        <div class="metric-value" style="margin-bottom: 0;">$1.8M</div>
-                        <p style="color: var(--accent); font-weight: 700; font-size: 0.8rem; letter-spacing: 2px;">INVERSIÓN BASE COP</p>
+                    <div class="pricing-amount">
+                        <div class="price-setup">Setup Inicial</div>
+                        <div class="price-value">$1.8M</div>
+                        <div class="price-monthly">+ $850K/mes · Blindaje Continuo</div>
                     </div>
                 </div>
                 <div style="height: 1px; background: var(--border); margin: 2rem 0;"></div>
-                <p style="font-size: 0.85rem; color: var(--text-dim); text-align: center; font-style: italic;">
-                    * La apertura de ticket técnico está sujeta a la validación de la brecha de tracción detectada por nuestro sistema de diagnóstico.
-                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <span style="color: var(--accent); font-size: 1.5rem;">✓</span>
+                        <div>
+                            <strong>Análisis de Integridad</strong>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.25rem;">Diagnóstico técnico de 87 puntos</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <span style="color: var(--accent); font-size: 1.5rem;">✓</span>
+                        <div>
+                            <strong>IA Generativa de Contenido</strong>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.25rem;">Posts, imágenes 4K, respuestas automáticas</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <span style="color: var(--accent); font-size: 1.5rem;">✓</span>
+                        <div>
+                            <strong>Dashboard Ejecutivo</strong>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.25rem;">Métricas en tiempo real + proyecciones</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <span style="color: var(--accent); font-size: 1.5rem;">✓</span>
+                        <div>
+                            <strong>Garantía de Resultados</strong>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.25rem;">Si no hay tracción en 60 días, pausas sin costo</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         
         <section class="final-cta" id="contacto" data-scroll>
             <div class="final-cta-content">
-                <h2>¿Listo Para Activar el Protocolo?</h2>
+                <h2>¿Listo Para Dominar Google Maps?</h2>
                 <p>
-                    Obtén análisis gratuito de tu ficha GMB con scoring exacto de visibilidad y reputación. 
-                    Descubre qué necesitas optimizar para dominar Google Maps.
+                    Obtén análisis técnico gratuito de tu ficha GMB con scoring exacto de visibilidad, 
+                    análisis competitivo y proyección de crecimiento. Descubre qué necesitas optimizar para 
+                    capturar más clientes que tu competencia.
                 </p>
                 <div class="final-cta-buttons">
-                    <a href="mailto:contacto@boostraffic.com?subject=Solicitud%20Análisis%20GMB" class="cta-dark">
+                    <button class="cta-dark" onclick="openModal()">
                         ANÁLISIS GRATUITO
-                    </a>
-                    <a href="https://wa.me/573125567463?text=Quiero%20optimizar%20mi%20Google%20My%20Business" class="cta-outline">
+                    </button>
+                    <a href="https://wa.me/573219481436?text=Quiero%20optimizar%20mi%20Google%20My%20Business%20con%20tecnología%20Silicon%20Valley" class="cta-outline">
                         CONSULTA WHATSAPP
                     </a>
                 </div>
@@ -796,44 +1133,105 @@
                 <div class="footer-brand">
                     <h3>BOOSTRAFFIC</h3>
                     <p>
-                        Sistema de optimización automatizada de Google My Business con tecnología de IA propietaria. 
-                        Convertimos datos en autoridad local y tracción comercial medible.
+                        Agencia de optimización GMB con tecnología de Silicon Valley. 
+                        IA propietaria, automatización total y resultados medibles garantizados.
                     </p>
                 </div>
                 <div class="footer-links">
                     <h4>Servicios</h4>
                     <ul>
-                        <li><a href="#contacto">Análisis GMB</a></li>
-                        <li><a href="#contacto">Dashboard Automatizado</a></li>
-                        <li><a href="#contacto">Gestión Reputación</a></li>
-                        <li><a href="#contacto">Contenido Visual 4K</a></li>
+                        <li><a onclick="openModal()">Análisis GMB Gratuito</a></li>
+                        <li><a onclick="openModal()">Dashboard Automatizado</a></li>
+                        <li><a onclick="openModal()">Gestión Reputación IA</a></li>
+                        <li><a onclick="openModal()">Contenido Visual 4K</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Protocolo</h4>
+                    <h4>Empresa</h4>
                     <ul>
-                        <li><a href="#contacto">Casos Verificados</a></li>
-                        <li><a href="#contacto">Metodología 4 Fases</a></li>
-                        <li><a href="#contacto">Planes y Pricing</a></li>
-                        <li><a href="#contacto">Iniciar Análisis</a></li>
+                        <li><a onclick="openModal()">Casos de Éxito</a></li>
+                        <li><a onclick="openModal()">Metodología</a></li>
+                        <li><a onclick="openPrivacyModal()">Aviso de Privacidad</a></li>
+                        <li><a onclick="openModal()">Solicitar Demo</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Contacto</h4>
                     <ul>
-                        <li><a href="mailto:contacto@boostraffic.com">contacto@boostraffic.com</a></li>
-                        <li><a href="https://wa.me/573125567463">+57 312 556 7463</a></li>
+                        <li><a href="mailto:info@boostraffic.com">info@boostraffic.com</a></li>
+                        <li><a href="https://wa.me/573219481436">+57 321 948 1436</a></li>
                         <li><a>Bogotá, Colombia</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 BoostrAffic · NODAL_LEVEL_03 · Sistema de Optimización GMB Automatizado</p>
+                <p>&copy; 2026 BoostrAffic · Tecnología Silicon Valley · Sistema de Optimización GMB Automatizado</p>
             </div>
         </div>
     </footer>
     
     <script>
+        // MODAL FUNCTIONS
+        function openModal() {
+            document.getElementById('modalAnalisis').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalAnalisis').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('analisisForm').reset();
+            document.getElementById('formContainer').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('active');
+        }
+        
+        function openPrivacyModal() {
+            alert('Aviso de Privacidad\n\nBoostrAffic respeta tu privacidad. Tus datos solo se usan para contactarte sobre servicios GMB. No compartimos información con terceros. Para más detalles, contacta: info@boostraffic.com');
+        }
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = {
+                negocio: formData.get('negocio'),
+                telefono: formData.get('telefono'),
+                direccion: formData.get('direccion'),
+                email: formData.get('email') || 'No proporcionado'
+            };
+            
+            const mensaje = `
+🎯 NUEVA SOLICITUD ANÁLISIS GMB
+
+📍 Negocio: ${data.negocio}
+📞 Teléfono: ${data.telefono}
+📍 Dirección: ${data.direccion}
+📧 Email: ${data.email}
+
+---
+Fecha: ${new Date().toLocaleString('es-CO')}
+Origen: boostraffic.com
+            `.trim();
+            
+            const mailtoLink = `mailto:info@boostraffic.com?subject=Solicitud Análisis GMB - ${data.negocio}&body=${encodeURIComponent(mensaje)}`;
+            window.location.href = mailtoLink;
+            
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').classList.add('active');
+        }
+        
+        document.getElementById('modalAnalisis').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 30;
@@ -864,7 +1262,6 @@
             });
         }
         
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -883,7 +1280,6 @@
             revealOnScroll();
         });
         
-        // Mouse parallax effect on orbs
         document.addEventListener('mousemove', (e) => {
             const orbs = document.querySelectorAll('.orb');
             const mouseX = e.clientX / window.innerWidth;
@@ -899,4 +1295,3 @@
     </script>
 </body>
 </html>
-
