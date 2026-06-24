@@ -139,9 +139,18 @@ print('OK')
 
 ## PALABRAS CLAVE (búsquedas Google) — sección del dashboard cliente
 
-La sección **"Cómo te encontraron en Google"** aparece en el dashboard del cliente
-(debajo de "Acciones del mes") cuando la ficha tiene el campo `keywords`. Si no
-existe, la sección no se muestra.
+La sección aparece en el dashboard del cliente (debajo de "Acciones del mes") y es
+una **tarjeta de dos columnas** (rediseño 2026-06-24):
+- **Izquierda — "Cómo te encontraron en Google"**: búsquedas reales con volumen,
+  desde el campo `keywords`.
+- **Derecha — "Palabras clave que estamos posicionando"**: etiquetas objetivo
+  (palabras clave de alto valor que optimizamos vía etiquetas GBP), desde el campo
+  `tags`.
+
+La tarjeta se muestra si existe `keywords` **o** `tags`. Si solo hay uno de los dos,
+esa columna ocupa el ancho completo (no se fuerza el grid). En móvil (≤760px) las
+dos columnas se apilan. Construcción en `buildFichaDetail`: variables server-side
+`kwCol` / `tagCol` / `kwBlock` (fuera del template literal, sin gotcha de backslash).
 
 ### Cómo agregarlas (desde el panel admin):
 1. Abrir la ficha en el admin → sección **"Palabras clave (búsquedas Google)"**
@@ -169,8 +178,54 @@ del cliente).
 - `count` string con `<` → barra y valor en gris atenuado.
 - Top 3 (no-`<`) se resaltan con rank verde degradado.
 
+### Etiquetas (columna derecha) — campo `tags`
+```json
+"tags": ["Rines de Lujo para Toyota, repuestos", "Llantas Todoterreno para Toyota, Toyo+"]
+```
+- Array de strings (una etiqueta = una palabra clave objetivo). Se renderiza como
+  filas con check verde (`.tag-row` / `.tag-dot`), sin barras ni volumen.
+- Admin: sección **"Etiquetas (palabras clave que estamos posicionando)"** (debajo
+  de "Palabras clave"). Textarea, una por línea → `saveTags()` → POST `{tags:[...]}`.
+- Guardar reemplaza la lista completa; guardar vacío la borra.
+- Fuente típica: las **Etiquetas de GBP** (no públicas) del negocio.
+
 Backend: `/api/ficha/{id}/metrics` hace `Object.assign`, así que acepta `keywords`
-sin cambios adicionales en el handler.
+y `tags` sin cambios adicionales en el handler.
+
+---
+
+## CÓMO DESCUBRIERON TU EMPRESA (donut por plataforma) — campo `platforms`
+
+Tarjeta con **gráfico de anillo (donut SVG)** + leyenda, en el dashboard cliente
+(debajo de la tarjeta de keywords/etiquetas). Replica el módulo de GBP «Cómo
+descubrieron tu empresa las personas → Desglose por plataforma y dispositivo».
+Aparece solo si la ficha tiene `platforms`.
+
+### Esquema en KV:
+```json
+"platforms": [
+  {"label": "Búsqueda de Google – dispositivos móviles", "count": 4445},
+  {"label": "Google Maps – dispositivos móviles", "count": 1269}
+]
+```
+- Array de `{label, count}`. El **total** (centro del donut) y los **porcentajes**
+  (leyenda) se calculan solos a partir de los `count`.
+- Colores asignados por orden (paleta Google): dorado `#f9ab00`, azul `#4285f4`,
+  rojo `#ea4335`, verde `#34a853`, luego morado/cian/naranja. Ciclan si hay >7.
+- Donut: `<circle>` con `stroke-dasharray` + `stroke-dashoffset` acumulado,
+  `rotate(-90)` para empezar arriba. Construido server-side en `buildFichaDetail`
+  (variable `platBlock`, fuera del template literal → sin gotcha de backslash).
+
+### Cómo agregarlas (admin):
+Sección **"Cómo descubrieron tu empresa (plataforma / dispositivo)"** (debajo de
+Etiquetas). `parsePlatforms` acepta:
+- **Pegado crudo de GBP**: línea `4,445·62%` y debajo la plataforma. Ignora solo
+  las líneas de cabecera (título, total suelto, descripciones) — el `%` se descarta,
+  se recalcula.
+- **Editado**: `Plataforma | 4445` por línea.
+
+Guardar reemplaza la lista; guardar vacío borra la sección. POST `{platforms:[...]}`
+al mismo `/metrics` (Object.assign lo acepta).
 
 ---
 
@@ -183,7 +238,8 @@ Orden actual de bloques (rediseñado 2026-06-23):
 2. **Crecimiento interanual** — bloque verde condicional (ver abajo).
 3. **Score** — Índice de Visibilidad Google + barras (autoridad / estrellas / Ask Maps).
 4. **Acciones del mes** — `kpi-grid` de tarjetas (llamadas, rutas, web, WhatsApp + reservas si hotel).
-5. **Cómo te encontraron en Google** — keywords (condicional).
+5. **Donut "Cómo descubrieron tu empresa"** — desglose por plataforma/dispositivo (`platforms`). Condicional. Va ENCIMA de la tarjeta de keywords.
+5b. **Tarjeta keywords (2 columnas)** — izq "Cómo te encontraron en Google" (`keywords`) · der "Palabras clave que estamos posicionando" (`tags`). Condicional: aparece si hay `keywords` o `tags`.
 6. **Ask Maps** · **Reputación + Sentimiento** · **Actividad del servicio** · **Proyección 30d**.
 
 > Eliminados en el rediseño: tabla "Antes vs Ahora", "Actividad diaria", "Referencia mes anterior".

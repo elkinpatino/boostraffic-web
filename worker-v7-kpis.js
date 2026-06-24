@@ -316,6 +316,46 @@ function buildFichaDetail(c, accountName) {
       +'</div>';
   });
 
+  // Etiquetas / palabras clave objetivo que estamos posicionando
+  var tags=c.tags||[];
+  var tagsHTML='';
+  tags.forEach(function(t){
+    tagsHTML+='<div class="tag-row"><span class="tag-dot"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="tag-txt">'+t+'</span></div>';
+  });
+
+  // Bloque de dos columnas: búsquedas reales (izq) + palabras clave objetivo (der)
+  var kwSearchIco='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+  var kwTagIco='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>';
+  var kwCol=keywords.length?('<div class="kw-col"><div class="kw-title">'+kwSearchIco+' Cómo te encontraron en Google</div><div class="kw-sub">Búsquedas que mostraron tu perfil este mes · ordenadas por volumen</div>'+keywordsHTML+'</div>'):'';
+  var tagCol=tags.length?('<div class="kw-col"><div class="kw-title">'+kwTagIco+' Palabras clave que estamos posicionando</div><div class="kw-sub">Términos de alto valor que optimizamos para atraer clientes nuevos</div>'+tagsHTML+'</div>'):'';
+  var kwBlock='';
+  if(keywords.length||tags.length){
+    var kwInner=(keywords.length&&tags.length)?('<div class="kw-grid">'+kwCol+tagCol+'</div>'):(kwCol+tagCol);
+    kwBlock='<div class="kw-card">'+kwInner+'</div>';
+  }
+
+  // Cómo descubrieron tu empresa — desglose por plataforma/dispositivo (donut)
+  var platforms=c.platforms||[];
+  var platBlock='';
+  if(platforms.length){
+    var PLAT_PAL=['#f9ab00','#4285f4','#ea4335','#34a853','#a142f4','#00acc1','#ff7043'];
+    var platTotal=platforms.reduce(function(s,p){return s+(Number(p.count)||0)},0)||1;
+    var PC=2*Math.PI*48, pacc=0, platSegs='', platLegend='';
+    platforms.forEach(function(p,i){
+      var cnt=Number(p.count)||0;
+      var frac=cnt/platTotal;
+      var len=frac*PC;
+      var gap=len>4?1.4:0;
+      var seg=Math.max(len-gap,0.4);
+      var color=PLAT_PAL[i%PLAT_PAL.length];
+      platSegs+='<circle cx="60" cy="60" r="48" fill="none" stroke="'+color+'" stroke-width="14" stroke-dasharray="'+seg.toFixed(2)+' '+(PC-seg).toFixed(2)+'" stroke-dashoffset="'+(-pacc).toFixed(2)+'" transform="rotate(-90 60 60)"/>';
+      pacc+=len;
+      var pct=Math.round(frac*100);
+      platLegend+='<div class="plat-item"><span class="plat-dot" style="background:'+color+'"></span><div><div class="plat-val">'+cnt.toLocaleString('es-CO')+' · '+pct+'%</div><div class="plat-lbl">'+p.label+'</div></div></div>';
+    });
+    platBlock='<div class="plat-card"><div class="kw-title"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="20" y2="16"/></svg> Cómo descubrieron tu empresa las personas</div><div class="kw-sub">Plataformas y dispositivos que usaron para encontrarte</div><div class="plat-grid"><div class="plat-ring"><svg viewBox="0 0 120 120">'+platSegs+'</svg><div class="plat-center"><div class="plat-center-num">'+platTotal.toLocaleString('es-CO')+'</div><div class="plat-center-lbl">vieron tu perfil</div></div></div><div class="plat-legend">'+platLegend+'</div></div></div>';
+  }
+
   var sentPositive=c.sentPositive||0, sentNeutral=c.sentNeutral||0, sentNegative=c.sentNegative||0;
 
   var startedLabel=c.started?new Date(c.started).toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'}):baselineDate;
@@ -393,6 +433,26 @@ body{background:#f5f5f3;font-family:'Inter',sans-serif;color:#1a1a1a;min-height:
 .kw-bar{height:7px;background:#f2f2f0;border-radius:4px;overflow:hidden}
 .kw-fill{height:100%;background:linear-gradient(90deg,#1d9e75,#39c98f);border-radius:4px;width:0;transition:width 1.4s cubic-bezier(.22,1,.36,1)}
 .kw-fill.low{background:#d8d8d4}
+.kw-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.kw-grid .kw-col+.kw-col{border-left:0.5px solid #f0f0ee;padding-left:30px}
+@media(max-width:760px){.kw-grid{grid-template-columns:1fr;gap:26px}.kw-grid .kw-col+.kw-col{border-left:none;padding-left:0;border-top:0.5px solid #f0f0ee;padding-top:26px}}
+.tag-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:0.5px solid #f4f4f2}
+.tag-row:last-child{border:none;padding-bottom:0}
+.tag-dot{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#1d9e75,#39c98f);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(29,158,117,.28)}
+.tag-txt{font-size:13px;color:#333;line-height:1.35}
+.plat-card{background:#fff;border:none;border-radius:16px;padding:22px 24px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.05);margin-bottom:16px}
+.plat-grid{display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:center;margin-top:8px}
+@media(max-width:680px){.plat-grid{grid-template-columns:1fr;justify-items:center;gap:22px}}
+.plat-ring{position:relative;width:180px;height:180px;flex-shrink:0}
+.plat-ring svg{width:180px;height:180px;display:block}
+.plat-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+.plat-center-num{font-size:27px;font-weight:700;color:#1a1a1a;font-variant-numeric:tabular-nums;line-height:1}
+.plat-center-lbl{font-size:10px;color:#aaa;margin-top:4px;max-width:92px;line-height:1.3}
+.plat-legend{display:flex;flex-direction:column;gap:13px}
+.plat-item{display:flex;gap:11px;align-items:flex-start}
+.plat-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.plat-val{font-size:14px;font-weight:700;color:#1a1a1a;font-variant-numeric:tabular-nums}
+.plat-lbl{font-size:12px;color:#888;margin-top:1px;line-height:1.3}
 .table-wrap{overflow-x:auto}
 table.comp{width:100%;border-collapse:collapse;font-size:13px}
 table.comp th{font-size:11px;color:#aaa;font-weight:500;padding:6px 10px;text-align:center;border-bottom:0.5px solid #e5e5e3;white-space:nowrap}
@@ -538,12 +598,11 @@ table.comp tr.hl td{background:#fafafa}
     </div>`:''}
   </div>
 
-  <!-- PALABRAS CLAVE -->
-  ${keywords.length?`<div class="kw-card">
-    <div class="kw-title"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Cómo te encontraron en Google</div>
-    <div class="kw-sub">Búsquedas que mostraron tu perfil este mes &middot; ordenadas por volumen</div>
-    ${keywordsHTML}
-  </div>`:''}
+  <!-- DESCUBRIMIENTO POR PLATAFORMA (donut) -->
+  ${platBlock}
+
+  <!-- PALABRAS CLAVE + ETIQUETAS (dos columnas) -->
+  ${kwBlock}
 
   <!-- ASK MAPS -->
   <div class="card card-pad" style="border-color:#b5d4f4">
@@ -1031,6 +1090,22 @@ function buildFichaDetailAdmin(ficha, accountKey) {
     <button class="savebtn" id="kwBtn" onclick="saveKeywords()">GUARDAR PALABRAS CLAVE</button>
   </div>
 
+  <!-- ETIQUETAS / PALABRAS CLAVE OBJETIVO -->
+  <div class="kvsec" id="tagsSection">
+    <div class="kvtitle">Etiquetas (palabras clave que estamos posicionando)</div>
+    <div style="font-size:12px;color:#888;margin-bottom:12px">Una etiqueta por línea. Son las palabras clave objetivo que el cliente ve en la columna &laquo;Palabras clave que estamos posicionando&raquo; (al lado de las búsquedas reales). Guardar reemplaza la lista completa; guardar vacío la borra.</div>
+    <textarea class="inp full" id="tag-input" placeholder="Rines de Lujo para Toyota, repuestos&#10;Llantas Todoterreno para Toyota&#10;Accesorios 4x4 para Toyota" style="height:160px;resize:vertical;margin-bottom:12px;font-family:monospace;font-size:12px">${(ficha.tags||[]).join('\n')}</textarea>
+    <button class="savebtn" id="tagBtn" onclick="saveTags()">GUARDAR ETIQUETAS</button>
+  </div>
+
+  <!-- DESCUBRIMIENTO POR PLATAFORMA -->
+  <div class="kvsec" id="platSection">
+    <div class="kvtitle">Cómo descubrieron tu empresa (plataforma / dispositivo)</div>
+    <div style="font-size:12px;color:#888;margin-bottom:12px">Copia y pega directo de GBP (&laquo;Cómo descubrieron tu empresa las personas&raquo; &rarr; &laquo;Desglose por plataforma y dispositivo&raquo;). Acepta el pegado crudo (la línea &laquo;4,445&middot;62%&raquo; y debajo la plataforma) o &laquo;Plataforma | 4445&raquo; por línea. El total y los porcentajes se calculan solos. Guardar vacío borra la sección.</div>
+    <textarea class="inp full" id="plat-input" placeholder="4,445&middot;62%&#10;Búsqueda de Google – dispositivos móviles&#10;1,337&middot;19%&#10;Búsqueda de Google – computadoras de escritorio" style="height:150px;resize:vertical;margin-bottom:12px;font-family:monospace;font-size:12px">${(ficha.platforms||[]).map(function(p){return p.label+' | '+p.count}).join('\n')}</textarea>
+    <button class="savebtn" id="platBtn" onclick="savePlatforms()">GUARDAR PLATAFORMAS</button>
+  </div>
+
   <!-- FORMULARIO AGREGAR ACCION -->
   <div class="kvsec" id="actionSection">
     <div class="kvtitle">Agregar accion al registro</div>
@@ -1143,6 +1218,40 @@ async function saveKeywords(){
   var res=await fetch('/api/ficha/'+currentFichaId+'/metrics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({keywords:kws})});
   if(res.ok){showToast(kws.length+' palabras clave guardadas','ok');setBtn('kwBtn',false,'GUARDAR PALABRAS CLAVE');setTimeout(function(){location.reload()},1500)}
   else{showToast('Error','error');setBtn('kwBtn',false,'GUARDAR PALABRAS CLAVE')}
+}
+
+async function saveTags(){
+  var text=document.getElementById('tag-input').value;
+  var tags=text.split('\\n').map(function(l){return l.trim()}).filter(function(l){return l});
+  setBtn('tagBtn',true);showToast('Guardando...','info');
+  var res=await fetch('/api/ficha/'+currentFichaId+'/metrics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tags:tags})});
+  if(res.ok){showToast(tags.length+' etiquetas guardadas','ok');setBtn('tagBtn',false,'GUARDAR ETIQUETAS');setTimeout(function(){location.reload()},1500)}
+  else{showToast('Error','error');setBtn('tagBtn',false,'GUARDAR ETIQUETAS')}
+}
+
+function parsePlatforms(text){
+  var lines=text.split('\\n').map(function(l){return l.trim()}).filter(function(l){return l});
+  var countRe=/^([\\d.,]+)\\s*[·•.]\\s*\\d+\\s*%/;
+  var pipeRe=/^(.+?)\\s*[|=]\\s*([\\d.,]+)\\s*(?:[·•.]\\s*\\d+\\s*%)?$/;
+  var out=[],pending=null;
+  lines.forEach(function(l){
+    var pm=l.match(pipeRe);
+    if(pm){out.push({label:pm[1].trim(),count:parseInt(pm[2].replace(/[^0-9]/g,''))||0});pending=null;return}
+    var cm=l.match(countRe);
+    if(cm){pending=parseInt(cm[1].replace(/[^0-9]/g,''))||0;return}
+    if(pending!==null){out.push({label:l,count:pending});pending=null}
+  });
+  return out;
+}
+
+async function savePlatforms(){
+  var text=document.getElementById('plat-input').value;
+  var arr=text.trim()?parsePlatforms(text):[];
+  if(text.trim()&&!arr.length)return showToast('No pude interpretar el formato','error');
+  setBtn('platBtn',true);showToast('Guardando...','info');
+  var res=await fetch('/api/ficha/'+currentFichaId+'/metrics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({platforms:arr})});
+  if(res.ok){showToast(arr.length+' plataformas guardadas','ok');setBtn('platBtn',false,'GUARDAR PLATAFORMAS');setTimeout(function(){location.reload()},1500)}
+  else{showToast('Error','error');setBtn('platBtn',false,'GUARDAR PLATAFORMAS')}
 }
 
 async function saveAction(){
