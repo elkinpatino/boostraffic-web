@@ -353,7 +353,27 @@ function buildFichaDetail(c, accountName) {
       var pct=Math.round(frac*100);
       platLegend+='<div class="plat-item"><span class="plat-dot" style="background:'+color+'"></span><div><div class="plat-val">'+cnt.toLocaleString('es-CO')+' · '+pct+'%</div><div class="plat-lbl">'+p.label+'</div></div></div>';
     });
-    platBlock='<div class="plat-card"><div class="kw-title"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="20" y2="16"/></svg> Cómo descubrieron tu empresa las personas</div><div class="kw-sub">Plataformas y dispositivos que usaron para encontrarte</div><div class="plat-grid"><div class="plat-ring"><svg viewBox="0 0 120 120">'+platSegs+'</svg><div class="plat-center"><div class="plat-center-num">'+platTotal.toLocaleString('es-CO')+'</div><div class="plat-center-lbl">vieron tu perfil</div></div></div><div class="plat-legend">'+platLegend+'</div></div></div>';
+    // Lectura automática: agrupa por dispositivo y por canal (desde los labels de GBP)
+    var devMobile=0, devDesktop=0, chSearch=0, chMaps=0;
+    platforms.forEach(function(p){
+      var l=(p.label||'').toLowerCase(), c=Number(p.count)||0;
+      if(/escritorio|computador/.test(l)) devDesktop+=c; else if(/m[oó]vil/.test(l)) devMobile+=c;
+      if(/maps/.test(l)) chMaps+=c; else chSearch+=c;
+    });
+    var platInsights='';
+    if(devMobile+devDesktop>0){
+      var mPct=Math.round(devMobile/platTotal*100), dPct=Math.round(devDesktop/platTotal*100);
+      var sPct=Math.round(chSearch/platTotal*100), pmPct=Math.round(chMaps/platTotal*100);
+      var heroNum=(devMobile>=devDesktop)?mPct:dPct;
+      var heroTxt=(devMobile>=devDesktop)?'te encontró desde el celular 📱':'te encontró desde el computador 💻';
+      platInsights='<div class="plat-insights">'
+        +'<div class="pins-cap">Lectura rápida</div>'
+        +'<div class="pins-hero"><div class="pins-hero-num">'+heroNum+'%</div><div class="pins-hero-txt">de las personas '+heroTxt+'</div></div>'
+        +'<div class="pins-split"><div class="pins-split-lbl"><span><b>Móvil</b> '+mPct+'%</span><span><b>Escritorio</b> '+dPct+'%</span></div><div class="pins-bar"><span style="width:'+mPct+'%;background:#1d9e75"></span><span style="width:'+dPct+'%;background:#cdd6e0"></span></div></div>'
+        +'<div class="pins-split"><div class="pins-split-lbl"><span><b>Búsqueda Google</b> '+sPct+'%</span><span><b>Google Maps</b> '+pmPct+'%</span></div><div class="pins-bar"><span style="width:'+sPct+'%;background:#4285f4"></span><span style="width:'+pmPct+'%;background:#ea4335"></span></div></div>'
+        +'</div>';
+    }
+    platBlock='<div class="plat-card"><div class="kw-title"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="12"/><line x1="12" y1="12" x2="20" y2="16"/></svg> Cómo descubrieron tu empresa las personas</div><div class="kw-sub">Plataformas y dispositivos que usaron para encontrarte</div><div class="plat-grid"><div class="plat-ring"><svg viewBox="0 0 120 120">'+platSegs+'</svg><div class="plat-center"><div class="plat-center-num">'+platTotal.toLocaleString('es-CO')+'</div><div class="plat-center-lbl">vieron tu perfil</div></div></div><div class="plat-legend">'+platLegend+'</div>'+platInsights+'</div></div>';
   }
 
   var sentPositive=c.sentPositive||0, sentNeutral=c.sentNeutral||0, sentNegative=c.sentNegative||0;
@@ -441,8 +461,18 @@ body{background:#f5f5f3;font-family:'Inter',sans-serif;color:#1a1a1a;min-height:
 .tag-dot{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#1d9e75,#39c98f);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(29,158,117,.28)}
 .tag-txt{font-size:13px;color:#333;line-height:1.35}
 .plat-card{background:#fff;border:none;border-radius:16px;padding:22px 24px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.05);margin-bottom:16px}
-.plat-grid{display:grid;grid-template-columns:190px 1fr;gap:28px;align-items:center;margin-top:8px}
-@media(max-width:680px){.plat-grid{grid-template-columns:1fr;justify-items:center;gap:22px}}
+.plat-grid{display:grid;grid-template-columns:175px minmax(180px,1fr) minmax(210px,1.05fr);gap:30px;align-items:center;margin-top:8px}
+@media(max-width:860px){.plat-grid{grid-template-columns:175px 1fr}.plat-insights{grid-column:1/-1;border-top:0.5px solid #f0f0ee;padding-top:18px}}
+@media(max-width:680px){.plat-grid{grid-template-columns:1fr;justify-items:center;gap:22px}.plat-insights{grid-column:auto;width:100%;max-width:340px;border-top:none;padding-top:0}}
+.plat-insights{display:flex;flex-direction:column;gap:13px;justify-content:center;align-self:center}
+.pins-cap{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:.05em}
+.pins-hero{background:linear-gradient(135deg,#eafaf3,#f4fbf8);border:0.5px solid #d6f0e4;border-radius:12px;padding:13px 15px}
+.pins-hero-num{font-size:23px;font-weight:700;color:#1a1a1a;line-height:1;font-variant-numeric:tabular-nums}
+.pins-hero-txt{font-size:12px;color:#555;margin-top:3px;line-height:1.35}
+.pins-split-lbl{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:6px}
+.pins-split-lbl b{color:#1a1a1a;font-weight:600}
+.pins-bar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:#f2f2f0}
+.pins-bar>span{display:block;height:100%}
 .plat-ring{position:relative;width:180px;height:180px;flex-shrink:0}
 .plat-ring svg{width:180px;height:180px;display:block}
 .plat-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}

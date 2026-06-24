@@ -227,6 +227,18 @@ Etiquetas). `parsePlatforms` acepta:
 Guardar reemplaza la lista; guardar vacío borra la sección. POST `{platforms:[...]}`
 al mismo `/metrics` (Object.assign lo acepta).
 
+### Panel "Lectura rápida" (tercera columna, derecha)
+El grid del donut tiene 3 columnas: donut · leyenda · **insights automáticos**
+(`platInsights`). Se calcula server-side agrupando los labels (sin datos extra):
+- **Por dispositivo**: Móvil vs Escritorio (regex `/m[oó]vil/` y `/escritorio|computador/`).
+- **Por canal**: Búsqueda Google vs Google Maps (regex `/maps/` → Maps, resto → Búsqueda).
+- **Titular** (`pins-hero`): dispositivo dominante, ej. "79% te encontró desde el celular".
+- Dos barras split de 2 segmentos (`pins-bar`) con %.
+
+Solo aparece si `devMobile+devDesktop>0` (si los labels no son los de GBP, no se muestra
+y el donut+leyenda quedan igual). Responsive: 3 col → 2 col (insights abajo, `grid-column:1/-1`)
+→ 1 col apilado.
+
 ---
 
 ## ESTRUCTURA DEL DASHBOARD CLIENTE (`buildFichaDetail`)
