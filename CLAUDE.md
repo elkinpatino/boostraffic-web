@@ -105,6 +105,67 @@ KV compartido entre ambos workers (`RADAR_KV`, id: `47a79e38a48046c6ba8facd533e8
 
 ---
 
+## Incidente 2026-07-02 — boostraffic.com mostraba un diseño viejo
+
+### Síntoma
+El dominio mostraba el diseño oscuro "Silicon Valley Tech" (sin SEO), en vez del
+diseño blanco/elegante que ya se había subido antes.
+
+### Causa raíz
+Existían **dos mecanismos de deploy distintos apuntando al mismo container**:
+1. Coolify, conectado al repo `boostraffic-web` (este repo), reconstruye el
+   container automáticamente en cada `git push` usando el `Dockerfile`, que
+   copiaba `boostraffic_nodal_complete.html` (diseño viejo).
+2. Un flujo manual (`scp` + `docker cp` documentado en `~/Documents/BoostraffecWeb-Landing/CLAUDE-WEB.md`)
+   con el que se había subido a mano el diseño nuevo (`boostraffic-landing.html`)
+   directo al container, sin pasar por git ni por Coolify.
+
+Cualquier push normal a este repo (aunque fuera un cambio no relacionado, como
+un fix de SEO) hacía que Coolify reconstruyera el container **desde cero** con
+el `Dockerfile` viejo, borrando el diseño subido a mano por el flujo 2. Por eso
+"un push" parecía causar que volviera "una versión anterior".
+
+### Diagnóstico (pasos que sirvieron, en orden)
+1. `git log --oneline`, `git status`, `git fetch` + `git log origin/main..HEAD`
+   → confirmar que local/remoto/HEAD estaban sincronizados (descartó "falta push").
+2. `git show HEAD:archivo | grep -c "marcador de contenido"` vs el mismo grep en
+   el working tree → detectó que el working tree tenía el archivo **corrupto**
+   (contenía JS de un worker viejo en vez de HTML) — no relacionado al síntoma
+   principal, pero un riesgo real si se llegaba a commitear por accidente.
+3. `curl -sI https://boostraffic.com` → sin headers de Cloudflare/CDN, `server: nginx`
+   directo → descartó caché de CDN.
+4. `dig +short boostraffic.com` contra resolver local, `8.8.8.8` y `1.1.1.1` →
+   los tres coincidían con la IP real del servidor → descartó DNS.
+5. Entrar al panel Coolify (`http://178.156.139.120:8000`) → **Resources → la
+   app → Deployments/Logs** → el log del deploy mostró explícitamente qué
+   commit SHA se estaba construyendo y si reusaba una imagen cacheada
+   ("No configuration changed & image found... Build step skipped").
+6. Comparar visualmente el sitio en vivo contra los archivos en
+   `~/Documents/BoostraffecWeb-Landing/` → encontrar cuál archivo local tenía
+   el diseño "correcto" (`--bg: #ffffff` en el CSS) que el usuario esperaba ver.
+
+### Fix aplicado
+- Se migró `boostraffic-landing.html` (+ `privacy.html`, `LogoBoostr.webp`,
+  `llms.txt`, `favicon.ico`, `robots.txt`, `sitemap.xml`) a este repo como
+  única fuente de verdad, y se actualizó el `Dockerfile` para copiarlo como
+  `index.html`. El directorio `BoostraffecWeb-Landing` y su flujo `scp`/`docker cp`
+  quedaron obsoletos (ver sección "Servidor Ubuntu (Landing)" arriba).
+
+### Runbook rápido — "el sitio muestra una versión vieja" (cualquiera de los 3 proyectos)
+
+| Proyecto | Cómo verificar en 1 minuto | Cómo forzar el deploy correcto |
+|---|---|---|
+| **Landing** (`boostraffic.com`, Coolify) | `curl -s https://boostraffic.com \| grep -o '<title>[^<]*</title>'` y comparar con el título esperado del archivo local (`grep '<title>' boostraffic-landing.html`) | Confirmar que el cambio esté en `boostraffic-landing.html` de ESTE repo → `git push` → si no reconstruye solo, entrar al panel Coolify → la app → botón **Redeploy**, y revisar la pestaña **Logs** |
+| **Dashboard** (subdominios `*.boostraffic.com`, Cloudflare Worker) | `git log -1 -- worker-v7-kpis.js` vs `npx wrangler deployments list` (comparar fecha del último commit vs último deploy) | `git push` **NO despliega el Worker**. Hay que correr `npx wrangler deploy` manualmente después de cada push con cambios en `worker-v7-kpis.js` (ver truco EPERM abajo si falla) |
+| **Radar** (`radar.boostraffic.com`, Cloudflare Worker) | Mismo método que Dashboard, con `src/index.js` | Igual: `cd ~/radar-boostraffic && npx wrangler deploy` a mano tras cada cambio. **Ojo:** este proyecto hoy no tiene git (no hay `.git`) — no hay forma de comparar commits ni de revertir si algo sale mal. Pendiente inicializarlo. |
+
+**Reglas generales para no repetir esto:**
+- Nunca editar/desplegar el mismo sitio por dos caminos distintos (git+Coolify vs scp manual, o cualquier combinación similar). Un solo camino por proyecto.
+- Cuando algo "no se actualiza", diagnosticar en este orden: (1) ¿el commit está pusheado? (2) ¿el mecanismo de deploy de ESE proyecto específico requiere un paso manual (Workers) o es automático (Coolify)? (3) ¿DNS/CDN están cacheando? (4) ¿el navegador está cacheando (favicon, HTML, Open Graph vía WhatsApp/Facebook)?
+- Verificar siempre con `curl`/`dig` (headers, DNS, contenido) antes de asumir que el problema está en el código — la mayoría de estos incidentes fueron de infraestructura/proceso, no de bugs en el HTML.
+
+---
+
 ## ACTUALIZACIÓN SEMANAL DE MÉTRICAS
 
 ### Comando base para actualizar cualquier ficha:
