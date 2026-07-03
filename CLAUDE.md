@@ -15,7 +15,7 @@
 
 | Worker | Subdominio(s) | Archivo |
 |---|---|---|
-| `dashboard-boostraffic` | `htl.boostraffic.com`, `atielec.boostraffic.com`, `demo.boostraffic.com`, `toyo.boostraffic.com`, `corlaminas.boostraffic.com`, `fundeqs.boostraffic.com` | `worker-v7-kpis.js` |
+| `dashboard-boostraffic` | `htl.boostraffic.com`, `atielec.boostraffic.com`, `demo.boostraffic.com`, `toyo.boostraffic.com`, `corlaminas.boostraffic.com`, `fundeqs.boostraffic.com`, `qpturbos.boostraffic.com` | `worker-v7-kpis.js` |
 | `radar-boostraffic` | `radar.boostraffic.com` | `src/index.js` |
 
 Desplegar dashboard:
@@ -79,6 +79,17 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - Score inicial: 42 · Rating: 4.2 ⭐ · 5 reseñas
 - Ref. Radar: BT·AE7866ED
 - Creado: 02/jul/2026
+
+### QPT2026 — QP Turbos S.A.S.
+- URL: `qpturbos.boostraffic.com`
+- Clave de acceso: `QPT2026`
+- KV: `dash:account:QPT2026`
+- Fichas: `QPT2026-PRINCIPAL` (Turboalimentadores / repuestos de carro — Bogotá, Cra. 17 #6a-12, Los Mártires)
+- Score inicial: 47 · Rating: 4.7 ⭐ · 23 reseñas
+- Ref. Radar: BT·DD212BB8
+- Perfil ya reclamado/administrado por el cliente
+- ⚠️ Pendiente: la dirección en GBP aparece duplicada/inconsistente (`Cra 17 #6a-49` y `Cra. 17 #6a-12` juntas) — corrección programada como acción de servicio (`status:"plan"` en la ficha)
+- Creado: 03/jul/2026
 
 ---
 
@@ -196,6 +207,7 @@ print('OK')
 - TOYO+ → `dash:ficha:TOYO2026-PRINCIPAL`
 - Corlaminas → `dash:ficha:CORL2026-PRINCIPAL`
 - Fundeqs → `dash:ficha:FDQ2026-PRINCIPAL`
+- QP Turbos → `dash:ficha:QPT2026-PRINCIPAL`
 
 ### Datos a sacar de GBP cada semana:
 - Impresiones nuevas del período
