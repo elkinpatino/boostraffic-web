@@ -2,7 +2,9 @@
 
 ## Estructura de proyectos
 - `~/Documents/BoostraffecWeb/` → Dashboard worker principal (`worker-v7-kpis.js`) **y** landing de `boostraffic.com` (`boostraffic-landing.html`, desplegado vía Coolify — ver sección "Servidor Ubuntu / Landing").
-- `~/radar-boostraffic/` → Radar worker de auditorías (`src/index.js`)
+- `~/radar-boostraffic/` → Radar worker de auditorías (`src/index.js`). Tiene su propio repo en GitHub (`elkinpatino/radar-boostraffic`) desde el 2026-07-02.
+
+> **Nota (2026-07-02):** se evaluó separar el dashboard (`worker-v7-kpis.js`) a su propio repo, como está `radar-boostraffic`. Se decidió **dejarlo donde está**: Coolify y `wrangler deploy` leen archivos completamente distintos dentro de este repo (nunca se pisan entre sí, a diferencia del incidente de la landing), así que mezclarlos aquí no es un riesgo real — separarlo sería solo estético y tiene el costo/riesgo de mover archivos de algo que ya está desplegado y funcionando. Revisar esta decisión solo si surge una razón concreta (ej. dar acceso al código de uno sin el otro).
 
 > ⚠️ **Fuente única de verdad para la landing:** `boostraffic-landing.html` en ESTE repo (`BoostraffecWeb`) es el diseño oficial (blanco/elegante, con SEO completo: OG, Twitter Card, geo, hreflang, JSON-LD). El `Dockerfile` lo copia como `index.html`.
 > El directorio `~/Documents/BoostraffecWeb-Landing/` (con `scp`+`docker cp` manual) quedó **obsoleto el 2026-07-02** — tener dos mecanismos de deploy al mismo contenedor causó que un push normal (vía Coolify, que reconstruye desde este repo) sobreescribiera un diseño nuevo que se había subido a mano por el otro camino. Si necesitas editar la landing, hazlo aquí y sigue el flujo normal de git push (ver abajo); no vuelvas a usar `scp`/`docker cp` a mano.
