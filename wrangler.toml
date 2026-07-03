@@ -1,0 +1,21 @@
+name = "dashboard-boostraffic"
+main = "worker-v7-kpis.js"
+compatibility_date = "2026-05-13"
+account_id = "df7b1bae8b0736eef3fa8ba52be2ed71"
+workers_dev = true
+
+routes = [
+  {pattern = "htl.boostraffic.com", custom_domain = true},
+  {pattern = "atielec.boostraffic.com", custom_domain = true},
+  {pattern = "demo.boostraffic.com", custom_domain = true},
+  {pattern = "toyo.boostraffic.com", custom_domain = true},
+  {pattern = "corlaminas.boostraffic.com", custom_domain = true},
+  {pattern = "fundeqs.boostraffic.com", custom_domain = true}
+]
+
+[[kv_namespaces]]
+binding = "RADAR_KV"
+id = "47a79e38a48046c6ba8facd533e81d04"
+
+[triggers]
+crons = ["0 12 * * *"]
