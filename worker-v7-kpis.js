@@ -336,6 +336,16 @@ function buildFichaDetail(c, accountName) {
     kwBlock='<div class="kw-card">'+kwInner+'</div>';
   }
 
+  // Proyeccion proximos 30 dias — solo se muestra si el admin definio al menos un valor real
+  var projBlock='';
+  if(c.projScore||c.projStars||c.projAsk){
+    projBlock='<div class="card card-pad"><div class="card-title" style="margin-bottom:16px">Proyeccion proximos 30 dias</div><div class="proj-grid">'
+      +'<div class="pitem"><div class="pl">Score estimado</div><div class="pv">'+(c.projScore||'—')+'</div><div class="pn">fin de mes</div></div>'
+      +'<div class="pitem"><div class="pl">Calificacion</div><div class="pv">'+(c.projStars||'—')+'</div><div class="pn">con estrategia activa</div></div>'
+      +'<div class="pitem"><div class="pl">Presencia Ask Maps</div><div class="pv">'+(c.projAsk||'—')+'</div><div class="pn">consultas IA respondidas</div></div>'
+      +'</div></div>';
+  }
+
   // Cómo descubrieron tu empresa — desglose por plataforma/dispositivo (donut)
   var platforms=c.platforms||[];
   var platBlock='';
@@ -678,14 +688,7 @@ table.comp tr.hl td{background:#fafafa}
   </div>
 
   <!-- PROYECCION -->
-  <div class="card card-pad">
-    <div class="card-title" style="margin-bottom:16px">Proyeccion proximos 30 dias</div>
-    <div class="proj-grid">
-      <div class="pitem"><div class="pl">Score estimado</div><div class="pv">${c.projScore||((score_n+18)+'/100')}</div><div class="pn">fin de mes</div></div>
-      <div class="pitem"><div class="pl">Calificacion</div><div class="pv">${c.projStars||(Math.min(5,(stars_n+0.3)).toFixed(1)+' \u2605')}</div><div class="pn">con estrategia activa</div></div>
-      <div class="pitem"><div class="pl">Presencia Ask Maps</div><div class="pv">${c.projAsk||'12%'}</div><div class="pn">consultas IA respondidas</div></div>
-    </div>
-  </div>
+  ${projBlock}
 
   <div class="foot">boostraffic.com &nbsp;&middot;&nbsp; Sistema de Inteligencia Local &nbsp;&middot;&nbsp; Mayo 2026</div>
 </div>
@@ -1091,6 +1094,13 @@ function buildFichaDetailAdmin(ficha, accountKey) {
       <div><div class="inpl">Proyeccion 30d (%)</div><input class="inp" id="u-askprog" placeholder="${ficha.askProgress||0}"></div>
     </div>
 
+    <div class="kvsub">Proyeccion proximos 30 dias</div>
+    <div class="irow-inp">
+      <div><div class="inpl">Score estimado</div><input class="inp" id="u-projscore" placeholder="${ficha.projScore||'—'}"></div>
+      <div><div class="inpl">Calificacion estimada</div><input class="inp" id="u-projstars" placeholder="${ficha.projStars||'—'}"></div>
+      <div><div class="inpl">Presencia Ask Maps estimada</div><input class="inp" id="u-projask" placeholder="${ficha.projAsk||'—'}"></div>
+    </div>
+
     <div class="kvsub">Sentimiento de resenas</div>
     <div class="irow-inp">
       <div><div class="inpl">Positivas (%)</div><input class="inp" id="u-sentpos" placeholder="${ficha.sentPositive||0}"></div>
@@ -1200,11 +1210,14 @@ async function saveMetrics(){
   var askconv=document.getElementById('u-askconv').value;
   var askscore=document.getElementById('u-askscore').value;
   var askprog=document.getElementById('u-askprog').value;
+  var projscore=document.getElementById('u-projscore').value;
+  var projstars=document.getElementById('u-projstars').value;
+  var projask=document.getElementById('u-projask').value;
   var sentpos=document.getElementById('u-sentpos').value;
   var sentneu=document.getElementById('u-sentneu').value;
   var sentneg=document.getElementById('u-sentneg').value;
 
-  if(!impr_new&&!dir&&!calls&&!web&&!wa&&!stars&&!score&&!askpresence&&!askconv&&!askscore&&!askprog&&!sentpos&&!sentneu&&!sentneg)
+  if(!impr_new&&!dir&&!calls&&!web&&!wa&&!stars&&!score&&!askpresence&&!askconv&&!askscore&&!askprog&&!projscore&&!projstars&&!projask&&!sentpos&&!sentneu&&!sentneg)
     return showToast('Ingresa al menos una metrica','error');
 
   if(impr_new)payload.impressions_new=parseInt(impr_new);
@@ -1219,6 +1232,9 @@ async function saveMetrics(){
   if(askconv)payload.askConversations=parseInt(askconv);
   if(askscore)payload.askScore=askscore;
   if(askprog)payload.askProgress=parseInt(askprog);
+  if(projscore)payload.projScore=projscore;
+  if(projstars)payload.projStars=projstars;
+  if(projask)payload.projAsk=projask;
   if(sentpos)payload.sentPositive=parseInt(sentpos);
   if(sentneu)payload.sentNeutral=parseInt(sentneu);
   if(sentneg)payload.sentNegative=parseInt(sentneg);
