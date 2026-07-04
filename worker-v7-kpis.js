@@ -336,15 +336,19 @@ function buildFichaDetail(c, accountName) {
     kwBlock='<div class="kw-card">'+kwInner+'</div>';
   }
 
-  // Proyeccion proximos 30 dias — solo se muestra si el admin definio al menos un valor real
-  var projBlock='';
-  if(c.projScore||c.projStars||c.projAsk){
-    projBlock='<div class="card card-pad"><div class="card-title" style="margin-bottom:16px">Proyeccion proximos 30 dias</div><div class="proj-grid">'
-      +'<div class="pitem"><div class="pl">Score estimado</div><div class="pv">'+(c.projScore||'—')+'</div><div class="pn">fin de mes</div></div>'
-      +'<div class="pitem"><div class="pl">Calificacion</div><div class="pv">'+(c.projStars||'—')+'</div><div class="pn">con estrategia activa</div></div>'
-      +'<div class="pitem"><div class="pl">Presencia Ask Maps</div><div class="pv">'+(c.projAsk||'—')+'</div><div class="pn">consultas IA respondidas</div></div>'
-      +'</div></div>';
-  }
+  // Proyeccion proximos 30 dias — calculada a partir de la tendencia real (actual vs baseline),
+  // no de una formula fija. Si no hay baseline registrado aun, la tendencia es 0 (proyeccion = valor actual).
+  // El admin puede sobreescribir cualquiera de los 3 con un valor manual (projScore/projStars/projAsk).
+  var scoreTrend=(c.baseline_score!=null)?(score_n-score_b):0;
+  var scoreCalc=Math.max(0,Math.min(100,score_n+scoreTrend))+'/100';
+  var starsTrend=(c.baseline_stars!=null)?(stars_n-stars_b):0;
+  var starsCalc=Math.max(0,Math.min(5,stars_n+starsTrend)).toFixed(1)+' ★';
+  var askCalc=(c.askProgress!=null?c.askProgress:0)+'%';
+  var projBlock='<div class="card card-pad"><div class="card-title" style="margin-bottom:16px">Proyeccion proximos 30 dias</div><div class="proj-grid">'
+    +'<div class="pitem"><div class="pl">Score estimado</div><div class="pv">'+(c.projScore||scoreCalc)+'</div><div class="pn">fin de mes</div></div>'
+    +'<div class="pitem"><div class="pl">Calificacion</div><div class="pv">'+(c.projStars||starsCalc)+'</div><div class="pn">con estrategia activa</div></div>'
+    +'<div class="pitem"><div class="pl">Presencia Ask Maps</div><div class="pv">'+(c.projAsk||askCalc)+'</div><div class="pn">consultas IA respondidas</div></div>'
+    +'</div></div>';
 
   // Cómo descubrieron tu empresa — desglose por plataforma/dispositivo (donut)
   var platforms=c.platforms||[];
@@ -1094,7 +1098,7 @@ function buildFichaDetailAdmin(ficha, accountKey) {
       <div><div class="inpl">Proyeccion 30d (%)</div><input class="inp" id="u-askprog" placeholder="${ficha.askProgress||0}"></div>
     </div>
 
-    <div class="kvsub">Proyeccion proximos 30 dias</div>
+    <div class="kvsub">Proyeccion proximos 30 dias (opcional: se calcula sola desde score/estrellas/Ask Maps; llena esto solo para forzar un valor manual)</div>
     <div class="irow-inp">
       <div><div class="inpl">Score estimado</div><input class="inp" id="u-projscore" placeholder="${ficha.projScore||'—'}"></div>
       <div><div class="inpl">Calificacion estimada</div><input class="inp" id="u-projstars" placeholder="${ficha.projStars||'—'}"></div>
