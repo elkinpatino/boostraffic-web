@@ -327,7 +327,8 @@ function buildFichaDetail(c, accountName) {
   // Bloque de dos columnas: búsquedas reales (izq) + palabras clave objetivo (der)
   var kwSearchIco='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
   var kwTagIco='<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>';
-  var kwCol=keywords.length?('<div class="kw-col"><div class="kw-title">'+kwSearchIco+' Cómo te encontraron en Google</div><div class="kw-sub">Búsquedas que mostraron tu perfil este mes · ordenadas por volumen</div>'+keywordsHTML+'</div>'):'';
+  var kwPeriodTxt=c.keywords_period?('Búsquedas que mostraron tu perfil ('+c.keywords_period+') · ordenadas por volumen'):'Búsquedas que mostraron tu perfil · ordenadas por volumen';
+  var kwCol=keywords.length?('<div class="kw-col"><div class="kw-title">'+kwSearchIco+' Cómo te encontraron en Google</div><div class="kw-sub">'+kwPeriodTxt+'</div>'+keywordsHTML+'</div>'):'';
   var tagCol=tags.length?('<div class="kw-col"><div class="kw-title">'+kwTagIco+' Palabras clave que estamos posicionando</div><div class="kw-sub">Términos de alto valor que optimizamos para atraer clientes nuevos</div>'+tagsHTML+'</div>'):'';
   var kwBlock='';
   if(keywords.length||tags.length){
