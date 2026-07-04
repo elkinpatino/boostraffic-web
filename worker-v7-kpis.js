@@ -583,7 +583,7 @@ table.comp tr.hl td{background:#fafafa}
             <div class="pr-bar"><div class="pr-fill" style="width:0%;background:#378add" id="pb1"></div></div>
           </div>
           <div class="prog-row">
-            <div class="pr-hdr"><span class="pr-lbl">Objetivo estrellas (${c.starsTarget||'4.3'})</span><span class="pr-val">${Math.round((stars_n/parseFloat(c.starsTarget||4.3))*100)}%</span></div>
+            <div class="pr-hdr"><span class="pr-lbl">Objetivo estrellas (${c.starsTarget||'4.3'})</span><span class="pr-val">${Math.min(100,Math.round((stars_n/parseFloat(c.starsTarget||4.3))*100))}%</span></div>
             <div class="pr-bar"><div class="pr-fill" style="width:0%;background:#1d9e75" id="pb2"></div></div>
           </div>
           <div class="prog-row">
@@ -701,7 +701,7 @@ setTimeout(function(){
   var body=score<30?'Tu perfil recibe las primeras intervenciones de autoridad.':score<50?'Progreso significativo. Las optimizaciones se indexan en Google.':'Perfil con autoridad consolidada.';
   var et=document.getElementById('scoreTitle');var eb=document.getElementById('scoreBody');
   if(et)et.textContent=title;if(eb)eb.textContent=body;
-  var bars=[[document.getElementById('pb1'),score],[document.getElementById('pb2'),Math.round((${JSON.stringify(stars_n)}/parseFloat('${c.starsTarget||4.3}'))*100)],[document.getElementById('pb3'),askProg]];
+  var bars=[[document.getElementById('pb1'),score],[document.getElementById('pb2'),Math.min(100,Math.round((${JSON.stringify(stars_n)}/parseFloat('${c.starsTarget||4.3}'))*100))],[document.getElementById('pb3'),askProg]];
   bars.forEach(function(b){if(b[0]){b[0].style.transition='width 1.5s ease';b[0].style.width=b[1]+'%'}});
   function animNum(id,target){var el=document.getElementById(id);if(!el)return;var s=null,dur=1400;function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/dur,1);el.textContent=Math.round(p*target).toLocaleString('es-CO');if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
   animNum('kv1',calls);animNum('kv3',dir);animNum('kv4',web);
