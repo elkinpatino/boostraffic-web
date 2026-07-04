@@ -344,7 +344,7 @@ function buildFichaDetail(c, accountName) {
   var starsTrend=(c.baseline_stars!=null)?(stars_n-stars_b):0;
   var starsCalc=Math.max(0,Math.min(5,stars_n+starsTrend)).toFixed(1)+' ★';
   var askCalc=(c.askProgress!=null?c.askProgress:0)+'%';
-  var projBlock='<div class="card card-pad"><div class="card-title" style="margin-bottom:16px">Proyeccion proximos 30 dias</div><div class="proj-grid">'
+  var projBlock='<div class="card card-pad"><div class="card-title" style="margin-bottom:16px">Proyección de acuerdo a lo contratado</div><div class="proj-grid">'
     +'<div class="pitem"><div class="pl">Score estimado</div><div class="pv">'+(c.projScore||scoreCalc)+'</div><div class="pn">fin de mes</div></div>'
     +'<div class="pitem"><div class="pl">Calificacion</div><div class="pv">'+(c.projStars||starsCalc)+'</div><div class="pn">con estrategia activa</div></div>'
     +'<div class="pitem"><div class="pl">Presencia Ask Maps</div><div class="pv">'+(c.projAsk||askCalc)+'</div><div class="pn">consultas IA respondidas</div></div>'
