@@ -562,6 +562,38 @@ Al revisar el contenido completo de cada ficha (no solo las keys huérfanas) apa
 > campo en `worker-v7-kpis.js`). Los 2 hallazgos de esta ronda solo aparecieron al
 > inspeccionar el contenido, no la lista de keys.
 
+### Tercera ronda — 2026-07-04 (auditoría completa de las 9 fichas, campo por campo)
+Se extrajeron **todos** los nombres de campo que el código realmente lee (`grep -oE`
+sobre `c.`/`ficha.`/`f.` en `worker-v7-kpis.js`) y se compararon contra el JSON completo
+de cada una de las 9 fichas activas. Esto encontró un **bug real** (no solo basura
+cosmética) y varios campos muertos más:
+
+- ⚠️ **Bug real: `whatsapp` vs `waConversations`.** El campo que el dashboard
+  efectivamente lee para la tarjeta "Chats WhatsApp" es `waConversations`. Tres fichas
+  (Fundeqs, QP Turbos, Reyes) tenían el dato guardado bajo el nombre equivocado
+  `whatsapp`. Para **QP Turbos esto ocultaba un dato real** (`whatsapp: 7`) — su tarjeta
+  de WhatsApp mostraba 0 en el dashboard del cliente aunque el valor real ya estaba
+  cargado. Fix: renombrado `whatsapp` → `waConversations` en las 3 fichas (Fundeqs y
+  Reyes quedaron en 0, sin cambio visible; QP Turbos ahora muestra 7 correctamente).
+  **Al cargar WhatsApp chats a mano, usar siempre `waConversations`, nunca `whatsapp`.**
+- **HTL2026-PRINCIPAL (Hotel HTL)** tenía **dos campos de reservas distintos y
+  desincronizados**: `bookingClicks: 19` (el que el dashboard sí muestra en "Clics de
+  Reserva") y `reservas: 39` (campo muerto, ningún código lo lee). El usuario confirmó
+  que 39 es el dato correcto → se migró `bookingClicks` a 39 y se borró `reservas`.
+  También se limpiaron 2 campos muertos más de esta ficha: `key` (redundante con
+  `accountKey`) y `avgRate`/`marketRate` (sin ningún consumidor en el código).
+- **HOME59-PRINCIPAL**: mismos `avgRate: 0`/`marketRate: 0` muertos, sin impacto (valor
+  cero) — eliminados por consistencia.
+- El resto de fichas (Demo, Corlaminas, Atielec ya limpiada en ronda 2, TOYO+ ya limpiada
+  en ronda 2) no tenían campos fuera del set real de campos leídos por el código.
+
+> **Lección reforzada:** un campo "muerto" no siempre es inofensivo — cuando el nombre
+> del campo muerto es *parecido* al campo real que sí se usa (`whatsapp` vs
+> `waConversations`, `reservas` vs `bookingClicks`), es señal de que alguien cargó un
+> dato real con el nombre equivocado y ese dato nunca llegó a mostrarse. Ante un campo
+> muerto con un nombre "vecino" de uno real, siempre preguntar antes de borrarlo si no
+> debería migrarse en vez de eliminarse.
+
 ---
 
 ## ⚠️ GOTCHA CRÍTICO — Backslashes dentro de los `<script>` embebidos
