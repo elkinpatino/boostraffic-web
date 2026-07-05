@@ -15,7 +15,7 @@
 
 | Worker | Subdominio(s) | Archivo |
 |---|---|---|
-| `dashboard-boostraffic` | `htl.boostraffic.com`, `atielec.boostraffic.com`, `demo.boostraffic.com`, `toyo.boostraffic.com`, `corlaminas.boostraffic.com`, `fundeqs.boostraffic.com`, `qpturbos.boostraffic.com` | `worker-v7-kpis.js` |
+| `dashboard-boostraffic` | `htl.boostraffic.com`, `atielec.boostraffic.com`, `demo.boostraffic.com`, `toyo.boostraffic.com`, `corlaminas.boostraffic.com`, `fundeqs.boostraffic.com`, `qpturbos.boostraffic.com`, `reyes.boostraffic.com` | `worker-v7-kpis.js` |
 | `radar-boostraffic` | `radar.boostraffic.com` | `src/index.js` |
 
 Desplegar dashboard:
@@ -90,6 +90,16 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - Perfil ya reclamado/administrado por el cliente
 - ⚠️ Pendiente: la dirección en GBP aparece duplicada/inconsistente (`Cra 17 #6a-49` y `Cra. 17 #6a-12` juntas) — corrección programada como acción de servicio (`status:"plan"` en la ficha)
 - Creado: 03/jul/2026
+
+### REYES2026 — Los reyes de la cazuela
+- URL: `reyes.boostraffic.com`
+- Clave de acceso: `REYES2026`
+- KV: `dash:account:REYES2026`
+- Fichas: `REYES2026-PRINCIPAL` (Marisquería/Cevichería — Bogotá, Calle 23, Edif. Mónaco, La Macarena)
+- Score inicial: 49 · Rating: 4.7 ⭐ · 189 reseñas · `starsTarget`: 4.8
+- Métricas reales cargadas: feb-jul 2026 (`keywords_period`) y junio 2026 (`month_label`) por separado
+  — ver sección "PROYECCIÓN..." y "PALABRAS CLAVE" abajo para cómo conviven ambos períodos en la misma ficha.
+- Creado: 04/jul/2026
 
 ---
 
@@ -208,6 +218,7 @@ print('OK')
 - Corlaminas → `dash:ficha:CORL2026-PRINCIPAL`
 - Fundeqs → `dash:ficha:FDQ2026-PRINCIPAL`
 - QP Turbos → `dash:ficha:QPT2026-PRINCIPAL`
+- Los reyes de la cazuela → `dash:ficha:REYES2026-PRINCIPAL`
 
 ### Datos a sacar de GBP cada semana:
 - Impresiones nuevas del período
@@ -216,6 +227,21 @@ print('OK')
 - Clics web del período
 - Rating actual
 - Total reseñas
+
+### Campos de período — `month_label` y `keywords_period`
+Los totales que se pegan de GBP a veces cubren **un mes** y otras veces un **rango de
+varios meses** (según qué filtro de fecha haya usado quien exportó los datos). El
+dashboard NO asume un período fijo — dos campos opcionales en la ficha lo hacen explícito:
+- `month_label` (string, ej. `"Junio 2026"`) → cambia el texto "Total del mes" de las
+  tarjetas KPI (llamadas/rutas/web/WhatsApp) a `"Total de {month_label}"`. Si no está,
+  se queda el texto genérico "Total del mes".
+- `keywords_period` (string, ej. `"feb-jul 2026"`) → cambia el subtítulo de la columna
+  "Cómo te encontraron en Google" de "este mes" (afirmación que puede ser falsa) a
+  "Búsquedas que mostraron tu perfil (**{keywords_period}**)". Si no está, queda un texto
+  neutral sin afirmar ningún período.
+- **Antes de escribir cualquiera de los dos, verifica el período real que dice la UI de
+  GBP** ("Período de tiempo: X–Y") — no asumas que es "este mes" solo porque así decía
+  el texto viejo hardcodeado.
 
 ### Places API (automático diario 7AM):
 - Rating y reseñas se sincronizan solos
@@ -338,7 +364,7 @@ Orden actual de bloques (rediseñado 2026-06-23):
 4. **Acciones del mes** — `kpi-grid` de tarjetas (llamadas, rutas, web, WhatsApp + reservas si hotel).
 5. **Donut "Cómo descubrieron tu empresa"** — desglose por plataforma/dispositivo (`platforms`). Condicional. Va ENCIMA de la tarjeta de keywords.
 5b. **Tarjeta keywords (2 columnas)** — izq "Cómo te encontraron en Google" (`keywords`) · der "Palabras clave que estamos posicionando" (`tags`). Condicional: aparece si hay `keywords` o `tags`.
-6. **Ask Maps** · **Reputación + Sentimiento** · **Actividad del servicio** · **Proyección 30d**.
+6. **Ask Maps** · **Reputación + Sentimiento** · **Actividad del servicio** · **Proyección de acuerdo a lo contratado** (ver sección propia abajo, renombrada 2026-07-04, antes "Proyección 30 días").
 
 > Eliminados en el rediseño: tabla "Antes vs Ahora", "Actividad diaria", "Referencia mes anterior".
 
@@ -363,6 +389,64 @@ Valores con signo, ej. `18.0` → muestra "+18.0%".
 - Estado por texto: <30 "Fase inicial" · <50 "Autoridad en construcción activa" · ≥50 "Visibilidad consolidándose".
 - NO es dato verificable de Google — se asigna como parte del servicio.
 
+### Barra "Objetivo estrellas" (dentro del bloque Score)
+- `% = min(100, round(stars / starsTarget × 100))`. **`starsTarget` se debe fijar por
+  cliente** al crearlo (campo del formulario admin) — el default en código es `4.3`,
+  pensado para negocios que arrancan bajos.
+- ⚠️ Bug corregido 2026-07-04: si un cliente ya tiene un rating real por encima del
+  default (ej. Reyes con 4.7 vs el default 4.3), sin fijar `starsTarget` a mano la barra
+  mostraba **109%** (una "meta" ya superada antes de definirla) y se desbordaba
+  visualmente porque el cálculo no tenía tope. Ahora el `%` está limitado a 100 en el
+  código (`Math.min(100,...)`, worker-v7-kpis.js), pero igual **hay que fijar un
+  `starsTarget` realista y por encima del rating actual** en cada ficha nueva, o el
+  100% aparece de inmediato sin reflejar ningún objetivo real.
+
+---
+
+## PROYECCIÓN DE ACUERDO A LO CONTRATADO (antes "Proyección 30 días") — campo `projScore`/`projStars`/`projAsk`
+
+Tarjeta al final del dashboard cliente (`buildFichaDetail`, variable `projBlock`).
+
+### Historia — por qué se rediseñó (2026-07-04)
+La versión original mostraba 3 "proyecciones" con **fórmulas fijas e inventadas**,
+iguales para absolutamente todos los clientes sin importar sus datos reales:
+```
+Score estimado      = score_actual + 18       (siempre +18 puntos)
+Calificación         = min(5, stars_actual + 0.3)  (siempre +0.3 estrellas)
+Presencia Ask Maps  = "12%"                    (texto literal fijo)
+```
+Nadie llenaba esto a mano porque **no existía ningún input en el admin** para hacerlo —
+en la práctica, cada cliente veía siempre estos 3 números falsos. Se detectó al revisar
+el dashboard de Reyes y se corrigió el mismo día.
+
+### Cómo funciona ahora
+El cálculo por defecto usa **datos reales ya existentes en la ficha** (no hay que cargar
+nada nuevo para que deje de ser falso):
+```
+scoreTrend  = (baseline_score existe) ? (score - baseline_score) : 0
+Score estimado = clamp(0,100, score + scoreTrend) + "/100"
+
+starsTrend  = (baseline_stars existe) ? (stars - baseline_stars) : 0
+Calificación   = clamp(0,5, stars + starsTrend).toFixed(1) + " ★"
+
+Presencia Ask Maps = askProgress (el mismo campo real que ya se usa en
+                      "Progreso Ask Maps" en otra sección) + "%"
+```
+Si un cliente no tiene aún un baseline de score/estrellas distinto del valor actual (caso
+típico de una ficha recién creada), la proyección sale **plana** (igual al valor actual) —
+es honesto: "si no ha habido tendencia medida todavía, no hay base para proyectar
+crecimiento". Esto es preferible a inventar un número optimista fijo.
+
+### Override manual (opcional)
+En el admin, sección "Proyección próximos 30 días" (debajo de Ask Maps), 3 inputs de
+texto libre: `projScore`, `projStars`, `projAsk`. Si el analista los llena a mano
+(criterio propio, ej. por una campaña puntual que se sabe que va a mover el número más
+de lo que el cálculo automático reflejaría), ese valor manual **gana sobre el cálculo**.
+Guardar vacío vuelve a activar el cálculo automático.
+
+> La tarjeta **siempre se muestra** (no es condicional como keywords/platforms) — con
+> datos calculados de verdad o con el override, nunca queda oculta ni con fórmula falsa.
+
 ---
 
 ## CREAR UN CLIENTE NUEVO (proceso en KV)
@@ -376,8 +460,18 @@ dash:account:CORL2026 → {"name","key":"CORL2026","subdomain":"corlaminas","fic
 # 2. Mapeo subdominio (MAYÚSCULAS) → accountKey
 dash:subdomain:CORLAMINAS → "CORL2026"
 # 3. Ficha
-dash:ficha:CORL2026-PRINCIPAL → {datos métricas, keywords, actions...}
+dash:ficha:CORL2026-PRINCIPAL → {"id":"CORL2026-PRINCIPAL","accountKey":"CORL2026", datos métricas, keywords, actions...}
 ```
+
+> ⚠️ **La ficha debe incluir `id` (igual al sufijo de su propia key en KV) y
+> `accountKey` (igual a la key de la cuenta dueña).** Cuando la ficha se crea desde el
+> formulario del admin (`/api/ficha/{id}/create`) estos campos se agregan solos. Pero si
+> se crea escribiendo directo en KV con `wrangler kv key put` (como se hizo con Fundeqs,
+> QP Turbos y Reyes) es fácil olvidarlos — sin `id`, el link de la tarjeta en
+> `/detail-account/{key}` apunta a `/detail-ficha/undefined` y al hacer clic el admin
+> muestra **"Ficha no encontrada"** (bug real, ocurrió con las 3 fichas de arriba el
+> 2026-07-04, se arregló agregando los 2 campos faltantes por KV, sin necesidad de
+> redeploy).
 
 Luego agregar el dominio a `wrangler.toml` (`routes`) y `npx wrangler deploy`.
 La **clave de acceso del cliente ES la `key` de la cuenta** (CORL2026, TOYO2026, etc.).
