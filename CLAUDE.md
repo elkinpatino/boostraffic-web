@@ -500,6 +500,43 @@ fechas ascendentes en el array. Redactar `text` orientado al cliente (estilo TOY
 
 ---
 
+## MANTENIMIENTO — Auditoría y limpieza de KV
+
+### Cómo auditar (repetible en cualquier sesión futura)
+```bash
+cd ~/Documents/BoostraffecWeb
+npx wrangler kv key list --remote --binding=RADAR_KV --prefix "dash:" 2>/dev/null | python3 -c "
+import json,sys
+for k in sorted(k['name'] for k in json.load(sys.stdin)): print(k)
+"
+```
+Con la lista completa, revisar:
+1. **Cada `dash:ficha:{ID}` debe tener `id` y `accountKey` propios** (ver gotcha en
+   "CREAR UN CLIENTE NUEVO" arriba) — si falta, el admin muestra "Ficha no encontrada".
+2. **Cada `dash:ficha:{ID}` debe estar referenciada en el `fichas[]` de algún
+   `dash:account:{KEY}`** — si no, es una ficha huérfana inalcanzable desde el admin
+   (probablemente dato de prueba viejo).
+3. **No debería haber keys `dash:client:{KEY}`** (formato legacy pre-migración, de antes
+   de que existiera la separación cuenta/ficha) — el endpoint `/migrate` del worker las lee
+   una sola vez para convertirlas a `dash:account:`+`dash:ficha:`; si ya se migraron
+   (comparar `updated` del `dash:ficha:` resultante, debería ser más reciente), el
+   `dash:client:` original queda muerto y se puede borrar.
+4. `dash:session:*` y `dash:client_session:{SUB}:*` son sesiones de login reales — no
+   tocar salvo que se sepa que están vencidas/abandonadas.
+
+### Limpieza hecha el 2026-07-04
+Se encontraron y borraron 2 keys muertas (sin código que las lea, sin cuenta que las
+referencie):
+- `dash:ficha:DEMO-001` ("Restaurante La Macarena", datos de abril-mayo 2026) — huérfana,
+  `dash:account:DEMO.fichas` solo apuntaba a `DEMO-PRINCIPAL`. Basura de prueba.
+- `dash:client:HTL2026` — formato legacy pre-migración de Hotel HTL. Ya estaba migrado
+  hacía tiempo a `dash:account:HTL2026` + `dash:ficha:HTL2026-PRINCIPAL` (con datos más
+  recientes que la copia vieja). Sobrante del endpoint `/migrate`, ya sin uso.
+
+Ninguna de las dos requirió `wrangler deploy` (son solo datos en KV, no código).
+
+---
+
 ## ⚠️ GOTCHA CRÍTICO — Backslashes dentro de los `<script>` embebidos
 
 Las páginas se generan como **template literals** (backticks) dentro de las funciones
