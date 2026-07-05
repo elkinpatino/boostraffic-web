@@ -535,6 +535,33 @@ referencie):
 
 Ninguna de las dos requirió `wrangler deploy` (son solo datos en KV, no código).
 
+### Segunda ronda de limpieza — 2026-07-04 (dentro de fichas activas, no keys huérfanas)
+Al revisar el contenido completo de cada ficha (no solo las keys huérfanas) aparecieron
+2 problemas más, esta vez **dentro de fichas de clientes activos**:
+- **Atielec (`dash:ficha:ATL2026-1778201837372`)**: una entrada duplicada/corrupta en
+  `actions` y `actions_pro` — texto concatenado por error ("Registro completo de
+  acciones" + el texto de otra entrada + "Completado" + fecha), visible tal cual en
+  "Actividad del servicio" del dashboard del cliente. Se eliminó la entrada de ambos
+  arrays (quedaron en 8 en vez de 9).
+- **TOYO+ (`dash:ficha:TOYO2026-PRINCIPAL`)**: 4 campos que ningún código del worker lee
+  nunca (verificado con `grep`) — basura acumulada de ediciones manuales pasadas:
+  - `fichas: []` — campo que solo pertenece a `dash:account:*`, quedó pegado por error
+    en una ficha.
+  - `images: [...]` — 7 nombres de archivo (`toyo_plus_01.jpg`...) sin ningún consumidor.
+  - `direccion` — el dashboard usa `zona`, nunca `direccion`.
+  - `created` (20/jun/**2024**, dos años antes que todo lo demás) — el dashboard usa
+    `started` (correcto, 2026) para "Trabajando contigo desde el...". Este `created`
+    parece ser también el origen del timestamp raro en `dash:account:TOYO2026.created`
+    (mismo valor 2024) — no se corrigió el del account porque no se lee en ningún lado
+    tampoco, solo se documenta aquí por si extraña en una futura auditoría.
+  Se borraron los 4 campos de la ficha; no se tocó `dash:account:TOYO2026`.
+
+> **Lección para próximas auditorías:** revisar solo las *keys* de KV (huérfanas,
+> legacy) no es suficiente — hay que abrir el JSON completo de cada ficha activa y
+> comparar sus campos contra lo que el código realmente lee (`grep` del nombre del
+> campo en `worker-v7-kpis.js`). Los 2 hallazgos de esta ronda solo aparecieron al
+> inspeccionar el contenido, no la lista de keys.
+
 ---
 
 ## ⚠️ GOTCHA CRÍTICO — Backslashes dentro de los `<script>` embebidos
