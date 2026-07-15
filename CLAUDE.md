@@ -121,7 +121,7 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - Score inicial: 21/100 (radar, "baja visibilidad local"), baseline_score 21 (plano, sin tendencia aún) · Rating: 5.0 ⭐ · 4 reseñas · `starsTarget`: 4.9 (deliberadamente por debajo del 5.0 actual — elección explícita del usuario, ya que 5.0 es el techo)
 - Métricas reales cargadas — Junio 2026 (`month_label`): llamadas 3, direcciones 29, web 0
 - `keywords_period`: "feb-jul 2026" → llamadas 25, direcciones 232, web 0, impresiones 423 (desglose por plataforma: Maps móvil 171, Búsqueda escritorio 93, Búsqueda móvil 83, Maps escritorio 76)
-- `yoy_interactions_pct`: -34.7 (la caída específica de direcciones, -38.3% YoY, no tenía campo propio y quedó en `actions` como texto libre)
+- Sin campos `yoy_*` (a propósito, igual que FDQ2026 y QPT2026) — se cargó `yoy_interactions_pct: -34.7` inicialmente pero se quitó el 15/jul/2026 para no mostrar el bloque "Crecimiento interanual" con una caída; la caída de direcciones (-38.3% YoY) quedó solo como texto libre en `actions`
 - 3 términos de búsqueda cargados (todos `< 15`; un 4to término que el texto pegado por el usuario cortaba se dejó fuera a propósito)
 - Sin `tags` todavía — el propio dashboard del cliente pide "agrega 10 palabras claves con mayor cantidad de consultas"; queda como TODO abierto del analista, no es dato que se haya recibido
 - Creado: 15/jul/2026
