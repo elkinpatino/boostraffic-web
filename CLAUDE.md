@@ -124,6 +124,8 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - Sin campos `yoy_*` (a propósito, igual que FDQ2026 y QPT2026) — se cargó `yoy_interactions_pct: -34.7` inicialmente pero se quitó el 15/jul/2026 para no mostrar el bloque "Crecimiento interanual" con una caída; la caída de direcciones (-38.3% YoY) quedó solo como texto libre en `actions`
 - 3 términos de búsqueda cargados (todos `< 15`; un 4to término que el texto pegado por el usuario cortaba se dejó fuera a propósito)
 - `tags` (10, generadas por el analista el 15/jul/2026 según el rubro "repuestos para camiones Mack", no vienen de Etiquetas GBP reales del cliente — excepción al patrón habitual de esta sección)
+- Reputación/Sentimiento: 100% positivas · 0% neutras · 0% negativas (4 reseñas reales, todas 5★)
+- Actividad del servicio: respuesta personalizada a las 4 reseñas (tono usted, palabras clave rotadas por respuesta)
 - Creado: 15/jul/2026
 
 ---
