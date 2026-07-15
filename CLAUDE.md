@@ -125,7 +125,7 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - 3 términos de búsqueda cargados (todos `< 15`; un 4to término que el texto pegado por el usuario cortaba se dejó fuera a propósito)
 - `tags` (10, generadas por el analista el 15/jul/2026 según el rubro "repuestos para camiones Mack", no vienen de Etiquetas GBP reales del cliente — excepción al patrón habitual de esta sección)
 - Reputación/Sentimiento: 100% positivas · 0% neutras · 0% negativas (4 reseñas reales, todas 5★)
-- Actividad del servicio: respuesta personalizada a las 4 reseñas (tono usted, palabras clave rotadas por respuesta)
+- Actividad del servicio: respuesta personalizada a las 4 reseñas (tono usted, palabras clave rotadas por respuesta) · optimización con las 10 palabras clave del sector (etiquetas)
 - Creado: 15/jul/2026
 
 ---
