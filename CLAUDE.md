@@ -123,7 +123,7 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - `keywords_period`: "feb-jul 2026" → llamadas 25, direcciones 232, web 0, impresiones 423 (desglose por plataforma: Maps móvil 171, Búsqueda escritorio 93, Búsqueda móvil 83, Maps escritorio 76)
 - Sin campos `yoy_*` (a propósito, igual que FDQ2026 y QPT2026) — se cargó `yoy_interactions_pct: -34.7` inicialmente pero se quitó el 15/jul/2026 para no mostrar el bloque "Crecimiento interanual" con una caída; la caída de direcciones (-38.3% YoY) quedó solo como texto libre en `actions`
 - 3 términos de búsqueda cargados (todos `< 15`; un 4to término que el texto pegado por el usuario cortaba se dejó fuera a propósito)
-- Sin `tags` todavía — el propio dashboard del cliente pide "agrega 10 palabras claves con mayor cantidad de consultas"; queda como TODO abierto del analista, no es dato que se haya recibido
+- `tags` (10, generadas por el analista el 15/jul/2026 según el rubro "repuestos para camiones Mack", no vienen de Etiquetas GBP reales del cliente — excepción al patrón habitual de esta sección)
 - Creado: 15/jul/2026
 
 ---
