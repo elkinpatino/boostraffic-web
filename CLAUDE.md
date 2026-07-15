@@ -15,7 +15,7 @@
 
 | Worker | Subdominio(s) | Archivo |
 |---|---|---|
-| `dashboard-boostraffic` | `htl.boostraffic.com`, `atielec.boostraffic.com`, `demo.boostraffic.com`, `toyo.boostraffic.com`, `corlaminas.boostraffic.com`, `fundeqs.boostraffic.com`, `qpturbos.boostraffic.com`, `reyes.boostraffic.com` | `worker-v7-kpis.js` |
+| `dashboard-boostraffic` | `htl.boostraffic.com`, `atielec.boostraffic.com`, `demo.boostraffic.com`, `toyo.boostraffic.com`, `corlaminas.boostraffic.com`, `fundeqs.boostraffic.com`, `qpturbos.boostraffic.com`, `reyes.boostraffic.com`, `mundomack.boostraffic.com`, `intermack.boostraffic.com` | `worker-v7-kpis.js` |
 | `radar-boostraffic` | `radar.boostraffic.com` | `src/index.js` |
 
 Desplegar dashboard:
@@ -37,7 +37,7 @@ cd ~/radar-boostraffic && npx wrangler deploy
 | Account ID Cloudflare | `df7b1bae8b0736eef3fa8ba52be2ed71` |
 | KV Namespace binding | `RADAR_KV` |
 | KV Namespace ID | `47a79e38a48046c6ba8facd533e81d04` |
-| MASTER_KEY (radar) | `BT2025!Radar#Secure` — **migrar a Cloudflare Secret** |
+| MASTER_KEY (radar) | `BT2025!Radar#Secure` (en `[vars]` de `radar-boostraffic/wrangler.toml`, texto plano) |
 | PLACES_API_KEY | Cloudflare Secrets (no está en código) |
 
 ---
@@ -100,6 +100,31 @@ cd ~/radar-boostraffic && npx wrangler deploy
 - Métricas reales cargadas: feb-jul 2026 (`keywords_period`) y junio 2026 (`month_label`) por separado
   — ver sección "PROYECCIÓN..." y "PALABRAS CLAVE" abajo para cómo conviven ambos períodos en la misma ficha.
 - Creado: 04/jul/2026
+
+### MACK2026 — Mundo Mack S.A.S
+- URL: `mundomack.boostraffic.com`
+- Clave de acceso: `MACK2026`
+- KV: `dash:account:MACK2026`
+- Fichas: `MACK2026-PRINCIPAL` (Repuestos para camiones Mack — Bogotá, Cl. 8 #25-22)
+- Score: 56 (baseline 50) · Rating: 4.5 ⭐ · 4,513 reseñas · `starsTarget`: 4.8 (default, no confirmado por el cliente)
+- Métricas reales cargadas — Junio 2026 (`month_label`): llamadas 67, direcciones 57, clics web 0, chats WhatsApp 0 (número recién sincronizado en Maps, sin conversaciones aún), impresiones 1,105 (desglose por plataforma: 591 Búsqueda móvil, 281 Búsqueda escritorio, 158 Maps móvil, 75 Maps escritorio)
+- Reputación/Sentimiento: 92% positivas · 0% neutras · 8% negativas (calculado sobre 13 reseñas reales: 12×5★, 1×1★ gestionada con protocolo de recuperación de cliente)
+- Actividad del servicio (4 acciones completadas 10/jul/2026): ficha reclamada y verificada · optimización con las 10 palabras clave más buscadas de la categoría (etiquetas GBP) · respuestas a las 13 reseñas · logo e imagen de portada optimizados
+- ⚠️ Pendiente: la categoría GBP real es "Proveedor de repuestos de carrocería de automóviles", que no calza con el negocio (repuestos de camiones pesados) — posible causa de la baja visibilidad local que mostró el radar. Sugerir al cliente corregir la categoría en GBP.
+- Creado: 10/jul/2026
+
+### INTM2026 — Intermack S.A.S
+- URL: `intermack.boostraffic.com`
+- Clave de acceso: `INTM2026`
+- KV: `dash:account:INTM2026`
+- Fichas: `INTM2026-PRINCIPAL` (Repuestos para Mack — Bogotá; posible empresa hermana de MACK2026/Mundo Mack, misma categoría, ambos en Bogotá — nunca confirmado con el cliente)
+- Score inicial: 21/100 (radar, "baja visibilidad local"), baseline_score 21 (plano, sin tendencia aún) · Rating: 5.0 ⭐ · 4 reseñas · `starsTarget`: 4.9 (deliberadamente por debajo del 5.0 actual — elección explícita del usuario, ya que 5.0 es el techo)
+- Métricas reales cargadas — Junio 2026 (`month_label`): llamadas 3, direcciones 29, web 0
+- `keywords_period`: "feb-jul 2026" → llamadas 25, direcciones 232, web 0, impresiones 423 (desglose por plataforma: Maps móvil 171, Búsqueda escritorio 93, Búsqueda móvil 83, Maps escritorio 76)
+- `yoy_interactions_pct`: -34.7 (la caída específica de direcciones, -38.3% YoY, no tenía campo propio y quedó en `actions` como texto libre)
+- 3 términos de búsqueda cargados (todos `< 15`; un 4to término que el texto pegado por el usuario cortaba se dejó fuera a propósito)
+- Sin `tags` todavía — el propio dashboard del cliente pide "agrega 10 palabras claves con mayor cantidad de consultas"; queda como TODO abierto del analista, no es dato que se haya recibido
+- Creado: 15/jul/2026
 
 ---
 
@@ -219,6 +244,8 @@ print('OK')
 - Fundeqs → `dash:ficha:FDQ2026-PRINCIPAL`
 - QP Turbos → `dash:ficha:QPT2026-PRINCIPAL`
 - Los reyes de la cazuela → `dash:ficha:REYES2026-PRINCIPAL`
+- Mundo Mack → `dash:ficha:MACK2026-PRINCIPAL`
+- Intermack → `dash:ficha:INTM2026-PRINCIPAL`
 
 ### Datos a sacar de GBP cada semana:
 - Impresiones nuevas del período
@@ -626,6 +653,12 @@ regex `\\d \\s \\+`) y en la validación de fecha de `saveDailyLog` (`/^\\d{4}-.
 
 ## Pendientes
 
-- [ ] Migrar `MASTER_KEY` de vars a Cloudflare Secret (`wrangler secret put MASTER_KEY`)
 - [ ] Completar comando deploy landing con la ruta correcta del container
 - [ ] Confirmar ruta de destino en container Docker para el HTML de la landing
+
+## Decisiones descartadas (no repetir la pregunta)
+
+- **Migrar `MASTER_KEY` a Cloudflare Secret**: evaluado 2026-07-06, descartado. Repo
+  privado, usuario trabaja solo, nadie más tiene acceso — el riesgo real (colaborador
+  viendo la clave en `wrangler.toml`) no aplica hoy. Queda en `[vars]` en texto plano
+  a propósito. Revisar solo si el repo pasa a público o se suma algún colaborador.

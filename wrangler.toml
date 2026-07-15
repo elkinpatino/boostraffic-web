@@ -12,7 +12,9 @@ routes = [
   {pattern = "corlaminas.boostraffic.com", custom_domain = true},
   {pattern = "fundeqs.boostraffic.com", custom_domain = true},
   {pattern = "qpturbos.boostraffic.com", custom_domain = true},
-  {pattern = "reyes.boostraffic.com", custom_domain = true}
+  {pattern = "reyes.boostraffic.com", custom_domain = true},
+  {pattern = "mundomack.boostraffic.com", custom_domain = true},
+  {pattern = "intermack.boostraffic.com", custom_domain = true}
 ]
 
 [[kv_namespaces]]
