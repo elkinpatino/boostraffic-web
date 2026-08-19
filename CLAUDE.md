@@ -155,6 +155,77 @@ KV compartido entre ambos workers (`RADAR_KV`, id: `47a79e38a48046c6ba8facd533e8
 
 ---
 
+## SEO — Auditoría y fixes (2026-08-19)
+
+Surgió al revisar por qué `boostraffic.com` no aparece en Google para su
+propia keyword de negocio ("seo local" / "seo local bogotá") ni en el
+"local pack" de Google Maps — de hecho **Google Maps no encuentra
+"boostraffic"** como negocio (sin Google Business Profile propio), algo
+irónico para una agencia que vende justo eso como servicio.
+
+### On-page: bien construido, con 2 bugs reales (ya corregidos)
+
+El `<head>` ya tenía meta description, canonical, Open Graph, Twitter
+Cards, `robots.txt`/`sitemap.xml`, y **8 bloques JSON-LD**
+(`ProfessionalService`, `FAQPage`, `HowTo`, `Organization` con redes
+sociales, `BreadcrumbList`, `ItemList` de precios que coinciden con los
+precios reales visibles en la página — nada fabricado). ~1.168 palabras
+de contenido, buena profundidad.
+
+Dos problemas reales encontrados y corregidos esa sesión:
+
+1. **El `<title>`/`og:title` reales no decían "SEO Local"** (decían
+   "Subimos tu Score en Google Maps & ASK Maps"), aunque el H1 y el
+   JSON-LD `WebPage.name` sí. Corregido a
+   `"Boostraffic | SEO Local y Optimización de Google Maps"` (alinea
+   `<title>` con lo que ya decía el JSON-LD). Commit `d33c22a`.
+2. **`www.boostraffic.com` no resolvía en DNS en absoluto** (mismo tipo
+   de bug que apareció ese mismo día en `cursoslaborales.com`, el
+   dominio viejo de otro proyecto). Corregido por API de Cloudflare:
+   - Registro **CNAME** `www` → `boostraffic.com`, `proxied: true`.
+   - Regla de **Redirección única** (Rulesets API, fase
+     `http_request_dynamic_redirect`) que hace 301 de
+     `www.boostraffic.com/*` → `https://boostraffic.com$1` **antes**
+     de llegar al origen — necesario porque el origen (Coolify/Traefik)
+     solo reconoce el Host `boostraffic.com` (devuelve 404 con
+     cualquier otro Host) y el certificado TLS del origen tampoco
+     cubre `www` (sin SAN). El redirect a nivel de Cloudflare evita
+     tocar Coolify.
+   - Token usado: el token "Zona" en Cloudflare (dashboard de
+     `elkinpatino@gmail.com`), con permisos `Zona.DNS:Editar` +
+     `Zona.Redirección única:Editar`, alcance limitado a la zona
+     `boostraffic.com` (id `4dcd755b25120d8bcf563838b59f4c45`). El
+     valor del token vive en `~/.zshrc` del usuario como
+     `$CF_DNS_TOKEN` — **nunca en este repo ni en texto plano en el
+     chat**.
+
+### Pendiente (no corregido todavía)
+
+- **`og:locale:alternate` declara en_US/pt_BR/de_DE/es_MX pero no hay
+  `hreflang` real ni contenido traducido** — solo hay
+  `hreflang="es-CO"`/`"es"` autoreferenciados. Metadatos "aspiracionales"
+  sin backing real; no rompe nada pero tampoco ayuda.
+- **`aggregateRating` (5.0★, 2 reseñas) en el JSON-LD `ProfessionalService`
+  está respaldado por 2 testimonios reales visibles en la página**
+  (Oscar Restrepo Villamil, Fredy Angarita Romero — el conteo coincide,
+  no está inventado), pero como no vienen de una plataforma de reseñas
+  de terceros (Google, Trustpilot), es poco probable que Google le dé
+  el rich snippet de estrellas en el buscador. Se resuelve creando el
+  Google Business Profile de Boostraffic (ver punto siguiente) y
+  consiguiendo reseñas reales ahí.
+- **Boostraffic no tiene Google Business Profile propio.** Para
+  "seo local bogotá" el "local pack" del mapa domina el resultado y ahí
+  compiten agencias con 20-30+ reseñas reales (Seoimpacto, Alturas RM
+  tipo — ver competidores reales del rubro). Es la palanca de mayor
+  impacto identificada, pendiente de ejecutar.
+
+**How to apply:** si en una sesión futura preguntan por el SEO/posicionamiento
+de `boostraffic.com`, o por qué no aparece en Google para su propia
+keyword, leer esta sección antes de re-auditar desde cero — el on-page
+ya está en buen estado, lo que falta es autoridad/reseñas vía GBP.
+
+---
+
 ## Incidente 2026-07-02 — boostraffic.com mostraba un diseño viejo
 
 ### Síntoma
