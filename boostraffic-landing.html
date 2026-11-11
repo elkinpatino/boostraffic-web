@@ -1420,6 +1420,66 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 .g2-cta .btn:hover { filter: brightness(1.1); }
 @media (max-width: 860px) { .g2-grid { grid-template-columns: 1fr; } .g2-core { height: 300px; } .g2-tabla div { grid-template-columns: 1fr auto; } .g2-tabla div span:nth-child(2) { grid-column: 1 / -1; order: 3; font-size: 12px; } .g2-cv { display: block; } }
 @media (prefers-reduced-motion: reduce) { .g2-c { opacity: 1; transform: none; transition: none; } .g2-scan { display: none; } }
+
+/* ═══ FAQ 2075 · "Consola de consultas" (sección 9) ══════════════════ */
+.f2 { position: relative; overflow: clip; isolation: isolate; background: #02050b; padding: clamp(70px,8vw,120px) 0; color: #d7e6f5; }
+.f2::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(50% 50% at 75% 45%, rgba(179,136,255,.2), transparent 70%), radial-gradient(45% 45% at 10% 20%, rgba(94,242,255,.16), transparent 70%); }
+.f2::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(94,242,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(94,242,255,.045) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 10%, transparent 72%); mask-image: radial-gradient(ellipse at 50% 50%, #000 10%, transparent 72%); }
+.f2 .container { max-width: 1180px; }
+.f2 .section-header { text-align: center; margin-bottom: clamp(26px,3.4vw,44px); }
+.f2 .badge { color: #b388ff; background: rgba(179,136,255,.1); border: 1px solid rgba(179,136,255,.45); font-family: ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; }
+.f2 h2 { color: #fff; font-size: clamp(28px, 3.9vw, 50px); letter-spacing: -.03em; line-height: 1.1; text-wrap: balance; text-shadow: 0 0 40px rgba(179,136,255,.5); }
+.f2-wrap { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); gap: clamp(16px,2.4vw,28px); align-items: start; }
+.f2-izq { display: grid; gap: 12px; }
+.f2-buscar { position: relative; }
+.f2-buscar input { width: 100%; height: 54px; padding: 0 18px 0 48px; border-radius: 14px; border: 1px solid rgba(94,242,255,.3); background: rgba(94,242,255,.05); color: #fff; font: 500 15px var(--font); outline: none; transition: border-color .3s, box-shadow .3s; }
+.f2-buscar input::placeholder { color: #6f8aa3; }
+.f2-buscar input:focus { border-color: #5ef2ff; box-shadow: 0 0 0 4px rgba(94,242,255,.15), 0 0 40px -10px rgba(94,242,255,.7); }
+.f2-buscar svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #5ef2ff; filter: drop-shadow(0 0 6px #5ef2ff); }
+.f2 .faq-list { display: grid; gap: 10px; max-width: none; margin: 0; }
+.f2 .faq-item { position: relative; border: 1px solid rgba(94,242,255,.18); border-radius: 14px; background: linear-gradient(90deg, rgba(94,242,255,.06), rgba(94,242,255,.015)); overflow: hidden; opacity: 0; transform: translateX(-24px); transition: opacity .7s cubic-bezier(.23,1,.32,1), transform .7s cubic-bezier(.23,1,.32,1), border-color .35s, background .35s, box-shadow .35s; }
+.f2.on .faq-item { opacity: 1; transform: none; }
+.f2.on .faq-item:nth-child(2) { transition-delay: .08s; } .f2.on .faq-item:nth-child(3) { transition-delay: .16s; } .f2.on .faq-item:nth-child(4) { transition-delay: .24s; } .f2.on .faq-item:nth-child(5) { transition-delay: .32s; }
+.f2 .faq-item.oculto { display: none; }
+.f2 .faq-item::before { content: attr(data-n); position: absolute; left: 0; top: 0; bottom: 0; width: 46px; display: grid; place-items: center; font: 800 13px ui-monospace, Menlo, monospace; color: #5ef2ff; border-right: 1px solid rgba(94,242,255,.18); background: rgba(94,242,255,.05); letter-spacing: .06em; }
+.f2 .faq-question { background: none; border: 0; color: #e8f4ff; font: 600 15.5px/1.35 var(--font); padding: 18px 18px 18px 64px; width: 100%; text-align: left; min-height: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
+.f2 .faq-question:hover { background: rgba(94,242,255,.06); }
+.f2 .faq-icon { color: #5ef2ff; transition: transform .3s; flex: none; }
+.f2 .faq-item.open { border-color: #5ef2ff; background: linear-gradient(90deg, rgba(94,242,255,.2), rgba(179,136,255,.08)); box-shadow: 0 0 50px -14px rgba(94,242,255,.65); }
+.f2 .faq-item.open::before { background: #5ef2ff; color: #02121c; }
+.f2 .faq-item.open .faq-icon { transform: translateX(4px) rotate(-90deg); }
+.f2 .faq-answer { color: #a9c3d8; font-size: 15px; line-height: 1.7; }
+@media (min-width: 901px) { .f2 .faq-answer { position: absolute; width: 1px; height: 1px; padding: 0 !important; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); max-height: none !important; } .f2 .faq-item.open .faq-icon { transform: translateX(4px); } }
+.f2-vacio { display: none; padding: 18px; border: 1px dashed rgba(94,242,255,.35); border-radius: 14px; color: #a9c3d8; font-size: 14.5px; line-height: 1.6; }
+.f2-vacio a { color: #5affb0; font-weight: 700; }
+.f2-vacio.ver { display: block; }
+/* terminal */
+.f2-term { position: sticky; top: 92px; border-radius: 18px; background: linear-gradient(170deg, rgba(8,14,30,.96), rgba(4,8,18,.98)); border: 1px solid rgba(179,136,255,.4); box-shadow: 0 40px 80px -40px #000, 0 0 90px -24px rgba(179,136,255,.6), inset 0 1px 0 rgba(255,255,255,.08); overflow: hidden; min-height: 420px; display: flex; flex-direction: column; opacity: 0; transform: translateY(30px) scale(.97); transition: opacity .9s .2s, transform .9s .2s cubic-bezier(.23,1,.32,1); }
+.f2.on .f2-term { opacity: 1; transform: none; }
+.f2-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid rgba(179,136,255,.25); background: rgba(179,136,255,.07); font: 600 12px ui-monospace, Menlo, monospace; color: #b8a6e8; letter-spacing: .06em; }
+.f2-bar i { width: 10px; height: 10px; border-radius: 50%; background: #5a4a86; } .f2-bar i:nth-child(1) { background: #ff6b8b; } .f2-bar i:nth-child(2) { background: #fdd663; } .f2-bar i:nth-child(3) { background: #5affb0; }
+.f2-bar span { margin-left: 8px; }
+.f2-cuerpo { position: relative; padding: clamp(18px,2.4vw,28px); flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.f2-orbe { position: relative; width: 74px; height: 74px; flex: none; }
+.f2-orbe::before { content: ""; position: absolute; inset: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #b388ff 35%, #5ef2ff 75%, #1a2a6e); box-shadow: 0 0 34px #b388ff, 0 0 70px rgba(94,242,255,.6); animation: f2-late 3s ease-in-out infinite; }
+.f2-orbe i { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid rgba(94,242,255,.6); border-top-color: transparent; border-bottom-color: transparent; animation: m2-giro 5s linear infinite; }
+.f2-orbe i + i { inset: 6px; border-color: rgba(179,136,255,.7); border-left-color: transparent; border-right-color: transparent; animation-duration: 3.2s; animation-direction: reverse; }
+.f2-hablando .f2-orbe::before { animation-duration: .9s; }
+@keyframes f2-late { 50% { transform: scale(1.12); } }
+.f2-cab { display: flex; align-items: center; gap: 16px; }
+.f2-cab small { display: block; font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .22em; color: #5ef2ff; text-transform: uppercase; }
+.f2-q { font-size: clamp(17px,1.7vw,20px); font-weight: 700; color: #fff; line-height: 1.3; margin-top: 4px; }
+.f2-resp { font: 400 clamp(14.5px,1.35vw,16px)/1.75 ui-monospace, SFMono-Regular, Menlo, monospace; color: #cfe3f3; min-height: 8em; white-space: pre-wrap; }
+.f2-resp b { color: #5affb0; font-weight: 700; text-shadow: 0 0 12px rgba(90,255,176,.5); }
+.f2-resp .cur { display: inline-block; width: 9px; height: 1.1em; background: #5ef2ff; vertical-align: -3px; margin-left: 2px; box-shadow: 0 0 12px #5ef2ff; animation: h2-cur 1s steps(1) infinite; }
+.f2-pie { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: auto; }
+.f2-prog { flex: 1; min-width: 100px; height: 3px; background: rgba(94,242,255,.15); border-radius: 3px; overflow: hidden; }
+.f2-prog i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #5ef2ff, #b388ff); box-shadow: 0 0 10px #5ef2ff; }
+.f2-cta { font: 700 13px var(--font); color: #02121c; background: linear-gradient(135deg, #5ef2ff, #5affb0); border: 0; border-radius: 99px; padding: 11px 20px; cursor: pointer; box-shadow: 0 0 30px -6px rgba(94,242,255,.8); }
+.f2-cta:hover { filter: brightness(1.1); }
+@media (max-width: 900px) { .f2-wrap { grid-template-columns: 1fr; } .f2-term { display: none; } .f2 .faq-answer { padding: 0 20px 0 64px; } .f2 .faq-item.open .faq-answer { padding: 0 20px 20px 64px; max-height: 420px; } .f2-pie-m { display: block; } }
+.f2-pie-m { display: none; text-align: center; margin-top: 14px; }
+@media (prefers-reduced-motion: reduce) { .f2 .faq-item, .f2-term { opacity: 1; transform: none; transition: none; } .f2-orbe::before, .f2-orbe i { animation: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -2134,54 +2194,47 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- FAQ -->
-<section class="faq-section">
+<section class="faq-section f2" id="faq">
   <div class="container">
     <div class="section-header fade-in">
       <div class="badge">Resolvemos tus dudas</div>
       <h2>Preguntas frecuentes sobre SEO Local y Google Maps</h2>
     </div>
-    <div class="faq-list fade-in">
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          ¿Por dónde empiezo si no sé en qué estado está mi perfil?
-          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
+    <div class="f2-wrap">
+      <div class="f2-izq">
+        <label class="f2-buscar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="f2q" type="search" placeholder="Escribe tu duda: precio, garantía, tiempo…" autocomplete="off" aria-label="Buscar en las preguntas frecuentes"></label>
+        <div class="faq-list" id="f2list">
+      <div class="faq-item open" data-n="01">
+        <button class="faq-question" aria-expanded="true">¿Por dónde empiezo si no sé en qué estado está mi perfil?<span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
         <div class="faq-answer">Con la Auditoría Profesional ($190.000, entrega en 48 h). Recibes tu score actual de optimización y un benchmark contra tus 5 competidores directos. Con ese diagnóstico en mano puedes decidir si continuar con el Plan Básico o Profesional — sin adivinar.</div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          ¿Cuánto tiempo tarda en verse el impacto?
-          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
+      <div class="faq-item" data-n="02">
+        <button class="faq-question" aria-expanded="false">¿Cuánto tiempo tarda en verse el impacto?<span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
         <div class="faq-answer">El Plan Básico activa todos los cambios técnicos en 72 horas; la mejora de score se refleja en los primeros 30 días. Con el Plan Profesional el incremento promedio de visitas al perfil es +89% en 60 días de gestión continua. El Enterprise opera bajo SLA 99.5% garantizado desde el primer mes.</div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          ¿El Plan Profesional incluye Google Maps y ASK Maps?
-          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
+      <div class="faq-item" data-n="03">
+        <button class="faq-question" aria-expanded="false">¿El Plan Profesional incluye Google Maps y ASK Maps?<span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
         <div class="faq-answer">Sí. El Plan Profesional y el Enterprise gestionan presencia activa en Google Maps y ASK Maps simultáneamente — los dos motores de búsqueda local con mayor crecimiento a nivel mundial. La Auditoría y el Plan Básico se enfocan en Google Maps Business Profile.</div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          ¿Qué garantía tiene cada plan?
-          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
+      <div class="faq-item" data-n="04">
+        <button class="faq-question" aria-expanded="false">¿Qué garantía tiene cada plan?<span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
         <div class="faq-answer">Plan Básico: si no percibes mejora en 30 días, soporte extendido sin costo adicional. Plan Profesional: pausa sin penalización en cualquier momento. Enterprise: si en 90 días no hay resultados medibles, reembolso de 2 meses. En todos los casos aplicamos la garantía de inmediato, sin preguntas.</div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          ¿Hay permanencia mínima?
-          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
+      <div class="faq-item" data-n="05">
+        <button class="faq-question" aria-expanded="false">¿Hay permanencia mínima?<span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
         <div class="faq-answer">No. El Plan Profesional y el Enterprise son mes a mes, sin contratos ni cláusulas de permanencia. Puedes pausar o cancelar cuando quieras. Los resultados son la única razón por la que nuestros clientes se quedan.</div>
       </div>
-
+        </div>
+        <div class="f2-vacio" id="f2v">No encontramos esa palabra en las preguntas. Pregúntanos directo: <a href="https://wa.me/573219453933?text=Hola%2C%20tengo%20una%20duda%20sobre%20SEO%20local" target="_blank" rel="noopener noreferrer">escríbenos por WhatsApp →</a></div>
+      </div>
+      <div class="f2-term" aria-live="polite">
+        <div class="f2-bar"><i></i><i></i><i></i><span>boostraffic://ayuda</span></div>
+        <div class="f2-cuerpo">
+          <div class="f2-cab"><div class="f2-orbe" aria-hidden="true"><i></i><i></i></div><div><small>Respuesta del sistema</small><div class="f2-q" id="f2tq"></div></div></div>
+          <div class="f2-resp" id="f2r"></div>
+          <div class="f2-pie"><div class="f2-prog" aria-hidden="true"><i id="f2p"></i></div><button class="f2-cta" onclick="openForm()">Quiero mi análisis gratis →</button></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2789,6 +2842,34 @@ updateBottomNav();
   tam(); addEventListener('resize',tam); if(window.ResizeObserver) new ResizeObserver(tam).observe(stage);
   decode(T,TXT[0]);
   if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v){ if(!sec.classList.contains('on')){ sec.classList.add('on'); cuenta(); } if(!run){ run=true; if(!reduce) requestAnimationFrame(frame); else { frame(performance.now()); run=false; } } autoplay(); } else { run=false; clearInterval(auto); } },{threshold:.15}).observe(sec); else sec.classList.add('on');
+})();
+</script>
+
+<script>
+/* FAQ · consola: la respuesta se escribe sola, rota cada pocos segundos y se puede buscar. En móvil funciona como acordeón. */
+(function(){
+  var sec=document.getElementById('faq'); if(!sec||!sec.classList.contains('f2')) return;
+  var items=[].slice.call(sec.querySelectorAll('.faq-item')), tq=document.getElementById('f2tq'), tr=document.getElementById('f2r'), pb=document.getElementById('f2p'), qi=document.getElementById('f2q'), vac=document.getElementById('f2v'), term=sec.querySelector('.f2-term');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, desk=matchMedia('(min-width:901px)'), act=-1, tim, auto, manual=false, t0=0, visible=false;
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function resalta(t){ return esc(t).replace(/(\$\d+(?:\.\d{3})*|\+?\d+(?:[.,]\d+)?\s?(?:%|h|horas|días|dias)|\d+\s?h\b|SLA 99\.5%|72 horas|ASK Maps)/g,'<b>$1</b>'); }
+  function escribir(txt){ clearInterval(tim); var i=0; term.classList.add('f2-hablando'); tr.innerHTML='<span class="cur"></span>';
+    if(reduce){ tr.innerHTML=resalta(txt); term.classList.remove('f2-hablando'); return; }
+    tim=setInterval(function(){ i+=2; tr.innerHTML=esc(txt.slice(0,i))+'<span class="cur"></span>'; if(i>=txt.length){ clearInterval(tim); tr.innerHTML=resalta(txt)+'<span class="cur"></span>'; term.classList.remove('f2-hablando'); } },16); }
+  function abrir(i,user){
+    var it=items[i]; if(!it) return;
+    if(!desk.matches){ var ya=it.classList.contains('open'); items.forEach(function(x){ x.classList.remove('open'); x.querySelector('.faq-question').setAttribute('aria-expanded','false'); }); if(!ya||!user){ it.classList.add('open'); it.querySelector('.faq-question').setAttribute('aria-expanded','true'); } act=i; return; }
+    if(i===act&&!user) return; act=i;
+    items.forEach(function(x,k){ var o=k===i; x.classList.toggle('open',o); x.querySelector('.faq-question').setAttribute('aria-expanded',o); });
+    tq.textContent=it.querySelector('.faq-question').firstChild.textContent.trim(); escribir(it.querySelector('.faq-answer').textContent.trim());
+    t0=performance.now(); pb.style.transition='none'; pb.style.width='0'; void pb.offsetWidth; }
+  function visibles(){ return items.filter(function(x){ return !x.classList.contains('oculto'); }); }
+  function siguiente(){ var v=visibles(); if(!v.length) return; var k=v.indexOf(items[act]); abrir(items.indexOf(v[(k+1)%v.length])); }
+  function reloj(){ clearInterval(auto); if(reduce||!desk.matches) return; auto=setInterval(function(){ if(!visible) return; var dur=Math.max(7000,Math.min(14000,items[act]?items[act].querySelector('.faq-answer').textContent.length*38:9000)); var k=(performance.now()-t0)/dur; pb.style.transition='none'; pb.style.width=Math.min(100,k*100)+'%'; if(k>=1&&!manual) siguiente(); },120); }
+  items.forEach(function(it,i){ it.querySelector('.faq-question').addEventListener('click',function(){ manual=true; abrir(i,true); clearTimeout(window._f2m); window._f2m=setTimeout(function(){ manual=false; t0=performance.now(); },20000); }); });
+  qi.addEventListener('input',function(){ var q=qi.value.trim().toLowerCase(), n=0; items.forEach(function(it){ var m=!q||it.textContent.toLowerCase().indexOf(q)>-1; it.classList.toggle('oculto',!m); if(m) n++; }); vac.classList.toggle('ver',n===0); if(n&&desk.matches){ var v=visibles(); if(v.indexOf(items[act])<0) abrir(items.indexOf(v[0]),true); manual=!!q; } });
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ visible=en[0].isIntersecting; if(visible&&!sec.classList.contains('on')){ sec.classList.add('on'); if(desk.matches) { act=-1; abrir(0,true); } else { act=0; } t0=performance.now(); reloj(); } },{threshold:.2}).observe(sec); else { sec.classList.add('on'); abrir(0,true); }
+  desk.addEventListener&&desk.addEventListener('change',function(){ act=-1; abrir(0,true); reloj(); });
 })();
 </script>
 </body>
