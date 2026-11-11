@@ -1199,6 +1199,47 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 .t2-nota { text-align: center; margin: 24px 0 0; font-size: 12px; color: #6f7b91; }
 @media (max-width: 800px) { .t2-grid { grid-template-columns: 1fr; } .t2-ver { display: none; } .t2-globo { width: 460px; height: 460px; margin-left: -230px; top: -60px; } }
 @media (prefers-reduced-motion: reduce) { .t2-c, .t2-stars svg { opacity: 1; transform: none; transition: none; } .t2-av::after { animation: none; } }
+
+/* ═══ CALCULADORA 2026 · "La fuga de dinero" (sección 5) ═════════════ */
+.c2 { position: relative; overflow: clip; isolation: isolate; background: #0a0710; padding: clamp(64px,8vw,110px) 0; color: #e8eaed; }
+.c2::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(50% 60% at 85% 40%, rgba(234,67,53,.24), transparent 70%), radial-gradient(40% 50% at 0% 100%, rgba(26,115,232,.18), transparent 70%), linear-gradient(180deg, #060b18, #0d0a14 40%, #0a0710); }
+.c2 .container { max-width: 1240px; }
+.c2 .section-header { text-align: center; margin-bottom: clamp(30px,4vw,52px); }
+.c2 .badge { color: #f28b82 !important; background: rgba(234,67,53,.14) !important; border: 1px solid rgba(242,139,130,.4); }
+.c2 h2 { color: #fff; font-size: clamp(30px, 4.2vw, 54px); letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
+.c2 .section-header p { color: #aab4c5; }
+.c2-grid { display: grid; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); gap: clamp(20px,3vw,40px); align-items: stretch; }
+.c2 .calc-card { background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.12); border-radius: 28px; padding: clamp(24px,2.8vw,38px); box-shadow: 0 40px 80px -40px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.08); max-width: none; margin: 0; opacity: 1; transform: none; }
+.c2 .calc-label { color: #fff; font-size: 18px; }
+.c2 .calc-sublabel { color: #8c97ab; }
+.c2 .calc-number { background: #0d1426; border: 1.5px solid rgba(255,255,255,.18); color: #fff; font-weight: 800; }
+.c2 .calc-number:focus { border-color: #8ab4f8; box-shadow: 0 0 0 4px rgba(138,180,248,.2); outline: none; }
+.c2 .calc-slider { accent-color: #ea4335; }
+.c2-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.c2-chip { font: 600 12.5px var(--font); color: #aab4c5; padding: 8px 13px; border-radius: 99px; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); cursor: pointer; transition: all .2s; }
+.c2-chip:hover, .c2-chip.on { color: #fff; border-color: #f28b82; background: rgba(234,67,53,.18); }
+.c2 .calc-result { background: linear-gradient(160deg, rgba(234,67,53,.2), rgba(234,67,53,.06)); border: 1px solid rgba(242,139,130,.5); border-radius: 22px; box-shadow: 0 0 60px -20px rgba(234,67,53,.7); position: relative; overflow: hidden; }
+.c2 .calc-result-label { color: #f6b0aa; }
+.c2 .calc-result-value { color: #ff7d70; font-variant-numeric: tabular-nums; letter-spacing: -.04em; text-shadow: 0 0 40px rgba(234,67,53,.6); transition: transform .15s; }
+.c2 .calc-result-value.pulso { transform: scale(1.04); }
+.c2 .calc-result-sub { color: #c3cad6; }
+.c2-reloj { display: flex; align-items: center; gap: 12px; margin: 14px 0 18px; padding: 13px 16px; border-radius: 16px; background: rgba(0,0,0,.35); border: 1px dashed rgba(242,139,130,.45); font-size: 13.5px; color: #c3cad6; line-height: 1.35; }
+.c2-reloj::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #ea4335; flex: none; animation: h2-vivo 1.4s infinite; box-shadow: 0 0 0 0 rgba(234,67,53,.7); }
+.c2-reloj b { display: block; font: 800 22px ui-monospace, Menlo, monospace; color: #ff7d70; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.c2 .calc-card > .btn { background: #ea4335; box-shadow: 0 14px 34px -12px rgba(234,67,53,.9); }
+.c2 .calc-card > .btn:hover { background: #f05a4d; }
+/* panel del embudo */
+.c2-viz { position: relative; min-height: 460px; border-radius: 28px; background: linear-gradient(170deg, #0f1428, #0a0d1c); border: 1px solid rgba(255,255,255,.1); box-shadow: 0 40px 80px -40px rgba(0,0,0,.9), 0 0 80px -30px rgba(234,67,53,.5); overflow: hidden; }
+.c2-viz canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.c2-tag { position: absolute; font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 6px 12px; border-radius: 99px; z-index: 2; white-space: nowrap; }
+.c2-t1 { left: 5%; top: 14px; color: #aecbfa; background: rgba(26,115,232,.2); border: 1px solid rgba(138,180,248,.4); }
+.c2-t2 { left: 5%; top: 49%; color: #fdd663; background: rgba(251,188,4,.14); border: 1px solid rgba(251,188,4,.4); }
+.c2-t3 { right: 5%; bottom: 16px; color: #f6b0aa; background: rgba(234,67,53,.2); border: 1px solid rgba(242,139,130,.5); }
+.c2-cuenta { position: absolute; right: 5%; top: 14px; text-align: right; z-index: 2; font-size: 11.5px; color: #8c97ab; line-height: 1.3; }
+.c2-cuenta b { display: block; font: 800 24px var(--font); color: #fdd663; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) { .c2-grid { grid-template-columns: 1fr; } .c2-viz { min-height: 380px; order: -1; } }
+@media (max-width: 480px) { .c2-t1 { display: none; } .c2-t2 { top: 40%; } }
+@media (prefers-reduced-motion: reduce) { .c2-reloj::before { animation: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -1650,28 +1691,39 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- CALCULADORA DE PÉRDIDA -->
-<section class="calc-section">
+<section class="calc-section c2" id="calculadora">
   <div class="container">
     <div class="section-header fade-in">
       <div class="badge" style="color:var(--red);background:#fce8e6;">Calcula tu pérdida real</div>
       <h2>¿Cuánto dinero estás dejando ir?</h2>
       <p>Cada mes sin optimizar tu perfil GMB es dinero que se va a la competencia.</p>
     </div>
-    <div class="calc-card fade-in">
-      <div class="calc-label">¿Cuántas impresiones tienes por mes en Google Maps?</div>
-      <div class="calc-sublabel">Si no lo sabes, usa el estimado promedio del sector: 5.000 impresiones/mes</div>
-      <div class="calc-input-row">
-        <input type="number" class="calc-number" id="calcInput" value="5000" min="100" max="200000">
-        <input type="range" class="calc-slider" id="calcSlider" min="100" max="100000" value="5000" step="100">
+    <div class="c2-grid">
+      <div class="calc-card fade-in">
+        <div class="calc-label">¿Cuántas impresiones tienes por mes en Google Maps?</div>
+        <div class="calc-sublabel">Si no lo sabes, usa el estimado promedio del sector: 5.000 impresiones/mes</div>
+        <div class="c2-chips" id="c2chips" role="group" aria-label="Valores de ejemplo"><button type="button" class="c2-chip" data-v="1000">1.000</button><button type="button" class="c2-chip on" data-v="5000">5.000 · promedio del sector</button><button type="button" class="c2-chip" data-v="15000">15.000</button><button type="button" class="c2-chip" data-v="33903">33.903 · nivel Hotel HTL</button></div>
+        <div class="calc-input-row">
+          <input type="number" class="calc-number" id="calcInput" value="5000" min="100" max="200000" aria-label="Impresiones por mes">
+          <input type="range" class="calc-slider" id="calcSlider" min="100" max="100000" value="5000" step="100" aria-label="Impresiones por mes, control deslizante">
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-label">Estás perdiendo aproximadamente</div>
+          <div class="calc-result-value" id="calcResult" aria-live="polite">$20.000.000</div>
+          <div class="calc-result-sub">COP por mes en clientes que no te contactan</div>
+        </div>
+        <div class="c2-reloj"><span>Mientras lees esta página, ya se fueron<b id="c2seg">$0</b></span></div>
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="openForm()">
+          Recupera ese dinero → Solicitar análisis gratis
+        </button>
       </div>
-      <div class="calc-result">
-        <div class="calc-result-label">Estás perdiendo aproximadamente</div>
-        <div class="calc-result-value" id="calcResult">$20.000.000</div>
-        <div class="calc-result-sub">COP por mes en clientes que no te contactan</div>
+      <div class="c2-viz fade-in" id="c2viz" role="img" aria-label="Ilustración: de todas las personas que ven tu ficha en Google Maps, el 8% serían clientes que no te contactan, y ese dinero se va a la competencia.">
+        <canvas id="c2cv"></canvas>
+        <span class="c2-tag c2-t1">Te ven en Google Maps</span>
+        <span class="c2-tag c2-t2">8% serían clientes</span>
+        <span class="c2-tag c2-t3">Se van a la competencia</span>
+        <div class="c2-cuenta">clientes perdidos este mes<b id="c2cl">0</b></div>
       </div>
-      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="openForm()">
-        Recupera ese dinero → Solicitar análisis gratis
-      </button>
     </div>
   </div>
 </section>
@@ -2155,6 +2207,7 @@ function updateCalc(val) {
   val = Math.max(100, Math.min(200000, parseInt(val) || 0));
   document.getElementById('calcInput').value = val;
   document.getElementById('calcSlider').value = Math.min(val, 100000);
+  if (window.calcViz) { window.calcViz(val); return; }
   document.getElementById('calcResult').textContent = calcLoss(val);
 }
 document.getElementById('calcInput').addEventListener('input', e => updateCalc(e.target.value));
@@ -2391,6 +2444,62 @@ updateBottomNav();
     c.addEventListener('pointermove',function(e){ var b=c.getBoundingClientRect(),x=(e.clientX-b.left)/b.width,y=(e.clientY-b.top)/b.height; c.style.setProperty('--mx',(x*100)+'%'); c.style.setProperty('--my',(y*100)+'%'); if(fino&&!reduce&&sec.classList.contains('on')){ c.style.transition='transform .1s'; c.style.transform='rotateY('+((x-.5)*8).toFixed(2)+'deg) rotateX('+((.5-y)*8).toFixed(2)+'deg) translateZ(0)'; } });
     c.addEventListener('pointerleave',function(){ c.style.transition=''; c.style.transform=''; });
   });
+})();
+</script>
+
+<script>
+/* Calculadora · fuga de dinero. Fórmula original: impresiones × 8 % × $50.000 COP. */
+(function(){
+  var sec=document.getElementById('calculadora'); if(!sec||!sec.classList.contains('c2')) return;
+  var cv=document.getElementById('c2cv'), cx=cv.getContext('2d'), viz=document.getElementById('c2viz');
+  var res=document.getElementById('calcResult'), inp=document.getElementById('calcInput'), sl=document.getElementById('calcSlider'), seg=document.getElementById('c2seg'), clE=document.getElementById('c2cl');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var imp=5000, loss=imp*.08*50000, shown=loss, W=0, H=0, dpr=Math.min(devicePixelRatio||1,2), parts=[], run=false, last=0, acc=0, cubo=0, cuenta=0, t0=0, tw=null;
+  var fmt=function(v){ return '$'+Math.round(v).toLocaleString('es-CO'); };
+  function tam(){ var r=viz.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
+  function geo(){ var fx=W*.36; return { fx:fx, top:H*.13, topW:Math.min(W*.5,260), neckY:H*.7, neckW:34, leakY:H*.45, bx:W*.74, by:H*.58, bw:Math.min(W*.22,120), bh:H*.34 }; }
+  function ancho(g,y){ var k=Math.max(0,Math.min(1,(y-g.top)/(g.neckY-g.top))); return (g.topW*(1-k)+g.neckW*k)/2; }
+  function nueva(){ var g=geo(), x=g.fx+(Math.random()*2-1)*(g.topW/2-8); var moneda=Math.random()<.08;
+    return { x:x, y:g.top, vx:0, vy:50+Math.random()*30, mon:moneda, fase:0, a:1, r:moneda?5:2.4, fx:x-g.fx }; }
+  function paso(dt,now){
+    var g=geo();
+    // tasa de aparición según impresiones
+    var rate=Math.max(10,Math.min(70,imp/220)); acc+=rate*dt; while(acc>=1){ acc--; parts.push(nueva()); }
+    for(var i=parts.length-1;i>=0;i--){ var p=parts[i];
+      if(p.fase===0){ p.y+=p.vy*dt; var w=ancho(g,p.y); var tgt=g.fx+p.fx*(w/(g.topW/2)); p.x+=(tgt-p.x)*Math.min(1,dt*6);
+        if(p.mon && p.y>=g.leakY){ p.fase=1; p.t=0; p.sx=p.x; p.sy=p.y; }
+        else if(p.y>=g.neckY){ p.fase=2; } }
+      else if(p.fase===1){ p.t+=dt*.9; var t=Math.min(1,p.t); var ex=g.bx+g.bw/2, ey=g.by+10; p.x=p.sx+(ex-p.sx)*t; p.y=p.sy+(ey-p.sy)*t-Math.sin(t*Math.PI)*28+t*t*40; if(t>=1){ parts.splice(i,1); cubo=Math.min(1,cubo+.012); continue; } }
+      else { p.a-=dt*1.6; p.y+=40*dt; if(p.a<=0){ parts.splice(i,1); continue; } }
+    }
+    cubo=Math.max(0,cubo-.0006);
+  }
+  function dib(){
+    cx.clearRect(0,0,W,H); var g=geo();
+    // embudo
+    cx.beginPath(); cx.moveTo(g.fx-g.topW/2,g.top); cx.lineTo(g.fx+g.topW/2,g.top); cx.lineTo(g.fx+g.neckW/2,g.neckY); cx.lineTo(g.fx-g.neckW/2,g.neckY); cx.closePath();
+    var gr=cx.createLinearGradient(0,g.top,0,g.neckY); gr.addColorStop(0,'rgba(26,115,232,.28)'); gr.addColorStop(1,'rgba(26,115,232,.06)'); cx.fillStyle=gr; cx.fill(); cx.strokeStyle='rgba(138,180,248,.55)'; cx.lineWidth=2; cx.stroke();
+    // tubo de fuga
+    cx.strokeStyle='rgba(242,139,130,.5)'; cx.lineWidth=2; cx.setLineDash([6,6]); cx.beginPath(); var wl=ancho(g,g.leakY); cx.moveTo(g.fx+wl,g.leakY); cx.quadraticCurveTo(g.bx-30,g.leakY-30,g.bx+g.bw/2,g.by+10); cx.stroke(); cx.setLineDash([]);
+    // cubo de la competencia
+    cx.fillStyle='rgba(234,67,53,.08)'; cx.strokeStyle='rgba(242,139,130,.7)'; cx.lineWidth=2; cx.beginPath(); cx.roundRect(g.bx,g.by,g.bw,g.bh,[6,6,16,16]); cx.fill(); cx.stroke();
+    var h=g.bh*Math.min(1,.12+cubo); cx.save(); cx.beginPath(); cx.roundRect(g.bx+2,g.by+g.bh-h,g.bw-4,h-2,[4,4,14,14]); cx.clip(); var g2=cx.createLinearGradient(0,g.by+g.bh-h,0,g.by+g.bh); g2.addColorStop(0,'#fdd663'); g2.addColorStop(1,'#f9ab00'); cx.fillStyle=g2; cx.globalAlpha=.9; cx.fillRect(g.bx,g.by+g.bh-h,g.bw,h); cx.restore();
+    // partículas
+    for(var i=0;i<parts.length;i++){ var p=parts[i]; cx.globalAlpha=p.a;
+      if(p.mon){ cx.fillStyle='#fdd663'; cx.shadowColor='#fbbc04'; cx.shadowBlur=12; cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill(); cx.shadowBlur=0; cx.fillStyle='#8a5a00'; cx.font='700 7px sans-serif'; cx.textAlign='center'; cx.fillText('$',p.x,p.y+2.5); }
+      else { cx.fillStyle=p.fase===2?'#5f6b83':'#8ab4f8'; cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill(); } }
+    cx.globalAlpha=1;
+  }
+  function frame(now){ if(!run) return; var dt=Math.min(.05,(now-last)/1000); last=now; paso(dt,now); dib();
+    seg.textContent=fmt((now-t0)/1000*loss/2592000); requestAnimationFrame(frame); }
+  function tween(to){ cancelAnimationFrame(tw); var from=shown, t=performance.now(), dur=reduce?1:900; (function f(now){ var k=Math.min(1,(now-t)/dur); k=1-Math.pow(1-k,3); shown=from+(to-from)*k; res.textContent=fmt(shown); if(k<1) tw=requestAnimationFrame(f); else shown=to; })(t); res.classList.add('pulso'); setTimeout(function(){res.classList.remove('pulso')},180); }
+  var cl0=0, clt; function clientes(to){ cancelAnimationFrame(clt); var f0=cl0,t=performance.now(); (function f(now){ var k=Math.min(1,(now-t)/900); k=1-Math.pow(1-k,3); cl0=f0+(to-f0)*k; clE.textContent=Math.round(cl0).toLocaleString('es-CO'); if(k<1) clt=requestAnimationFrame(f); })(t); }
+  window.calcViz=function(v){ imp=v; loss=Math.round(v*.08*50000); tween(loss); inp.value=v; sl.value=Math.min(v,100000); clientes(Math.round(v*.08));
+    sec.querySelectorAll('.c2-chip').forEach(function(c){ c.classList.toggle('on',+c.dataset.v===v); }); };
+  sec.querySelectorAll('.c2-chip').forEach(function(c){ c.addEventListener('click',function(){ window.calcViz(+c.dataset.v); }); });
+  tam(); addEventListener('resize',tam); if(window.ResizeObserver) new ResizeObserver(tam).observe(viz);
+  window.calcViz(5000); shown=loss; res.textContent=fmt(loss);
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v&&!run){ run=true; if(!t0) t0=performance.now(); last=performance.now(); if(reduce){ for(var k=0;k<40;k++) parts.push(Object.assign(nueva(),{y:geo().top+k*5})); dib(); run=false; return; } requestAnimationFrame(frame); } else if(!v) run=false; },{threshold:.15}).observe(sec);
 })();
 </script>
 </body>
