@@ -1606,6 +1606,31 @@ footer .trust-badge { border-color: rgba(94,242,255,.25); background: rgba(94,24
 footer .countries-row { filter: drop-shadow(0 0 10px rgba(138,180,248,.4)); }
 @media (max-width: 860px) { .gm-mapa { position: relative; right: auto; bottom: auto; width: auto; margin: 18px 16px 0; } .gm-cont { position: relative; left: auto; bottom: auto; text-align: center; margin-top: 10px; } .gm-mapa-b { font-size: 12.5px; } }
 @media (prefers-reduced-motion: reduce) { .gm-cta .btn-main::after { animation: none; } .gm-mapa { opacity: 1; transform: none; transition: none; } }
+
+/* ═══ MENÚ 2026 · navegación por secciones ═══════════════════════════ */
+html { scroll-padding-top: 78px; }
+.nav-inner { max-width: 1240px; gap: 18px; }
+a.nav-logo { text-decoration: none; transition: transform .25s cubic-bezier(.23,1,.32,1), filter .25s; flex: none; }
+a.nav-logo:hover { transform: translateY(-1px); filter: drop-shadow(0 0 14px rgba(138,180,248,.7)); }
+a.nav-logo:focus-visible, .nv-l a:focus-visible, .nv-burger:focus-visible { outline: 2px solid #8ab4f8; outline-offset: 4px; border-radius: 10px; }
+.nv-l { position: relative; display: flex; align-items: center; gap: 2px; list-style: none; margin: 0 auto; padding: 5px; border-radius: 99px; background: rgba(255,255,255,.05); border: 1px solid rgba(138,180,248,.18); }
+.nv-l a { position: relative; z-index: 1; display: block; padding: 9px 15px; border-radius: 99px; font: 600 13.5px var(--font); color: #aab4c5; text-decoration: none; letter-spacing: .005em; transition: color .25s; white-space: nowrap; }
+.nv-l a:hover { color: #fff; }
+.nv-l a.on { color: #fff; }
+.nv-ind { position: absolute; z-index: 0; top: 5px; bottom: 5px; left: 0; width: 0; border-radius: 99px; background: linear-gradient(135deg, rgba(26,115,232,.75), rgba(90,255,176,.45)); box-shadow: 0 0 22px rgba(26,115,232,.7), inset 0 1px 0 rgba(255,255,255,.3); transition: transform .45s cubic-bezier(.23,1,.32,1), width .45s cubic-bezier(.23,1,.32,1), opacity .3s; opacity: 0; }
+.nv-l.listo .nv-ind { opacity: 1; }
+.nv-prog { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: linear-gradient(90deg, #1a73e8, #5affb0); transform-origin: left; transform: scaleX(var(--sp,0)); box-shadow: 0 0 12px rgba(90,255,176,.8); pointer-events: none; }
+.nv-burger { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(138,180,248,.3); background: rgba(255,255,255,.06); color: #fff; cursor: pointer; place-items: center; }
+.nv-burger span, .nv-burger span::before, .nv-burger span::after { display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px; position: relative; transition: transform .3s, opacity .2s; }
+.nv-burger span::before, .nv-burger span::after { content: ""; position: absolute; left: 0; } .nv-burger span::before { top: -6px; } .nv-burger span::after { top: 6px; }
+.nv-burger[aria-expanded="true"] span { background: transparent; } .nv-burger[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); } .nv-burger[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
+@media (max-width: 1060px) and (min-width: 769px) {
+  .nv-burger { display: grid; margin-left: auto; }
+  .nv-l { position: absolute; left: 20px; right: 20px; top: 70px; flex-direction: column; align-items: stretch; border-radius: 22px; padding: 10px; background: rgba(6,11,24,.97); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: 0 30px 60px -20px #000; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity .25s, transform .3s, visibility .25s; }
+  .nv-l.abierto { opacity: 1; visibility: visible; transform: none; }
+  .nv-l a { padding: 13px 18px; font-size: 15px; } .nv-ind { display: none; } .nv-l a.on { background: rgba(26,115,232,.3); }
+}
+@media (max-width: 768px) { .nv-l, .nv-burger { display: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -1888,10 +1913,14 @@ footer .countries-row { filter: drop-shadow(0 0 10px rgba(138,180,248,.4)); }
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">
-      <img src="LogoBoostr.webp" alt="Boostraffic" loading="lazy" decoding="async">
+    <a class="nav-logo" href="/" aria-label="Boostraffic, ir al inicio">
+      <img src="LogoBoostr.webp" alt="" loading="lazy" decoding="async">
       <b class="nl-t">Boost<span>raffic</span></b>
-    </div>
+    </a>
+    <button class="nv-burger" id="nvb" aria-expanded="false" aria-controls="nvl" aria-label="Abrir menú"><span></span></button>
+    <ul class="nv-l" id="nvl" aria-label="Secciones"><span class="nv-ind" aria-hidden="true"></span>
+      <li><a href="#resultados">Resultados</a></li><li><a href="#servicios">Cómo funciona</a></li><li><a href="#precios">Planes</a></li><li><a href="#caso">Casos</a></li><li><a href="#garantias">Garantías</a></li><li><a href="#faq">Preguntas</a></li>
+    </ul>
     <button class="btn btn-primary nav-cta" onclick="openForm()">Análisis gratuito</button>
   </div>
 </nav>
@@ -3117,6 +3146,26 @@ updateBottomNav();
   function mapaReal(){ var ph=document.getElementById('gmph'); if(!ph||ph.dataset.ok) return; ph.dataset.ok=1; var f=document.createElement('iframe'); f.title='Mapa de Google Maps: Bogotá, Colombia'; f.loading='lazy'; f.referrerPolicy='no-referrer-when-downgrade'; f.src='https://www.google.com/maps?q=Bogot%C3%A1%2C%20Colombia&z=11&output=embed'; ph.replaceWith(f); }
   tam(); addEventListener('resize',function(){ tam(); if(reduce) estatico(); });
   if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v){ if(!sec.classList.contains('on')){ sec.classList.add('on'); mapaReal(); t0=performance.now(); } if(reduce){ estatico(); return; } if(!run){ run=true; requestAnimationFrame(frame); } } else run=false; },{threshold:.15}).observe(sec); else { sec.classList.add('on'); estatico(); mapaReal(); }
+})();
+</script>
+
+<script>
+/* Menú · indicador deslizante, sección activa, logo al inicio. */
+(function(){
+  var ul=document.getElementById('nvl'); if(!ul) return;
+  var ind=ul.querySelector('.nv-ind'), links=[].slice.call(ul.querySelectorAll('a')), btn=document.getElementById('nvb'), nav=document.querySelector('nav');
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); }), act=-1, prog=document.createElement('span'); prog.className='nv-prog'; nav.appendChild(prog); nav.style.position='sticky';
+  function mover(i){ if(i<0||!links[i]||getComputedStyle(ind).display==='none'){ ul.classList.remove('listo'); return; } var a=links[i]; ind.style.width=a.offsetWidth+'px'; ind.style.transform='translateX('+a.offsetLeft+'px)'; ul.classList.add('listo'); }
+  function espia(){ var y=innerHeight*.38, mejor=-1; secs.forEach(function(s,i){ if(!s) return; var r=s.getBoundingClientRect(); if(r.top<=y&&r.bottom>y) mejor=i; });
+    if(mejor!==act){ act=mejor; links.forEach(function(a,i){ a.classList.toggle('on',i===act); if(i===act) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); }); mover(act); }
+    var e=document.documentElement, max=e.scrollHeight-e.clientHeight; prog.style.setProperty('--sp',max>0?Math.min(1,scrollY/max).toFixed(4):0); }
+  var tick=false; addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(function(){ tick=false; espia(); }); } },{passive:true});
+  addEventListener('resize',function(){ mover(act); }); espia(); setTimeout(function(){ mover(act); },400);
+  links.forEach(function(a){ a.addEventListener('click',function(e){ var t=document.querySelector(a.getAttribute('href')); if(!t) return; e.preventDefault(); t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); ul.classList.remove('abierto'); btn.setAttribute('aria-expanded','false'); history.replaceState(null,'',a.getAttribute('href')); }); });
+  btn&&btn.addEventListener('click',function(){ var o=ul.classList.toggle('abierto'); btn.setAttribute('aria-expanded',o); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ ul.classList.remove('abierto'); btn.setAttribute('aria-expanded','false'); } });
+  // logo: si ya estás en el inicio, sube suave; si no, va a la página principal
+  var lg=document.querySelector('a.nav-logo'); lg.addEventListener('click',function(e){ var p=location.pathname.replace(/index\.html$/,''); if(p==='/'||p===''){ e.preventDefault(); scrollTo({top:0,behavior:'smooth'}); history.replaceState(null,'',location.pathname); } });
 })();
 </script>
 </body>
