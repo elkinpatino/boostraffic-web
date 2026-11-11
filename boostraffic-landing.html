@@ -1568,6 +1568,44 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 .pf2-nota { margin: 22px 0 0; font-size: 12px; color: #6f7b91; }
 @media (max-width: 760px) { .pf2-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .pf2-marq { animation: none; } .pf2-c { opacity: 1; transform: none; transition: none; } }
+
+/* ═══ FINAL 2026 · "Misión global" + pie (sección 12) ═══════════════ */
+.gm { position: relative; overflow: clip; isolation: isolate; background: #010309; color: #e8eef7; padding: clamp(56px,7vw,100px) 0 0; }
+.gm::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(60% 55% at 50% 55%, rgba(26,115,232,.34), transparent 72%), radial-gradient(40% 40% at 0% 0%, rgba(179,136,255,.2), transparent 70%), radial-gradient(40% 40% at 100% 100%, rgba(90,255,176,.16), transparent 70%); }
+.gm-top { text-align: center; padding: 0 24px; position: relative; z-index: 2; }
+.gm-tag { display: inline-flex; align-items: center; gap: 9px; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: .22em; text-transform: uppercase; color: #5affb0; padding: 8px 16px; border-radius: 99px; background: rgba(90,255,176,.08); border: 1px solid rgba(90,255,176,.45); }
+.gm-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #5affb0; box-shadow: 0 0 12px #5affb0; animation: h2-vivo 2s infinite; }
+.gm h2 { margin: 20px auto 14px; max-width: 980px; color: #fff; font-size: clamp(34px, 6vw, 84px); font-weight: 800; letter-spacing: -.045em; line-height: 1.02; text-wrap: balance; }
+.gm h2 em { font-style: normal; background: linear-gradient(90deg, #ff6b6b, #fdd663 35%, #5affb0 65%, #8ab4f8); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 30px rgba(138,180,248,.5)); }
+.gm-sub { max-width: 620px; margin: 0 auto; font-size: clamp(15px,1.6vw,19px); color: #aab4c5; line-height: 1.6; }
+.gm-cta { margin-top: 26px; display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.gm-cta .btn-main { background: linear-gradient(135deg, #1a73e8, #5affb0); color: #02121c; font-weight: 800; font-size: 16px; padding: 16px 34px; border-radius: 99px; border: 0; cursor: pointer; box-shadow: 0 0 60px -6px rgba(26,115,232,.95); position: relative; overflow: hidden; }
+.gm-cta .btn-main::after { content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 38%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent); transform: translateX(-160%) skewX(-18deg); animation: p2-brillo 3.2s ease-in-out infinite; }
+.gm-cta .btn-sec { color: #fff; font-weight: 700; font-size: 15px; padding: 15px 26px; border-radius: 99px; border: 1.5px solid rgba(255,255,255,.35); background: rgba(255,255,255,.05); }
+.gm-cta .btn-sec:hover { background: #fff; color: #0b1220; }
+.gm-escena { position: relative; width: 100%; margin-top: clamp(-10px,1vw,10px); }
+.gm-cv { display: block; width: 100%; }
+.gm-cont { position: absolute; left: clamp(14px,4vw,64px); bottom: clamp(10px,3vw,40px); z-index: 3; font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .2em; text-transform: uppercase; color: #8c97ab; }
+.gm-cont b { display: block; font: 800 clamp(36px,5vw,72px)/1 var(--font); letter-spacing: -.05em; color: #fff; text-shadow: 0 0 40px rgba(90,255,176,.7); margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+.gm-mapa { position: absolute; right: clamp(14px,4vw,64px); bottom: clamp(10px,3vw,40px); z-index: 3; width: min(360px, 42vw); border-radius: 20px; background: #0b1224; border: 1px solid rgba(138,180,248,.4); box-shadow: 0 40px 80px -30px #000, 0 0 80px -20px rgba(26,115,232,.8); overflow: hidden; opacity: 0; transform: translateY(30px) scale(.94); transition: opacity .9s .4s, transform .9s .4s cubic-bezier(.23,1,.32,1); }
+.gm.on .gm-mapa { opacity: 1; transform: none; }
+.gm-mapa-b { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #fff; color: #202124; font: 600 13px var(--font); }
+.gm-mapa-b i { width: 10px; height: 10px; border-radius: 50%; background: #ea4335; flex: none; }
+.gm-mapa-b a { margin-left: auto; color: #1a73e8; font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+.gm-mapa iframe { display: block; width: 100%; height: 190px; border: 0; filter: invert(.92) hue-rotate(180deg) saturate(.8) brightness(.95); }
+.gm-mapa-ph { height: 190px; display: grid; place-items: center; color: #8c97ab; font-size: 13px; background: #101a30; }
+.gm-enlaces { position: relative; z-index: 2; background: linear-gradient(180deg, transparent, #02040a 30%); padding: clamp(10px,2vw,30px) 24px 0; }
+footer { background: #02040a !important; color: rgba(255,255,255,.7); padding-top: 0 !important; border-top: 1px solid rgba(138,180,248,.15); }
+footer .footer-top { border-bottom-color: rgba(138,180,248,.15); padding-top: clamp(36px,5vw,64px); }
+footer .footer-col h4 { color: #5ef2ff; font-family: ui-monospace, Menlo, monospace; letter-spacing: .2em; text-shadow: 0 0 14px rgba(94,242,255,.6); }
+footer .footer-col a { position: relative; width: fit-content; transition: color .2s, transform .25s cubic-bezier(.23,1,.32,1); }
+footer .footer-col a:hover { color: #fff; transform: translateX(6px); }
+footer .footer-col a::before { content: "›"; position: absolute; left: -14px; color: #5affb0; opacity: 0; transition: opacity .2s; } footer .footer-col a:hover::before { opacity: 1; }
+footer .response-note { border-left-color: #5affb0; background: rgba(90,255,176,.06); color: #8fd9b3; }
+footer .trust-badge { border-color: rgba(94,242,255,.25); background: rgba(94,242,255,.05); color: #a9c3d8; }
+footer .countries-row { filter: drop-shadow(0 0 10px rgba(138,180,248,.4)); }
+@media (max-width: 860px) { .gm-mapa { position: relative; right: auto; bottom: auto; width: auto; margin: 18px 16px 0; } .gm-cont { position: relative; left: auto; bottom: auto; text-align: center; margin-top: 10px; } .gm-mapa-b { font-size: 12.5px; } }
+@media (prefers-reduced-motion: reduce) { .gm-cta .btn-main::after { animation: none; } .gm-mapa { opacity: 1; transform: none; transition: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -2394,6 +2432,21 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 </div>
 
 <!-- FOOTER -->
+<!-- MISIÓN GLOBAL -->
+<section class="gm" id="mision" aria-label="Boostraffic en el mundo">
+  <div class="gm-top">
+    <span class="gm-tag">Cobertura mundial</span>
+    <h2>Tu negocio, en el <em>primer lugar del mapa</em>. En cualquier parte del mundo.</h2>
+    <p class="gm-sub">Desde Bogotá conectamos negocios de 8 países con las personas que hoy los buscan en Google Maps y Ask Maps.</p>
+    <div class="gm-cta"><button class="btn-main" onclick="openForm()">Poner mi negocio en el mapa →</button><a class="btn-sec" href="https://wa.me/573219453933?text=Hola%2C%20quiero%20posicionar%20mi%20negocio%20en%20Google%20Maps" target="_blank" rel="noopener noreferrer">Hablar con un experto</a></div>
+  </div>
+  <div class="gm-escena" id="gmesc">
+    <canvas class="gm-cv" id="gmcv" role="img" aria-label="Mapa del mundo que muestra a Boostraffic conectando con negocios en Colombia, México, Brasil, España, Canadá, Alemania, Emiratos Árabes y Estados Unidos."></canvas>
+    <div class="gm-cont"><b id="gmn">0</b>países conectados</div>
+    <div class="gm-mapa" id="gmmapa"><div class="gm-mapa-b"><i></i>Bogotá, Colombia · sede<a href="https://www.google.com/maps/search/?api=1&query=Bogot%C3%A1%2C%20Colombia" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a></div><div class="gm-mapa-ph" id="gmph">Cargando Google Maps…</div></div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -3007,6 +3060,63 @@ updateBottomNav();
   tam(); addEventListener('resize',tam);
   sec.addEventListener('pointermove',function(e){ var r=sec.getBoundingClientRect(); ptr.x=e.clientX-r.left; ptr.y=e.clientY-r.top; }); sec.addEventListener('pointerleave',function(){ ptr.x=ptr.y=-999; });
   if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v){ if(!sec.classList.contains('on')){ sec.classList.add('on'); sec.querySelectorAll('.pf2-n').forEach(cuenta); } if(!run&&!reduce){ run=true; requestAnimationFrame(frame); } } else run=false; },{threshold:.15}).observe(sec); else sec.classList.add('on');
+})();
+</script>
+
+<script>
+/* Misión global · mapamundi de puntos con arcos desde Bogotá, pines al estilo Google Maps y mapa real incrustado. */
+(function(){
+  var sec=document.getElementById('mision'); if(!sec) return;
+  var cv=document.getElementById('gmcv'), cx=cv.getContext('2d'), esc=document.getElementById('gmesc'), cnt=document.getElementById('gmn');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, dpr=Math.min(devicePixelRatio||1,2);
+  var B64="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF//gD//+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////////8AAAAAAAAAAAMAAAAAAAAAAAAAAAAAAf////////wAA//gB+AAAA/gAAAAAAAAAAAAAAAOf/////////AAAf8AAAAAAAP+AAAAAAAAAAAAAAHvB+/4//////AAAH+AAAAMAAA/4AAAAAAAAAAAAAP/3//gf////+AAAAAAAAf8AD//+AAf+AAAAAAAAA/ux//wAH////AAAAAAAB4AB////zgPsAAAAAAAAA/////8AB///+AAAAAAADwD//////4P8AAAwAfoAA//5+//4D///8AAAADgAD4P/////////8ABgB//9///////8B///8AAAA//gAD///////////9/wP/////////P+A///AAAAH//7////////////////P/////////P/g//wNYAAH////////////////////////////+f/Af/Af4AAP7/////////////////jz/////////v+Af4AP4AB///////////////////gn////////D/+APwAAAAH/P/////////////////AP///////8APyAHwAAAAH/v//////////////7/gAP/8P////8Af/AAAAAAMH/H//////////////z5AAAfgD/////AP/gAAAAAOD+P////////////4APgAAA/AAf////4P/wAAAAAeB+P////////////wAfgAADgAAf///////8AAAAA/B///////////////AfgAAAAAAX/////f/+AAAAB/3///////////////AeAAAAAAAL////////AAAAB/////////////////AMAAAAAAAD///////3AAAAAP////////////////AAAAAAAAAA///////vgAAAAP////////////////gAAAAAAAAAf//////fgAAAAH/////4/////////7AAAAAAAAAAf//////4AAAAAB/////g/////////7AAAAAAAAAAf//////AAAAAA5///zfh/////////jgAAAAAAAAA//////wAAAAAB//9/jPg/////////HwAAAAAAAAAf/////wAAAAAB/5v///wf///////4HAAAAAAAAAAf////+AAAAAAB/hn///w////////4GAAAAAAAAAAf////+AAAAAAB/hPf//w///////5wMAAAAAAAAAAP////8AAAAAAA//2M//4///////84cAAAAAAAAAAH////8AAAAAAAf/wHH/////////w/8AAAAAAAAAAH////wAAAAAAA//wAB/////////4vgAAAAAAAAAAB////gAAAAAAB//+fL/////////8OAAAAAAAAAAAA////AAAAAAAB//////////////8MAAAAAAAAAAAA///ngAAAAAAD//////////////8AAAAAAAAAAAAAf/wDoAAAAAAH//////7///////8AAAAAAAAAAAAAP/wB4AAAAAAP////+/////////wAAAAAAAAAAAAAH/gB4AAAAAAf///////3//////8AAAAAAAAAAAAAD/gH4AAAAAAf/////f/8P/////oAAAAAAAAcAAAAAfx/8AAAAAA//////v/8D////+IAAAAAAAAGAAAAAfx4fwAAAAA//////v/4D/+f/4AAAAAAAAACAAAAAP/wf+AAAAAf/////3/4A/4P+wMAAAAAAAAAAAAAAH/wMmAAAAA//////3/wA/wH/AMAAAAAAAAAAAAAAA/+AAAAAAA//////7+AAfgP/gcAAAAAAAAAAAAAAAD+AAAAAAA///////8AAfAB/gOAAAAAAAAAAAAAAAA+AwAAAAA///////2AAfAB/gPAAAAAAAAAAAAAAAAOH9wAAAAf//////+AAPABvgXAAAAAAAAAAAAAAAAP3/wAAAAP//////8AAPABnA3gAAAAAAAAAAAAAAAD//4AAAAH//////8AAHgBiAngAAAAAAAAAAAAAAAAv/9AAAAH//////4AABgA4BngAAAAAAAAAAAAAAAAP//wAAAB/n////4AABAG4DxAAAAAAAAAAAAAAAAAP//wAAAAgH////wAAAAD4HwAAAAAAAAAAAAAAAAAf//4AAAAAA////wAAAAB8fhQAAAAAAAAAAAAAAAA///4AAAAAA////AAAAAB8//wAAAAAAAAAAAAAAAA///+AAAAAB///+AAAAAA8/+XAAAAAAAAAAAAAAAA////8AAAAA///8AAAAAAefcf+CAAAAAAAAAAAAAB////+AAAAAf//4AAAAAAOPd//jgAAAAAAAAAAAAB/////gAAAAf//4AAAAAAHAeB//QAAAAAAAAAAAAB/////gAAAAP//4AAAAAAD8ABP+cAAAAAAAAAAAAAf////gAAAAP//4AAAAAAA/9gf4HAAAAAAAAAAAAAf////gAAAAP//4AAAAAAAB7ADODgAAAAAAAAAAAAP////AAAAAH//4AAAAAAAAAHjCBgAAAAAAAAAAAAP///+AAAAAP//8MAAAAAAAAPzAAAAAAAAAAAAAAAH///+AAAAAP//8cAAAAAAAB/jgAEAgAAAAAAAAAAH///+AAAAAf//58AAAAAAAD/zgAEBgAAAAAAAAAAA///8AAAAAf//58AAAAAAAH//wAEDgAAAAAAAAAAAf//8AAAAAf//h4AAAAAAAP//4AADAAAAAAAAAAAAf//8AAAAAP//B4AAAAAAB///8AYAAAAAAAAAAAAAf//4AAAAAH//DwAAAAAAH///+AcAAAAAAAAAAAAAf//4AAAAAH//DwAAAAAAH///+AAAAAAAAAAAAAAAf//AAAAAAH//BwAAAAAAH////AAAAAAAAAAAAAAA//8AAAAAAH/8AgAAAAAAH////gAAAAAAAAAAAAAA//8AAAAAAD/8AAAAAAAAD////gAAAAAAAAAAAAAA//8AAAAAAD/8AAAAAAAAD////gAAAAAAAAAAAAAA//4AAAAAAB/4AAAAAAAAD////gAAAAAAAAAAAAAA//wAAAAAAB/wAAAAAAAAB/7//AAAAAAAAAAAAAAA//gAAAAAAA/gAAAAAAAAD+B//AAQAAAAAAAAAAAB//AAAAAAAAQAAAAAAAAABwA/+AAYAAAAAAAAAAAD/+AAAAAAAAAAAAAAAAAAAAAH+AAcgAAAAAAAAAAD/8AAAAAAAAAAAAAAAAAAAAAH8AAPAAAAAAAAAAAD/gAAAAAAAAAAAAAAAAAAAAAAQAAeAAAAAAAAAAAD/gAAAAAAAAAAAAAAAAAAAAAA4AA8AAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAAAAAA4ABwAAAAAAAAAAAD+AAAAAAAAAAAAAAAAAAAAAAAQADwAAAAAAAAAAAD+AAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAH+AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAH+AAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAH4AAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAH4cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAAAAAAAAABwAAAAMEAAgAAAAAAAAAAAAAAAAPgAAAAAAAAAAAP8gA///////wAAAAAAAAAAAAAAAfAAAAAAAAAADH//+D////////wAAAAAAAAAAAAAA/gAAAAAADv7////+//////////AAAAAAAAAAHwAH/gAAAAD////////////////////gAAAAABqAP/8r/wAAAAf////////////////////gAAAAH///P////wAAAA////////////////////+AAAAD/////////AAAB/////////////////////wAAAP/////////gACAf/////////////////////wAAD/////////+AAPw//////////////////////8AAAgH////////n5/wf/////////////////////AAAAH//////////4////////////////////////wAAgB///////////////////////////////////+A////////////////////////////////////////AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", GW=240, GH=120, raw=atob(B64), land=[];
+  for(var i=0;i<GW*GH;i++){ land.push((raw.charCodeAt(i>>3)>>(7-(i&7)))&1); }
+  var HUB={n:'Bogotá',lat:4.7,lon:-74.1};
+  var T=[{n:'México',lat:19.4,lon:-99.1},{n:'Estados Unidos',lat:38.9,lon:-77,side:'r'},{n:'Canadá',lat:45.4,lon:-75.7,side:'l'},{n:'Brasil',lat:-23.5,lon:-46.6},{n:'España',lat:40.4,lon:-3.7},{n:'Alemania',lat:52.5,lon:13.4},{n:'Emiratos Árabes',lat:25.2,lon:55.3}];
+  var W=0,H=0,sc=1,ox=0,oy=0, stat=null, shine=null, run=false, t0=0, vistos=0;
+  function P(lat,lon){ return [ox+lon*sc, oy-lat*sc]; }
+  function tam(){ var w=esc.clientWidth; var mob=w<700; sc=mob?(w-40)/175:Math.min(w/330,4.05); var lon0=mob?-22:0; W=w; H=Math.round(138*sc+60); ox=w/2-lon0*sc; oy=H/2+11*sc; cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+'px'; cx.setTransform(dpr,0,0,dpr,0,0);
+    stat=document.createElement('canvas'); stat.width=W*dpr; stat.height=H*dpr; var a=stat.getContext('2d'); a.setTransform(dpr,0,0,dpr,0,0);
+    shine=document.createElement('canvas'); shine.width=W*dpr; shine.height=H*dpr; var b=shine.getContext('2d'); b.setTransform(dpr,0,0,dpr,0,0);
+    var cell=1.5*sc, r=Math.max(.9,cell*.28);
+    for(var y=0;y<GH;y++) for(var x=0;x<GW;x++){ if(!land[y*GW+x]) continue; var lon=-180+(x+.5)*1.5, lat=90-(y+.5)*1.5; if(lat<-58||lat>80) continue; var p=P(lat,lon); if(p[0]<-4||p[0]>W+4) continue;
+      a.fillStyle='rgba(138,180,248,.38)'; a.fillRect(p[0]-r,p[1]-r,r*2,r*2); b.fillStyle='rgba(190,235,255,.95)'; b.fillRect(p[0]-r*1.25,p[1]-r*1.25,r*2.5,r*2.5); } }
+  function ease(t){ return 1-Math.pow(1-t,3); }
+  function bounce(t){ var n=7.5625,d=2.75; if(t<1/d) return n*t*t; if(t<2/d) return n*(t-=1.5/d)*t+.75; if(t<2.5/d) return n*(t-=2.25/d)*t+.9375; return n*(t-=2.625/d)*t+.984375; }
+  function pin(x,y,k,col,etq,big,side){ if(k<=0) return; var drop=(1-bounce(Math.min(1,k)))*-70, s=big?1.25:1, h=20*s;
+    cx.save(); cx.globalAlpha=Math.min(1,k*2);
+    cx.fillStyle='rgba(0,0,0,.45)'; cx.beginPath(); cx.ellipse(x,y,7*s*(1+drop/90),3*s,0,0,6.283); cx.fill();
+    cx.translate(x,y+drop); cx.shadowColor=col; cx.shadowBlur=18; cx.fillStyle=col; cx.beginPath(); cx.moveTo(0,0); cx.bezierCurveTo(-4*s,-h*.45,-9*s,-h*.62,-9*s,-h*.95); cx.arc(0,-h*.95,9*s,Math.PI,0); cx.bezierCurveTo(9*s,-h*.62,4*s,-h*.45,0,0); cx.fill(); cx.shadowBlur=0; cx.fillStyle='#fff'; cx.beginPath(); cx.arc(0,-h*.95,3.4*s,0,6.283); cx.fill(); cx.restore();
+    if(k>=1&&etq){ var a=Math.min(1,(k-1)*2.2); cx.save(); cx.globalAlpha=a; cx.font='700 '+(W<700?10:12)+'px Inter, system-ui, sans-serif'; var tw=cx.measureText(etq).width+18, lx=x-tw/2, ly=y-h*1.95-12-(1-a)*6; if(side){ lx=side==='l'?x-tw-16:x+16; ly=y-h*.95+4-(1-a)*4; } cx.fillStyle='rgba(8,14,30,.88)'; cx.strokeStyle=col; cx.lineWidth=1; cx.beginPath(); cx.roundRect(lx,ly-10,tw,22,11); cx.fill(); cx.stroke(); cx.fillStyle='#fff'; cx.textAlign='center'; cx.fillText(etq,lx+tw/2,ly+5); cx.restore(); } }
+  function arco(a,b){ var mx=(a[0]+b[0])/2, my=Math.min(a[1],b[1])-Math.hypot(a[0]-b[0],a[1]-b[1])*.32; return {a:a,b:b,c:[mx,my]}; }
+  function pt(A,t){ var u=1-t; return [u*u*A.a[0]+2*u*t*A.c[0]+t*t*A.b[0], u*u*A.a[1]+2*u*t*A.c[1]+t*t*A.b[1]]; }
+  var COL=['#ea4335','#fbbc04','#34a853','#4285f4'];
+  function frame(now){ if(!run) return; var t=(now-t0)/1000; cx.clearRect(0,0,W,H);
+    cx.drawImage(stat,0,0,W,H);
+    // franja de brillo que recorre el mapa
+    var sx=((t*160)%(W+300))-150; cx.save(); cx.beginPath(); cx.rect(sx-70,0,140,H); cx.clip(); cx.globalAlpha=.55; cx.drawImage(shine,0,0,W,H); cx.restore(); cx.globalAlpha=1;
+    var hub=P(HUB.lat,HUB.lon), hk=Math.min(1.6,Math.max(0,t-.2)/.9*1);
+    // arcos
+    var llegados=0;
+    T.forEach(function(d,i){ var q=P(d.lat,d.lon), A=arco(hub,q), st=1.1+i*.85, dur=1.7, k=(t-st)/dur; if(k<=0) return; var kk=Math.min(1,k);
+      // trazo
+      cx.beginPath(); var n=40; for(var j=0;j<=n*kk;j++){ var p=pt(A,j/n); if(j===0) cx.moveTo(p[0],p[1]); else cx.lineTo(p[0],p[1]); } cx.strokeStyle='rgba(138,180,248,'+(kk>=1?.35:.7)+')'; cx.lineWidth=1.4; cx.stroke();
+      // cometa
+      var ciclo=kk>=1?((t-st-dur)%5)/1.8:kk; if(ciclo>=0&&ciclo<=1){ for(var s2=0;s2<14;s2++){ var tt=Math.max(0,ciclo-s2*.012), p2=pt(A,tt); cx.globalAlpha=(1-s2/14)*.9; cx.fillStyle=s2===0?'#fff':'#5affb0'; cx.beginPath(); cx.arc(p2[0],p2[1],s2===0?3:2.2-(s2*.1),0,6.283); cx.fill(); } cx.globalAlpha=1; }
+      if(kk>=1){ llegados++; var pk=Math.min(1.6,(t-st-dur)/.8+0), col=COL[(i+1)%4];
+        // onda
+        var o=((t-st-dur)%3)/3; cx.strokeStyle=col; cx.globalAlpha=(1-o)*.6; cx.lineWidth=1.5; cx.beginPath(); cx.arc(q[0],q[1],4+o*26,0,6.283); cx.stroke(); cx.globalAlpha=1; } });
+    // pines (sobre arcos)
+    T.forEach(function(d,i){ var st=1.1+i*.85+1.7, k=(t-st)/.8; var q=P(d.lat,d.lon); pin(q[0],q[1],Math.min(1.6,k+0),COL[(i+1)%4],d.n,false,d.side); });
+    // sede
+    var o2=(t%2.4)/2.4; cx.strokeStyle='#4285f4'; cx.globalAlpha=(1-o2)*.8; cx.lineWidth=2; cx.beginPath(); cx.arc(hub[0],hub[1],5+o2*40,0,6.283); cx.stroke(); cx.globalAlpha=1;
+    pin(hub[0],hub[1],hk,'#4285f4','Bogotá · sede',true);
+    var n=Math.min(T.length+1, (hk>=1?1:0)+llegados); if(n!==vistos){ vistos=n; cnt.textContent=n; }
+    requestAnimationFrame(frame); }
+  function estatico(){ tam(); cx.drawImage(stat,0,0,W,H); var hub=P(HUB.lat,HUB.lon); T.forEach(function(d,i){ var A=arco(hub,P(d.lat,d.lon)); cx.beginPath(); for(var j=0;j<=40;j++){ var p=pt(A,j/40); if(j===0) cx.moveTo(p[0],p[1]); else cx.lineTo(p[0],p[1]); } cx.strokeStyle='rgba(138,180,248,.4)'; cx.stroke(); pin(P(d.lat,d.lon)[0],P(d.lat,d.lon)[1],2,COL[(i+1)%4],d.n,false,d.side); }); pin(hub[0],hub[1],2,'#4285f4','Bogotá · sede',true); cnt.textContent=T.length+1; }
+  function mapaReal(){ var ph=document.getElementById('gmph'); if(!ph||ph.dataset.ok) return; ph.dataset.ok=1; var f=document.createElement('iframe'); f.title='Mapa de Google Maps: Bogotá, Colombia'; f.loading='lazy'; f.referrerPolicy='no-referrer-when-downgrade'; f.src='https://www.google.com/maps?q=Bogot%C3%A1%2C%20Colombia&z=11&output=embed'; ph.replaceWith(f); }
+  tam(); addEventListener('resize',function(){ tam(); if(reduce) estatico(); });
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v){ if(!sec.classList.contains('on')){ sec.classList.add('on'); mapaReal(); t0=performance.now(); } if(reduce){ estatico(); return; } if(!run){ run=true; requestAnimationFrame(frame); } } else run=false; },{threshold:.15}).observe(sec); else { sec.classList.add('on'); estatico(); mapaReal(); }
 })();
 </script>
 </body>
