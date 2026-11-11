@@ -1240,6 +1240,81 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 @media (max-width: 900px) { .c2-grid { grid-template-columns: 1fr; } .c2-viz { min-height: 380px; order: -1; } }
 @media (max-width: 480px) { .c2-t1 { display: none; } .c2-t2 { top: 40%; } }
 @media (prefers-reduced-motion: reduce) { .c2-reloj::before { animation: none; } }
+
+/* ═══ PLANES 2026 · "Elige tu nivel" (sección 6) ═════════════════════ */
+@property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.p2 { position: relative; overflow: clip; isolation: isolate; background: #060b18; padding: clamp(70px,8vw,120px) 0; color: #e8eaed; }
+.p2::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(45% 50% at 50% 55%, rgba(26,115,232,.3), transparent 70%), radial-gradient(35% 40% at 0% 0%, rgba(52,168,83,.14), transparent 70%), radial-gradient(35% 40% at 100% 10%, rgba(251,188,4,.1), transparent 70%); }
+.p2::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 15%, transparent 70%); mask-image: radial-gradient(ellipse at 50% 45%, #000 15%, transparent 70%); }
+.p2 .container { max-width: 1240px; }
+.p2 .section-header { text-align: center; margin-bottom: clamp(24px,3vw,40px); }
+.p2 .badge { color: #fdd663; background: rgba(251,188,4,.12); border: 1px solid rgba(251,188,4,.4); }
+.p2 h2 { color: #fff; font-size: clamp(30px, 4.2vw, 54px); letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
+.p2 .section-header p { color: #aab4c5; }
+/* selector */
+.p2-quien { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin: 0 auto clamp(20px,3vw,32px); }
+.p2-quien > span { font-size: 14px; font-weight: 600; color: #aab4c5; margin-right: 4px; }
+.p2-q { font: 600 13.5px var(--font); color: #e8eaed; padding: 10px 16px; border-radius: 99px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.05); cursor: pointer; transition: all .25s cubic-bezier(.23,1,.32,1); }
+.p2-q:hover { border-color: #8ab4f8; background: rgba(26,115,232,.2); transform: translateY(-2px); }
+.p2-q:active { transform: scale(.97); }
+/* retorno */
+.p2-roi { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(14px,2.4vw,28px); max-width: 980px; margin: 0 auto clamp(30px,4vw,52px); padding: clamp(16px,2vw,22px) clamp(18px,2.6vw,30px); border-radius: 22px; background: linear-gradient(120deg, rgba(52,168,83,.16), rgba(26,115,232,.12)); border: 1px solid rgba(129,201,149,.4); box-shadow: 0 30px 60px -36px rgba(0,0,0,.9); }
+.p2-roi b.g { font-size: clamp(34px,4.2vw,54px); font-weight: 800; letter-spacing: -.04em; color: #81c995; line-height: 1; font-variant-numeric: tabular-nums; }
+.p2-roi p { margin: 0; font-size: clamp(14px,1.4vw,16px); line-height: 1.5; color: #c3cad6; }
+.p2-roi p strong { color: #fff; }
+.p2-roi a { font-weight: 700; font-size: 14px; color: #8ab4f8; white-space: nowrap; }
+.p2-roi a:hover { color: #fff; }
+/* tarjetas */
+.p2 .plans-grid { gap: clamp(12px,1.6vw,20px); align-items: stretch; perspective: 1500px; }
+.p2 .plan-card { position: relative; border: 1px solid rgba(255,255,255,.13); border-radius: 26px; background: linear-gradient(170deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); color: #e8eaed; box-shadow: 0 40px 70px -40px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.08); transition: transform .5s cubic-bezier(.23,1,.32,1), box-shadow .4s, border-color .4s, opacity .8s; transform-style: preserve-3d; }
+.p2 .plan-card:hover { box-shadow: 0 50px 80px -40px rgba(0,0,0,.95), 0 0 50px -18px rgba(26,115,232,.55); border-color: rgba(138,180,248,.5); }
+.p2 .plan-card::before { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), rgba(138,180,248,.16), transparent 60%); opacity: 0; transition: opacity .4s; pointer-events: none; }
+.p2 .plan-card:hover::before { opacity: 1; }
+.p2 .plan-top, .p2 .plan-body { position: relative; z-index: 1; }
+.p2 .plan-top { background: none; border-bottom: 1px solid rgba(255,255,255,.1); padding: 26px 22px 22px; }
+.p2 .plan-name { color: #fff; font-size: 17px; letter-spacing: -.01em; }
+.p2 .plan-sub { color: #8c97ab; font-size: 12.5px; }
+.p2 .plan-price { color: #fff; font-size: clamp(30px,3vw,38px); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.p2 .plan-period { color: #8c97ab; }
+.p2 .plan-features li { color: #c3cad6; border-bottom-color: rgba(255,255,255,.07); font-size: 13.5px; padding: 8px 0; opacity: 0; transform: translateX(-8px); transition: opacity .5s, transform .5s; }
+.p2.on .plan-features li { opacity: 1; transform: none; }
+.p2.on .plan-features li:nth-child(1) { transition-delay: .5s; } .p2.on .plan-features li:nth-child(2) { transition-delay: .62s; } .p2.on .plan-features li:nth-child(3) { transition-delay: .74s; } .p2.on .plan-features li:nth-child(4) { transition-delay: .86s; } .p2.on .plan-features li:nth-child(5) { transition-delay: .98s; } .p2.on .plan-features li:nth-child(6) { transition-delay: 1.1s; }
+.p2 .plan-features li strong { color: #fff; }
+.p2 .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.35); }
+.p2 .btn-outline:hover { background: #fff; color: #0b1220; }
+.p2 .plan-cta { position: relative; overflow: hidden; border-radius: 14px; padding: 14px; font-size: 14px; font-weight: 700; }
+.p2 .plan-cta::after { content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent); transform: translateX(-160%) skewX(-18deg); pointer-events: none; }
+.p2-mc { display: block; text-align: center; font-size: 11.5px; color: #6f7b91; margin-top: 10px; }
+/* destacado */
+.p2 .plan-card.featured { border: 2px solid transparent; background: linear-gradient(170deg, #11204a, #0c1636) padding-box, conic-gradient(from var(--ang), #1a73e8, #34a853, #fbbc04, #ea4335, #1a73e8) border-box; box-shadow: 0 50px 90px -40px rgba(0,0,0,.95), 0 0 90px -20px rgba(26,115,232,.75); }
+.p2 .plan-card.featured .plan-top { background: linear-gradient(180deg, rgba(26,115,232,.22), transparent); }
+.p2 .plan-card.featured .plan-price { color: #8ab4f8; font-size: clamp(34px,3.5vw,46px); text-shadow: 0 0 40px rgba(26,115,232,.8); }
+.p2 .plan-featured-badge { position: relative; z-index: 2; background: linear-gradient(90deg, #1a73e8, #34a853); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 9px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.p2 .plan-card.featured .btn-primary { background: linear-gradient(135deg, #1a73e8, #3b87ee); box-shadow: 0 14px 34px -12px rgba(26,115,232,.95); }
+.p2 .plan-card.reco { box-shadow: 0 0 0 3px #fdd663, 0 0 60px -10px rgba(251,188,4,.7); border-color: #fdd663; }
+.p2 .plan-card.reco::after { content: "Recomendado para ti"; position: absolute; top: 10px; right: 10px; z-index: 3; font-size: 11px; font-weight: 800; letter-spacing: .04em; color: #1a1300; background: #fdd663; padding: 5px 10px; border-radius: 99px; animation: p2-pop .5s cubic-bezier(.34,1.56,.64,1) both; }
+@keyframes p2-pop { from { transform: scale(.4); opacity: 0; } }
+.p2 .plan-tab { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16); }
+.p2 .plan-tab-name { color: #fff; } .p2 .plan-tab-price { color: #8c97ab; }
+.p2 .plan-tab.active { background: #1a73e8; }
+.p2 .plans-dot { background: rgba(255,255,255,.25); }
+@media (min-width: 769px) {
+  .p2 .plan-card { opacity: 0; transform: translateY(50px) rotateX(10deg); }
+  .p2.on .plan-card { opacity: 1; transform: none; }
+  .p2.on .plan-card:nth-child(2) { transition-delay: .12s; } .p2.on .plan-card:nth-child(3) { transition-delay: .24s; } .p2.on .plan-card:nth-child(4) { transition-delay: .36s; }
+  .p2 .plan-card.featured { margin-top: -18px; margin-bottom: -18px; }
+  .p2 .plan-card.featured .plan-body { padding-top: 26px; }
+}
+@media (hover: hover) and (min-width: 769px) { .p2.on .plan-card:hover { transform: translateY(-8px) !important; } .p2.on .plan-card.featured:hover { transform: translateY(-12px) !important; } }
+@media (prefers-reduced-motion: no-preference) {
+  .p2 .plan-card.featured { animation: p2-giro 6s linear infinite; }
+  @keyframes p2-giro { to { --ang: 360deg; } }
+  .p2.on .plan-cta::after { animation: p2-brillo 5s ease-in-out 1.6s infinite; }
+  .p2.on .plan-card.featured .plan-cta::after { animation-duration: 3.4s; }
+  @keyframes p2-brillo { 0% { transform: translateX(-160%) skewX(-18deg); } 24%, 100% { transform: translateX(420%) skewX(-18deg); } }
+}
+@media (max-width: 768px) { .p2-roi { grid-template-columns: 1fr; text-align: center; } .p2-roi a { justify-self: center; } .p2-quien > span { width: 100%; text-align: center; } .p2 .plan-card { opacity: 1; transform: none; } .p2 .plan-features li { opacity: 1; transform: none; } .p2 .plan-card.featured { margin: 0 auto !important; } }
+@media (prefers-reduced-motion: reduce) { .p2 .plan-card, .p2 .plan-features li { opacity: 1 !important; transform: none !important; transition: none !important; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -1731,13 +1806,19 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- PLANES -->
-<section class="plans-section" id="precios">
+<section class="plans-section p2" id="precios">
   <div class="container">
     <div class="section-header fade-in">
       <div class="badge">Precios transparentes</div>
       <h2>Planes de SEO Local y Optimización Google Maps</h2>
       <p>Sin letra pequeña. Sin cláusulas de permanencia ocultas.</p>
     </div>
+    <div class="p2-quien" role="group" aria-label="Encuentra tu plan"><span>¿Cuál es para ti?</span>
+      <button type="button" class="p2-q" data-i="0">Quiero saber dónde estoy</button>
+      <button type="button" class="p2-q" data-i="1">Quiero un arranque rápido</button>
+      <button type="button" class="p2-q" data-i="2">Quiero crecer cada mes</button>
+      <button type="button" class="p2-q" data-i="3">Tengo varias sedes</button></div>
+    <div class="p2-roi"><b class="g">6%</b><p>Con 5.000 impresiones al mes, la calculadora estima <strong>$20.000.000 COP</strong> que se van a la competencia. El Plan Profesional cuesta <strong>$1.200.000 al mes</strong>, sin permanencia: una fracción de lo que hoy dejas ir. <em style="color:#8c97ab">(Estimado ilustrativo.)</em></p><a href="#calculadora">Ver mi cálculo →</a></div>
     <!-- Tab switcher: visible solo en móvil -->
     <div class="plan-tabs">
       <button class="plan-tab active" onclick="switchPlan(0)">
@@ -1765,7 +1846,7 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
         <div class="plan-top">
           <div class="plan-name">Auditoría Profesional</div>
           <div class="plan-sub">Entrega en 48 horas</div>
-          <div class="plan-price">$190.000</div>
+          <div class="plan-price" data-p="190000">$190.000</div>
           <div class="plan-period">COP · pago único</div>
         </div>
         <div class="plan-body">
@@ -1776,7 +1857,7 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
             <li>Inteligencia competitiva vs 5 competidores</li>
             <li>Proyección de impacto financiero</li>
           </ul>
-          <button class="btn btn-outline plan-cta" onclick="openForm()">Solicitar auditoría</button>
+          <button class="btn btn-outline plan-cta" onclick="openForm()">Solicitar auditoría</button><span class="p2-mc">Sin compromiso · respondemos por WhatsApp</span>
         </div>
       </div>
 
@@ -1784,7 +1865,7 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
         <div class="plan-top">
           <div class="plan-name">Plan Básico</div>
           <div class="plan-sub">Quick Win · Pago único</div>
-          <div class="plan-price">$600.000</div>
+          <div class="plan-price" data-p="600000">$600.000</div>
           <div class="plan-period">COP · pago único</div>
         </div>
         <div class="plan-body">
@@ -1795,7 +1876,7 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
             <li>Benchmark vs. 5 competidores directos</li>
             <li>Activación técnica completa en 72 horas</li>
           </ul>
-          <button class="btn btn-outline plan-cta" onclick="openForm()">Solicitar plan</button>
+          <button class="btn btn-outline plan-cta" onclick="openForm()">Solicitar plan</button><span class="p2-mc">Sin compromiso · respondemos por WhatsApp</span>
         </div>
       </div>
 
@@ -1804,19 +1885,19 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
         <div class="plan-top">
           <div class="plan-name">Plan Profesional</div>
           <div class="plan-sub">Growth · Sin permanencia</div>
-          <div class="plan-price">$1.200.000</div>
+          <div class="plan-price" data-p="1200000">$1.200.000</div>
           <div class="plan-period">COP / mes</div>
         </div>
         <div class="plan-body">
           <ul class="plan-features">
             <li>Score en ascenso continuo mes a mes</li>
             <li>+89% promedio de visitas al perfil en 60 días</li>
-            <li>Presencia activa en Google Maps <strong>y ASK Maps</strong></li>
+            <li><span>Presencia activa en Google Maps <strong>y ASK Maps</strong></span></li>
             <li>Respuestas a reseñas en menos de 2 horas</li>
             <li>Dashboard de métricas con IA · acceso 24/7</li>
             <li>Sin permanencia · pausas sin penalización</li>
           </ul>
-          <button class="btn btn-primary plan-cta" onclick="openForm()">Solicitar plan</button>
+          <button class="btn btn-primary plan-cta" onclick="openForm()">Solicitar plan</button><span class="p2-mc">Sin compromiso · respondemos por WhatsApp</span>
         </div>
       </div>
 
@@ -1824,19 +1905,19 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
         <div class="plan-top">
           <div class="plan-name">Plan Enterprise</div>
           <div class="plan-sub">Domination · Multi-locación</div>
-          <div class="plan-price">$3.200.000</div>
+          <div class="plan-price" data-p="3200000">$3.200.000</div>
           <div class="plan-period">COP / mes</div>
         </div>
         <div class="plan-body">
           <ul class="plan-features">
-            <li>Cobertura simultánea de <strong>hasta 5 locaciones</strong></li>
+            <li><span>Cobertura simultánea de <strong>hasta 5 locaciones</strong></span></li>
             <li>+94% visibilidad local en todos los puntos</li>
             <li>Inteligencia competitiva contra todo el mercado</li>
             <li>Account Manager dedicado · respuesta &lt;1 hora</li>
             <li>Reportes ejecutivos mensuales para dirección</li>
             <li>SLA 99.5% · garantía 90 días o reembolso</li>
           </ul>
-          <button class="btn btn-outline plan-cta" onclick="openForm()">Solicitar plan</button>
+          <button class="btn btn-outline plan-cta" onclick="openForm()">Solicitar plan</button><span class="p2-mc">Sin compromiso · respondemos por WhatsApp</span>
         </div>
       </div>
 
@@ -2500,6 +2581,22 @@ updateBottomNav();
   tam(); addEventListener('resize',tam); if(window.ResizeObserver) new ResizeObserver(tam).observe(viz);
   window.calcViz(5000); shown=loss; res.textContent=fmt(loss);
   if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v&&!run){ run=true; if(!t0) t0=performance.now(); last=performance.now(); if(reduce){ for(var k=0;k<40;k++) parts.push(Object.assign(nueva(),{y:geo().top+k*5})); dib(); run=false; return; } requestAnimationFrame(frame); } else if(!v) run=false; },{threshold:.15}).observe(sec);
+})();
+</script>
+
+<script>
+/* Planes · entrada escalonada, precios que cuentan, selector "¿cuál es para ti?" e inclinación 3D. */
+(function(){
+  var sec=document.getElementById('precios'); if(!sec||!sec.classList.contains('p2')) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, fino=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var cards=[].slice.call(sec.querySelectorAll('.plan-card'));
+  function precios(){ if(reduce) return; sec.querySelectorAll('.plan-price[data-p]').forEach(function(e){ var to=+e.dataset.p,t=performance.now(); (function f(now){ var k=Math.min(1,(now-t)/1500); k=1-Math.pow(1-k,3); e.textContent='$'+Math.round(to*k).toLocaleString('es-CO'); if(k<1) requestAnimationFrame(f); })(t); }); }
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en,o){ if(en[0].isIntersecting){ sec.classList.add('on'); precios(); o.disconnect(); } },{threshold:.12}).observe(sec); else sec.classList.add('on');
+  sec.querySelectorAll('.p2-q').forEach(function(b){ b.addEventListener('click',function(){ var i=+b.dataset.i; cards.forEach(function(c,k){ c.classList.toggle('reco',k===i); });
+    if(typeof switchPlan==='function' && matchMedia('(max-width:768px)').matches) switchPlan(i); else cards[i].scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); }); });
+  cards.forEach(function(c){ c.addEventListener('pointermove',function(e){ var b=c.getBoundingClientRect(),x=(e.clientX-b.left)/b.width,y=(e.clientY-b.top)/b.height; c.style.setProperty('--mx',x*100+'%'); c.style.setProperty('--my',y*100+'%');
+    if(fino&&!reduce&&innerWidth>768){ c.style.transition='transform .1s'; c.style.transform='translateY(-8px) rotateY('+((x-.5)*7).toFixed(2)+'deg) rotateX('+((.5-y)*7).toFixed(2)+'deg)'; } });
+    c.addEventListener('pointerleave',function(){ c.style.transition=''; c.style.transform=''; }); });
 })();
 </script>
 </body>
