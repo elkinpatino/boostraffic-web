@@ -978,7 +978,7 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 .h2-c2 { right: -3%; top: 58%; animation-delay: -3s; }
 .h2-c3 { right: 2%; top: -3%; animation-delay: -2s; }
 @keyframes h2-flota { 50% { transform: translateY(-9px); } }
-.h2-aviso { text-align: center; margin: 14px 0 0; font-size: 11.5px; color: #6f7b91; }
+.h2 p.h2-aviso { text-align: center; margin: 14px 0 0; font-size: 11.5px; color: #6f7b91; max-width: none; line-height: 1.4; }
 @media (max-width: 960px) {
   .h2-grid { grid-template-columns: 1fr; }
   .h2 { text-align: left; }
@@ -995,6 +995,89 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
   .nav-logo { font-size: 22px; }
 }
 @media (prefers-reduced-motion: reduce) { .h2-chip, .h2-barrido, .h2 .hero-eyebrow::before, .h2-tu.lider .h2-onda { animation: none; } .h2-tel { transition: none; } }
+
+/* ═══ MÉTRICAS 2026 · "Centro de mando" (rediseño sección 2) ══════════ */
+.m2 { position: relative; overflow: hidden; isolation: isolate; background: #060b18; border: 0; padding: clamp(64px,8vw,110px) 0; color: #e8eaed; }
+.m2::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(45% 50% at 15% 20%, rgba(26,115,232,.22), transparent 70%), radial-gradient(40% 45% at 90% 85%, rgba(52,168,83,.16), transparent 70%), linear-gradient(180deg, #060b18, #0a1226 60%, #060b18); }
+.m2::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 10%, transparent 72%); mask-image: radial-gradient(ellipse at 50% 40%, #000 10%, transparent 72%); }
+.m2 .container { max-width: 1240px; }
+.m2 .section-header { text-align: center; margin-bottom: clamp(32px,4vw,52px); }
+.m2 .badge { color: #8ab4f8; background: rgba(26,115,232,.14); border: 1px solid rgba(138,180,248,.35); }
+.m2 h2 { color: #fff; font-size: clamp(30px, 4.2vw, 54px); letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
+.m2-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.m2-c { position: relative; overflow: hidden; border-radius: 24px; padding: clamp(22px,2.4vw,32px); background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.11); box-shadow: 0 30px 60px -34px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.08); min-height: 300px; display: flex; flex-direction: column; opacity: 0; transform: translateY(28px) scale(.98); transition: opacity .8s cubic-bezier(.23,1,.32,1), transform .8s cubic-bezier(.23,1,.32,1), border-color .4s; }
+.m2.on .m2-c { opacity: 1; transform: none; }
+.m2.on .m2-c:nth-child(2) { transition-delay: .12s; } .m2.on .m2-c:nth-child(3) { transition-delay: .24s; } .m2.on .m2-c:nth-child(4) { transition-delay: .36s; }
+.m2-c::before { content: ""; position: absolute; inset: 0; background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), rgba(138,180,248,.16), transparent 60%); opacity: 0; transition: opacity .4s; pointer-events: none; }
+.m2-c:hover::before { opacity: 1; }
+.m2-c.a { grid-column: span 7; } .m2-c.b { grid-column: span 5; } .m2-c.c { grid-column: span 5; } .m2-c.d { grid-column: span 7; }
+.m2-v { font-size: clamp(44px, 5.4vw, 76px); font-weight: 800; letter-spacing: -.04em; line-height: 1; color: #8ab4f8; font-variant-numeric: tabular-nums; }
+.m2-v.g { color: #81c995; }
+.m2-l { font-size: 16px; font-weight: 600; color: #e8eaed; margin-top: 10px; line-height: 1.35; }
+.m2-s { font-size: 12.5px; color: #8c97ab; margin-top: 4px; font-style: italic; }
+.m2-viz { margin-top: auto; padding-top: 18px; }
+/* a · gráfico */
+.m2-chart { width: 100%; height: auto; display: block; overflow: visible; }
+.m2-chart .area { fill: url(#m2g); opacity: 0; transition: opacity 1s .8s; }
+.m2-chart .line { fill: none; stroke: #8ab4f8; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px rgba(138,180,248,.9)); stroke-dasharray: var(--len, 1200); stroke-dashoffset: var(--len, 1200); }
+.m2.on .m2-chart .line { animation: m2-dib 2.2s cubic-bezier(.4,0,.2,1) .3s forwards; }
+.m2.on .m2-chart .area { opacity: 1; }
+@keyframes m2-dib { to { stroke-dashoffset: 0; } }
+.m2-chart .punto { fill: #fff; stroke: #1a73e8; stroke-width: 3; opacity: 0; }
+.m2.on .m2-chart .punto { animation: m2-pto 3s ease-in-out 2.5s infinite; }
+@keyframes m2-pto { 0%, 20% { opacity: 1; r: 6; } 60% { opacity: 1; r: 9; } 100% { opacity: 1; r: 6; } }
+.m2-chart .grid line { stroke: rgba(255,255,255,.07); }
+.m2-chart text { fill: #6f7b91; font: 500 11px var(--font); }
+.m2-cap { display: flex; justify-content: space-between; font-size: 11.5px; color: #6f7b91; margin-top: 8px; }
+/* b · barras */
+.m2-barras { display: flex; align-items: flex-end; gap: 22px; height: 150px; }
+.m2-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; gap: 8px; font-size: 12px; color: #8c97ab; text-align: center; }
+.m2-bar i { display: block; width: 100%; border-radius: 12px 12px 4px 4px; height: 0; transition: height 1.6s cubic-bezier(.23,1,.32,1) .5s; position: relative; }
+.m2-bar.antes i { background: linear-gradient(#5f6b83, #3a4457); }
+.m2-bar.ahora i { background: linear-gradient(#81c995, #34a853); box-shadow: 0 0 34px -4px rgba(52,168,83,.7); }
+.m2.on .m2-bar.antes i { height: 38%; } .m2.on .m2-bar.ahora i { height: 100%; }
+.m2-bar.ahora i::after { content: "+161%"; position: absolute; top: -26px; left: 50%; transform: translateX(-50%); font-weight: 800; font-size: 14px; color: #81c995; opacity: 0; transition: opacity .6s 1.9s; }
+.m2.on .m2-bar.ahora i::after { opacity: 1; }
+.m2-tel { position: absolute; right: 22px; top: 22px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: rgba(52,168,83,.16); color: #81c995; }
+.m2-tel::before, .m2-tel::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(129,201,149,.6); opacity: 0; }
+.m2.on .m2-tel::before { animation: m2-ring 2.4s ease-out infinite; } .m2.on .m2-tel::after { animation: m2-ring 2.4s ease-out 1.2s infinite; }
+@keyframes m2-ring { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.3); opacity: 0; } }
+.m2.on .m2-tel svg { animation: m2-vibra 2.4s ease-in-out infinite; }
+@keyframes m2-vibra { 0%, 100% { transform: rotate(0); } 6%, 18% { transform: rotate(-14deg); } 12%, 24% { transform: rotate(14deg); } 30% { transform: rotate(0); } }
+/* c · medidor */
+.m2-med { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
+.m2-ring { position: relative; width: 150px; height: 150px; }
+.m2-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.m2-ring .pista { fill: none; stroke: rgba(255,255,255,.09); stroke-width: 10; }
+.m2-ring .prog { fill: none; stroke: #8ab4f8; stroke-width: 10; stroke-linecap: round; stroke-dasharray: 327; stroke-dashoffset: 327; filter: drop-shadow(0 0 10px rgba(138,180,248,.8)); transition: stroke-dashoffset 2.2s cubic-bezier(.23,1,.32,1) .4s; }
+.m2.on .m2-ring .prog { stroke-dashoffset: 0; }
+.m2-ring b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 30px; font-weight: 800; color: #fff; letter-spacing: -.03em; }
+.m2.on @keyframes m2-giro { to { transform: rotate(360deg); } }
+.m2-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.m2-lista li { display: flex; align-items: center; gap: 9px; font-size: 13px; color: #aab4c5; opacity: 0; transform: translateX(-10px); transition: opacity .5s, transform .5s; }
+.m2-lista li::before { content: ""; width: 16px; height: 16px; border-radius: 50%; flex: none; background: #34a853 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5 9-10'/></svg>") center/10px no-repeat; }
+.m2.on .m2-lista li { opacity: 1; transform: none; }
+.m2.on .m2-lista li:nth-child(1) { transition-delay: .7s; } .m2.on .m2-lista li:nth-child(2) { transition-delay: 1s; } .m2.on .m2-lista li:nth-child(3) { transition-delay: 1.3s; } .m2.on .m2-lista li:nth-child(4) { transition-delay: 1.6s; } .m2.on .m2-lista li:nth-child(5) { transition-delay: 1.9s; }
+/* d · 24/7 */
+.m2-rel { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
+.m2-reloj { position: relative; width: 150px; height: 150px; }
+.m2-reloj .tk { position: absolute; left: 50%; top: 0; width: 3px; height: 150px; margin-left: -1.5px; transform: rotate(calc(var(--i) * 15deg)); }
+.m2-reloj .tk::before { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 11px; border-radius: 2px; background: rgba(255,255,255,.12); transition: background .3s, box-shadow .3s; }
+.m2.on .m2-reloj .tk::before { background: #81c995; box-shadow: 0 0 10px rgba(129,201,149,.9); transition-delay: calc(var(--i) * .07s + .4s); }
+.m2-reloj .mano { position: absolute; left: 50%; top: 14px; width: 2px; height: 61px; margin-left: -1px; transform-origin: 50% 100%; background: linear-gradient(transparent, #8ab4f8); border-radius: 2px; }
+.m2.on .m2-reloj .mano { animation: m2-giro 8s linear infinite; }
+.m2-reloj b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+.m2-reloj::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #8ab4f8; box-shadow: 0 0 14px #8ab4f8; }
+.m2-vivo { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #81c995; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+.m2-vivo::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #34a853; animation: h2-vivo 2s infinite; }
+.m2-tick { min-height: 3.2em; font-size: 14px; color: #c3cad6; line-height: 1.55; font-family: ui-monospace, Menlo, monospace; }
+.m2-tick span { display: block; opacity: 0; transform: translateY(6px); animation: m2-lin .5s forwards; }
+@keyframes m2-lin { to { opacity: 1; transform: none; } }
+.m2-nota { text-align: center; margin: 22px 0 0; font-size: 12px; color: #6f7b91; }
+@media (max-width: 900px) { .m2-c.a, .m2-c.b, .m2-c.c, .m2-c.d { grid-column: span 12; } .m2-c { min-height: 0; } }
+@media (max-width: 560px) { .m2-cap span:nth-child(2) { display: none; } .m2-cap { justify-content: space-between; } }
+@media (max-width: 480px) { .m2-med, .m2-rel { grid-template-columns: 1fr; justify-items: start; } .m2-tel { width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .m2-c { opacity: 1; transform: none; transition: none; } .m2-chart .line { stroke-dashoffset: 0; animation: none !important; } .m2-lista li { opacity: 1; transform: none; transition: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -1329,34 +1412,47 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- MÉTRICAS -->
-<section class="metrics-section">
+<section class="metrics-section m2" id="resultados">
   <div class="container">
     <div class="section-header fade-in">
       <div class="badge">Datos reales de clientes activos</div>
       <h2>Resultados reales de SEO Local y Google Maps</h2>
     </div>
-    <div class="metrics-grid">
-      <div class="metric-card fade-in">
-        <div class="metric-value">33.903</div>
-        <div class="metric-label">Impresiones mensuales en Google Maps</div>
-        <div class="metric-source">Hotel HTL · mayo 2026</div>
-      </div>
-      <div class="metric-card fade-in">
-        <div class="metric-value green">+161%</div>
-        <div class="metric-label">Crecimiento en llamadas directas</div>
-        <div class="metric-source">vs. periodo anterior</div>
-      </div>
-      <div class="metric-card fade-in">
-        <div class="metric-value">100%</div>
-        <div class="metric-label">Análisis completo de visibilidad</div>
-        <div class="metric-source">por perfil auditado</div>
-      </div>
-      <div class="metric-card fade-in">
-        <div class="metric-value green">24/7</div>
-        <div class="metric-label">Monitoreo continuo del perfil GMB</div>
-        <div class="metric-source">sin intervención manual</div>
-      </div>
+    <div class="m2-grid" id="m2grid">
+      <article class="m2-c a">
+        <div class="m2-v" data-n="33903">33.903</div>
+        <div class="m2-l">Impresiones mensuales en Google Maps</div>
+        <div class="m2-s">Hotel HTL · mayo 2026</div>
+        <div class="m2-viz" aria-hidden="true">
+          <svg class="m2-chart" viewBox="0 0 600 190" id="m2ch"><defs><linearGradient id="m2g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a73e8" stop-opacity=".5"/><stop offset="1" stop-color="#1a73e8" stop-opacity="0"/></linearGradient></defs>
+            <g class="grid"><line x1="0" x2="600" y1="30" y2="30"/><line x1="0" x2="600" y1="80" y2="80"/><line x1="0" x2="600" y1="130" y2="130"/><line x1="0" x2="600" y1="180" y2="180"/></g>
+            <path class="area" id="m2ar"/><path class="line" id="m2li"/><circle class="punto" id="m2pt" r="6"/></svg>
+          <div class="m2-cap"><span>Día 1</span><span>Curva ilustrativa del mes · cifra real: 33.903</span><span>Día 31</span></div>
+        </div>
+      </article>
+      <article class="m2-c b">
+        <div class="m2-tel" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
+        <div class="m2-v g" data-n="161" data-pre="+" data-suf="%">+161%</div>
+        <div class="m2-l">Crecimiento en llamadas directas</div>
+        <div class="m2-s">vs. periodo anterior</div>
+        <div class="m2-viz" aria-hidden="true"><div class="m2-barras"><div class="m2-bar antes"><i></i>Periodo anterior</div><div class="m2-bar ahora"><i></i>Con optimización</div></div></div>
+      </article>
+      <article class="m2-c c">
+        <div class="m2-v" data-n="100" data-suf="%">100%</div>
+        <div class="m2-l">Análisis completo de visibilidad</div>
+        <div class="m2-s">por perfil auditado</div>
+        <div class="m2-viz" aria-hidden="true"><div class="m2-med"><div class="m2-ring"><svg viewBox="0 0 120 120"><circle class="pista" cx="60" cy="60" r="52"/><circle class="prog" cx="60" cy="60" r="52"/></svg><b>100%</b></div>
+          <ul class="m2-lista"><li>Ficha y categorías</li><li>Reseñas y respuestas</li><li>Fotos y publicaciones</li><li>Datos de contacto (NAP)</li><li>Competencia local</li></ul></div></div>
+      </article>
+      <article class="m2-c d">
+        <div class="m2-v g">24/7</div>
+        <div class="m2-l">Monitoreo continuo del perfil GMB</div>
+        <div class="m2-s">sin intervención manual</div>
+        <div class="m2-viz" aria-hidden="true"><div class="m2-rel"><div class="m2-reloj"><i class="tk" style="--i:0"></i><i class="tk" style="--i:1"></i><i class="tk" style="--i:2"></i><i class="tk" style="--i:3"></i><i class="tk" style="--i:4"></i><i class="tk" style="--i:5"></i><i class="tk" style="--i:6"></i><i class="tk" style="--i:7"></i><i class="tk" style="--i:8"></i><i class="tk" style="--i:9"></i><i class="tk" style="--i:10"></i><i class="tk" style="--i:11"></i><i class="tk" style="--i:12"></i><i class="tk" style="--i:13"></i><i class="tk" style="--i:14"></i><i class="tk" style="--i:15"></i><i class="tk" style="--i:16"></i><i class="tk" style="--i:17"></i><i class="tk" style="--i:18"></i><i class="tk" style="--i:19"></i><i class="tk" style="--i:20"></i><i class="tk" style="--i:21"></i><i class="tk" style="--i:22"></i><i class="tk" style="--i:23"></i><span class="mano"></span><b>24h</b></div>
+          <div><div class="m2-vivo">Monitoreando ahora</div><div class="m2-tick" id="m2tk"></div></div></div></div>
+      </article>
     </div>
+    <p class="m2-nota">Gráficos y paneles ilustrativos. Las cifras destacadas corresponden a datos de clientes activos.</p>
   </div>
 </section>
 
@@ -2095,6 +2191,36 @@ updateBottomNav();
     esc.addEventListener('pointermove',function(e){ var r=esc.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; tel.style.transform='rotateY('+(-7+x*9).toFixed(2)+'deg) rotateX('+(3-y*7).toFixed(2)+'deg)'; });
     esc.addEventListener('pointerleave',function(){ tel.style.transform=''; });
   }
+})();
+</script>
+
+<script>
+/* Métricas · centro de mando. Se activa al entrar en pantalla; respeta prefers-reduced-motion. */
+(function(){
+  var sec=document.getElementById('resultados'); if(!sec) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // curva ilustrativa (31 días, con ruido determinista)
+  var N=31,W=600,H=190,pts=[],r=7;
+  function rnd(){ r=(r*9301+49297)%233280; return r/233280; }
+  for(var i=0;i<N;i++){ var base=.12+.78*Math.pow(i/(N-1),1.35); var y=Math.min(.97,Math.max(.05,base+(rnd()-.5)*.14)); pts.push([i/(N-1)*W, H-10-y*(H-30)]); }
+  var d='M'+pts[0][0]+','+pts[0][1];
+  for(var j=1;j<N;j++){ var p=pts[j-1],c=pts[j],mx=(p[0]+c[0])/2; d+=' C'+mx+','+p[1]+' '+mx+','+c[1]+' '+c[0]+','+c[1]; }
+  var li=document.getElementById('m2li'), ar=document.getElementById('m2ar'), pt=document.getElementById('m2pt');
+  li.setAttribute('d',d); ar.setAttribute('d',d+' L'+W+','+H+' L0,'+H+' Z');
+  var L=li.getTotalLength(); li.style.setProperty('--len',Math.ceil(L)); 
+  var last=pts[N-1]; pt.setAttribute('cx',last[0]-4); pt.setAttribute('cy',last[1]);
+  function cuenta(e){ var n=+e.dataset.n,pre=e.dataset.pre||'',suf=e.dataset.suf||''; if(reduce){ return; } var t0=performance.now(),dur=2200;
+    (function s(now){ var k=Math.min(1,(now-t0)/dur); k=1-Math.pow(1-k,3); e.textContent=pre+Math.round(n*k).toLocaleString('es-CO')+suf; if(k<1) requestAnimationFrame(s); })(t0); }
+  // ticker 24/7
+  var LIN=['Ficha del perfil: verificada','Reseñas nuevas: respondidas a tiempo','Posición en el mapa: sin cambios bruscos','Horarios y datos de contacto: coherentes','Competidores cercanos: revisados','Alertas activas: ninguna'];
+  var tk=document.getElementById('m2tk'), ti=0, tim;
+  function lineas(){ if(reduce){ tk.innerHTML='<span style="opacity:1;transform:none">'+LIN[0]+'</span>'; return; } 
+    (function paso(){ var sp=document.createElement('span'); sp.textContent='› '+LIN[ti%LIN.length]; tk.appendChild(sp); while(tk.children.length>3) tk.removeChild(tk.firstChild); ti++; tim=setTimeout(paso,1500); })(); }
+  var vistas=false;
+  function activar(){ if(vistas) return; vistas=true; sec.classList.add('on'); sec.querySelectorAll('.m2-v[data-n]').forEach(cuenta); lineas(); }
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en,o){ if(en[0].isIntersecting){ activar(); o.disconnect(); } },{threshold:.25}).observe(sec); else activar();
+  // luz que sigue al mouse en cada tarjeta
+  sec.querySelectorAll('.m2-c').forEach(function(c){ c.addEventListener('pointermove',function(e){ var b=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-b.left)+'px'); c.style.setProperty('--my',(e.clientY-b.top)+'px'); }); });
 })();
 </script>
 </body>
