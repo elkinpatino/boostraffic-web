@@ -1373,6 +1373,53 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 .k2-nota { text-align: center; margin: 14px 0 0; font-size: 12px; color: #6f7b91; }
 @media (max-width: 900px) { .k2-grid { grid-template-columns: 1fr; } .k2-hero { min-height: 0; } }
 @media (prefers-reduced-motion: reduce) { .k2-c { opacity: 1; transform: none; transition: none; } .k2-chart .line { stroke-dashoffset: 0; animation: none !important; } .k2-bar i, .k2-bar b { transition: none; } .k2-est .v { opacity: 1; transform: none; transition: none; } .k2-chart .pt.fin .ring { animation: none; } }
+
+/* ═══ GARANTÍAS 2075 · "Escudo holográfico" (sección 8) ══════════════ */
+.g2 { position: relative; overflow: clip; isolation: isolate; background: #02050b; padding: clamp(70px,8vw,120px) 0; color: #d7e6f5; }
+.g2::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(60% 45% at 50% 22%, rgba(94,242,255,.2), transparent 70%), radial-gradient(40% 40% at 10% 90%, rgba(179,136,255,.14), transparent 70%), radial-gradient(40% 40% at 92% 85%, rgba(90,255,176,.12), transparent 70%); }
+.g2::after { content: ""; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(0deg, rgba(94,242,255,.03) 0 1px, transparent 1px 4px); pointer-events: none; }
+.g2 .container { max-width: 1180px; }
+.g2 .section-header { text-align: center; margin-bottom: clamp(10px,2vw,20px); }
+.g2 .badge { color: #5affb0; background: rgba(90,255,176,.08); border: 1px solid rgba(90,255,176,.45); font-family: ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; }
+.g2 h2 { color: #fff; font-size: clamp(30px, 4.2vw, 54px); letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; text-shadow: 0 0 40px rgba(94,242,255,.45); }
+.g2 .section-header p { color: #8fb0c9; }
+.g2-stage { position: relative; }
+.g2-cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.g2-core { position: relative; z-index: 1; height: clamp(300px, 34vw, 400px); display: grid; place-items: end center; padding-bottom: 10px; }
+.g2-hud { text-align: center; font-family: ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #5ef2ff; text-shadow: 0 0 14px rgba(94,242,255,.9); }
+.g2-hud b { display: block; font-size: clamp(20px,2.4vw,28px); letter-spacing: .12em; color: #fff; margin-top: 6px; min-height: 1.3em; }
+.g2-hud i { font-style: normal; display: block; margin-top: 4px; font-size: 11px; color: #5affb0; }
+.g2-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px,1.8vw,22px); margin-top: clamp(14px,2vw,26px); }
+.g2-c { position: relative; padding: clamp(22px,2.4vw,30px); border-radius: 6px; background: linear-gradient(180deg, rgba(94,242,255,.07), rgba(94,242,255,.015)); border: 1px solid rgba(94,242,255,.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); cursor: pointer; text-align: left; opacity: 0; transform: translateY(40px) rotateX(18deg); transform-origin: 50% 100%; transition: opacity .9s cubic-bezier(.23,1,.32,1), transform .9s cubic-bezier(.23,1,.32,1), border-color .4s, box-shadow .4s, background .4s; }
+.g2.on .g2-c { opacity: 1; transform: none; }
+.g2.on .g2-c:nth-child(2) { transition-delay: .15s; } .g2.on .g2-c:nth-child(3) { transition-delay: .3s; }
+.g2-c::before, .g2-c::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid #5ef2ff; transition: all .4s; filter: drop-shadow(0 0 6px #5ef2ff); }
+.g2-c::before { left: -2px; top: -2px; border-right: 0; border-bottom: 0; } .g2-c::after { right: -2px; bottom: -2px; border-left: 0; border-top: 0; }
+.g2-c.act { border-color: rgba(94,242,255,.9); background: linear-gradient(180deg, rgba(94,242,255,.16), rgba(94,242,255,.03)); box-shadow: 0 0 60px -10px rgba(94,242,255,.55), inset 0 0 40px -20px rgba(94,242,255,.6); }
+.g2-c.act::before, .g2-c.act::after { width: 30px; height: 30px; border-color: #5affb0; }
+.g2-scan { position: absolute; left: 0; right: 0; top: 0; height: 40px; background: linear-gradient(180deg, transparent, rgba(94,242,255,.2), transparent); transform: translateY(-50px); pointer-events: none; opacity: 0; }
+.g2-c.act .g2-scan { opacity: 1; animation: g2-scan 2.8s linear infinite; }
+@keyframes g2-scan { to { transform: translateY(420px); } }
+.g2-mod { font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .24em; color: #5ef2ff; opacity: .85; }
+.g2-ico { display: flex; align-items: center; gap: 14px; margin: 14px 0 10px; }
+.g2-ico .guarantee-icon { margin: 0; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 10px; background: rgba(94,242,255,.1); border: 1px solid rgba(94,242,255,.35); }
+.g2-ico svg { stroke: #5ef2ff; filter: drop-shadow(0 0 6px rgba(94,242,255,.9)); }
+.g2-v { font: 800 clamp(36px,4vw,52px)/1 ui-monospace, Menlo, monospace; color: #fff; letter-spacing: -.04em; text-shadow: 0 0 30px rgba(94,242,255,.7); font-variant-numeric: tabular-nums; }
+.g2-v small { font-size: .38em; letter-spacing: .08em; color: #5affb0; margin-left: 6px; text-shadow: none; }
+.g2-c h3 { color: #fff; font-size: clamp(19px,1.8vw,22px); margin: 12px 0 8px; letter-spacing: -.01em; }
+.g2-c p { color: #9db8cf; line-height: 1.65; font-size: 15px; margin: 0; }
+.g2-st { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .18em; color: #5affb0; text-transform: uppercase; }
+.g2-st::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #5affb0; box-shadow: 0 0 10px #5affb0; animation: h2-vivo 2s infinite; }
+.g2-tabla { position: relative; z-index: 1; margin: clamp(22px,3vw,36px) auto 0; max-width: 820px; border: 1px solid rgba(94,242,255,.25); border-radius: 6px; background: rgba(2,8,16,.7); font-family: ui-monospace, Menlo, monospace; overflow: hidden; }
+.g2-tabla div { display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 14px; padding: 13px 18px; font-size: 13.5px; border-bottom: 1px solid rgba(94,242,255,.12); align-items: center; }
+.g2-tabla div:last-child { border: 0; }
+.g2-tabla span:first-child { color: #8fb0c9; } .g2-tabla b { color: #fff; } .g2-tabla em { font-style: normal; font-weight: 700; color: #5affb0; letter-spacing: .1em; font-size: 11.5px; }
+.g2-tabla .th { background: rgba(94,242,255,.08); color: #5ef2ff; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+.g2-cta { position: relative; z-index: 1; text-align: center; margin-top: clamp(22px,3vw,34px); }
+.g2-cta .btn { background: linear-gradient(135deg, #5ef2ff, #5affb0); color: #02121c; font-weight: 800; box-shadow: 0 0 50px -8px rgba(94,242,255,.8); }
+.g2-cta .btn:hover { filter: brightness(1.1); }
+@media (max-width: 860px) { .g2-grid { grid-template-columns: 1fr; } .g2-core { height: 300px; } .g2-tabla div { grid-template-columns: 1fr auto; } .g2-tabla div span:nth-child(2) { grid-column: 1 / -1; order: 3; font-size: 12px; } .g2-cv { display: block; } }
+@media (prefers-reduced-motion: reduce) { .g2-c { opacity: 1; transform: none; transition: none; } .g2-scan { display: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -2039,30 +2086,48 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- GARANTÍAS -->
-<section class="guarantees-section">
+<section class="guarantees-section g2" id="garantias">
   <div class="container">
     <div class="section-header fade-in">
       <div class="badge badge-green">Sin riesgo</div>
       <h2>Trabajamos con garantías reales</h2>
       <p>No pedimos fe ciega. Pedimos una oportunidad de demostrarlo.</p>
     </div>
-    <div class="guarantees-grid">
-      <div class="guarantee-card fade-in">
-        <div class="guarantee-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div class="g2-stage" id="g2stage">
+      <canvas class="g2-cv" id="g2cv" aria-hidden="true"></canvas>
+      <div class="g2-core" aria-hidden="true"><div class="g2-hud">Escudo Boostraffic<b id="g2t">GARANTÍA DE 30 DÍAS</b><i id="g2e">● PROTECCIÓN ACTIVA</i></div></div>
+      <div class="g2-grid" id="g2grid">
+      <article class="g2-c act" data-i="0" tabindex="0" role="button" aria-label="Ver: Garantía de 30 días">
+        <div class="g2-scan"></div><div class="g2-mod">MÓDULO 01</div>
+        <div class="g2-ico"><div class="guarantee-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="g2-v"><span data-n="30">30</span><small>DÍAS</small></div></div>
         <h3>Garantía de 30 días</h3>
         <p>Si no ves mejoras medibles en tu perfil GMB en los primeros 30 días, te damos 2 meses de soporte adicional sin costo.</p>
-      </div>
-      <div class="guarantee-card fade-in">
-        <div class="guarantee-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
+        <span class="g2-st">Protección activa</span>
+      </article>
+      <article class="g2-c" data-i="1" tabindex="0" role="button" aria-label="Ver: Sin permanencia">
+        <div class="g2-scan"></div><div class="g2-mod">MÓDULO 02</div>
+        <div class="g2-ico"><div class="guarantee-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div><div class="g2-v"><span data-n="0">0</span><small>MESES</small></div></div>
         <h3>Sin permanencia</h3>
         <p>Puedes cancelar cuando quieras. Sin contratos de largo plazo. Sin penalizaciones. Tu confianza la ganamos mes a mes.</p>
-      </div>
-      <div class="guarantee-card fade-in">
-        <div class="guarantee-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+        <span class="g2-st">Libre de contrato</span>
+      </article>
+      <article class="g2-c" data-i="2" tabindex="0" role="button" aria-label="Ver: Transparencia total">
+        <div class="g2-scan"></div><div class="g2-mod">MÓDULO 03</div>
+        <div class="g2-ico"><div class="guarantee-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div><div class="g2-v"><span>24/7</span><small>EN VIVO</small></div></div>
         <h3>Transparencia total</h3>
         <p>Dashboard en tiempo real con todos tus datos. Ves exactamente qué se está haciendo y qué resultados genera cada acción.</p>
+        <span class="g2-st">Datos abiertos</span>
+      </article>
       </div>
     </div>
+    <div class="g2-tabla fade-in" role="table" aria-label="Lo que arriesgas con Boostraffic">
+      <div class="th" role="row"><span>Concepto</span><span>Tu compromiso</span><em>Estado</em></div>
+      <div role="row"><span>Permanencia</span><b>0 meses</b><em>LIBRE</em></div>
+      <div role="row"><span>Penalización por cancelar</span><b>$0</b><em>SIN COSTO</em></div>
+      <div role="row"><span>Si no ves mejoras en 30 días</span><b>2 meses de soporte adicional</b><em>GARANTIZADO</em></div>
+      <div role="row"><span>Acceso a tus datos</span><b>Dashboard en tiempo real</b><em>24/7</em></div>
+    </div>
+    <div class="g2-cta fade-in"><button class="btn btn-primary btn-lg" onclick="openForm()">Empezar sin riesgo → Solicitar análisis gratis</button></div>
   </div>
 </section>
 
@@ -2673,6 +2738,57 @@ updateBottomNav();
   function cuenta(e){ var n=+e.dataset.n,pre=e.dataset.pre||'',suf=e.dataset.suf||'',dec=e.dataset.dec?1:0; if(reduce) return; var t=performance.now(); (function g(now){ var k=Math.min(1,(now-t)/2400); k=1-Math.pow(1-k,3); var v=n*k; e.textContent=pre+(dec?(v/10).toFixed(1):Math.round(v).toLocaleString('es-CO'))+suf; if(k<1) requestAnimationFrame(g); })(t); }
   function ir(){ sec.classList.add('on'); sec.querySelectorAll('[data-n]').forEach(cuenta); }
   if('IntersectionObserver' in window) new IntersectionObserver(function(en,o){ if(en[0].isIntersecting){ ir(); o.disconnect(); } },{threshold:.2}).observe(sec); else ir();
+})();
+</script>
+
+<script>
+/* Garantías · escudo holográfico en canvas 2D (esfera de malla, anillos, haz de datos hacia la tarjeta activa). */
+(function(){
+  var sec=document.getElementById('garantias'); if(!sec||!sec.classList.contains('g2')) return;
+  var stage=document.getElementById('g2stage'), cv=document.getElementById('g2cv'), cx=cv.getContext('2d'), grid=document.getElementById('g2grid');
+  var cards=[].slice.call(grid.querySelectorAll('.g2-c')), T=document.getElementById('g2t'), E=document.getElementById('g2e');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, W=0,H=0,dpr=Math.min(devicePixelRatio||1,2), act=0, run=false, t0=performance.now(), parts=[], auto, manual=0;
+  var TXT=['GARANTÍA DE 30 DÍAS','SIN PERMANENCIA','TRANSPARENCIA TOTAL'], EST=['● PROTECCIÓN ACTIVA','● LIBRE DE CONTRATO','● DATOS ABIERTOS EN VIVO'];
+  var COL=['94,242,255','179,136,255','90,255,176'];
+  function tam(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
+  // decodificador de texto
+  var CH='█▓▒░<>/\\|{}[]0123456789ABCDEF', dtm;
+  function decode(el,txt){ clearInterval(dtm); if(reduce){ el.textContent=txt; return; } var f=0; dtm=setInterval(function(){ f++; var o=''; for(var i=0;i<txt.length;i++){ o+= (i<f/1.2||txt[i]===' ')?txt[i]:CH[Math.floor(Math.random()*CH.length)]; } el.textContent=o; if(f>txt.length*1.2) { clearInterval(dtm); el.textContent=txt; } },34); }
+  function ir(i,user){ if(i===act&&!user) return; act=i; cards.forEach(function(c,k){ c.classList.toggle('act',k===i); }); decode(T,TXT[i]); E.textContent=EST[i]; for(var k=0;k<24;k++) parts.push(nuevaP()); }
+  function core(){ var R=Math.min(W*.2,H*.165,128); return {x:W/2,y:R+34,r:R}; }
+  function objetivo(){ var c=cards[act].getBoundingClientRect(), s=stage.getBoundingClientRect(); return {x:c.left-s.left+c.width/2,y:c.top-s.top}; }
+  function nuevaP(){ var o=core(),t=objetivo(); return {t:0,v:.35+Math.random()*.5,off:(Math.random()-.5)*26,sx:o.x,sy:o.y+o.r*.8,ex:t.x+(Math.random()-.5)*60,ey:t.y,i:act}; }
+  function frame(now){ if(!run) return; var tt=(now-t0)/1000; cx.clearRect(0,0,W,H); var o=core(), col=COL[act];
+    // halo
+    var g=cx.createRadialGradient(o.x,o.y,o.r*.2,o.x,o.y,o.r*1.9); g.addColorStop(0,'rgba('+col+',.30)'); g.addColorStop(1,'rgba('+col+',0)'); cx.fillStyle=g; cx.fillRect(o.x-o.r*2,o.y-o.r*2,o.r*4,o.r*4);
+    // esfera de malla
+    var rotY=tt*.5, tilt=.38, cy=Math.cos(rotY), sy=Math.sin(rotY), ct=Math.cos(tilt), st=Math.sin(tilt);
+    function pr(lat,lon){ var x=Math.cos(lat)*Math.sin(lon), y=Math.sin(lat), z=Math.cos(lat)*Math.cos(lon); var x1=x*cy+z*sy, z1=-x*sy+z*cy; var y2=y*ct-z1*st, z2=y*st+z1*ct; return [o.x+x1*o.r, o.y-y2*o.r, z2]; }
+    cx.lineWidth=1;
+    for(var la=-60;la<=60;la+=30){ cx.beginPath(); for(var lo=0;lo<=360;lo+=6){ var p=pr(la*Math.PI/180,lo*Math.PI/180); if(lo===0) cx.moveTo(p[0],p[1]); else cx.lineTo(p[0],p[1]); } cx.strokeStyle='rgba('+col+',.38)'; cx.stroke(); }
+    for(var lo2=0;lo2<360;lo2+=30){ cx.beginPath(); for(var la2=-90;la2<=90;la2+=6){ var q=pr(la2*Math.PI/180,lo2*Math.PI/180); if(la2===-90) cx.moveTo(q[0],q[1]); else cx.lineTo(q[0],q[1]); } cx.strokeStyle='rgba('+col+',.3)'; cx.stroke(); }
+    // nodos
+    for(var n=0;n<46;n++){ var a1=(n*2.399)%6.283, b1=Math.asin(((n*.0435)%2)-1), pn=pr(b1,a1+0); if(pn[2]>-.1){ cx.fillStyle='rgba(255,255,255,'+(.4+.5*Math.max(0,pn[2]))+')'; cx.beginPath(); cx.arc(pn[0],pn[1],1.6,0,6.283); cx.fill(); } }
+    // escudo central
+    var sw=o.r*.62, sh=o.r*.74; cx.save(); cx.translate(o.x,o.y); cx.beginPath(); cx.moveTo(0,-sh); cx.bezierCurveTo(sw*.9,-sh*.85,sw,-sh*.55,sw,-sh*.2); cx.bezierCurveTo(sw,sh*.55,sw*.4,sh*.85,0,sh); cx.bezierCurveTo(-sw*.4,sh*.85,-sw,sh*.55,-sw,-sh*.2); cx.bezierCurveTo(-sw,-sh*.55,-sw*.9,-sh*.85,0,-sh); cx.closePath();
+    var gs=cx.createLinearGradient(0,-sh,0,sh); gs.addColorStop(0,'rgba('+col+',.38)'); gs.addColorStop(1,'rgba('+col+',.06)'); cx.fillStyle=gs; cx.fill(); cx.lineWidth=2.4; cx.strokeStyle='rgba('+col+',1)'; cx.shadowColor='rgba('+col+',1)'; cx.shadowBlur=22; cx.stroke(); cx.shadowBlur=0;
+    // check
+    cx.lineWidth=5; cx.lineCap='round'; cx.lineJoin='round'; cx.strokeStyle='#fff'; cx.beginPath(); cx.moveTo(-sw*.4,0); cx.lineTo(-sw*.08,sh*.26); cx.lineTo(sw*.46,-sh*.24); cx.stroke(); cx.restore();
+    // anillos orbitales
+    for(var k=0;k<3;k++){ cx.save(); cx.translate(o.x,o.y); cx.rotate(tt*(.25+k*.12)*(k%2?-1:1)); cx.scale(1,.32+k*.07); cx.beginPath(); cx.arc(0,0,o.r*(1.28+k*.14),0,6.283); cx.setLineDash([2,10+k*6]); cx.lineWidth=1.4; cx.strokeStyle='rgba('+col+','+(.55-k*.12)+')'; cx.stroke(); cx.restore(); }
+    // haz hacia la tarjeta
+    var tg=objetivo(); cx.setLineDash([]); var lg=cx.createLinearGradient(o.x,o.y+o.r,tg.x,tg.y); lg.addColorStop(0,'rgba('+col+',.7)'); lg.addColorStop(1,'rgba('+col+',.1)'); cx.strokeStyle=lg; cx.lineWidth=1.4; cx.beginPath(); cx.moveTo(o.x,o.y+o.r); cx.bezierCurveTo(o.x,o.y+o.r+(tg.y-o.y-o.r)*.5,tg.x,tg.y-(tg.y-o.y-o.r)*.5,tg.x,tg.y); cx.stroke();
+    // partículas de datos
+    if(Math.random()<.5) parts.push(nuevaP());
+    for(var i=parts.length-1;i>=0;i--){ var p=parts[i]; p.t+=p.v*.016; if(p.t>=1){ parts.splice(i,1); continue; } var u=p.t, my=(p.sy+p.ey)/2; var x=Math.pow(1-u,3)*p.sx+3*Math.pow(1-u,2)*u*p.sx+3*(1-u)*u*u*p.ex+u*u*u*p.ex, y=Math.pow(1-u,3)*p.sy+3*Math.pow(1-u,2)*u*my+3*(1-u)*u*u*my+u*u*u*p.ey;
+      x+=Math.sin(u*12+p.off)*p.off*.12*(1-u); cx.globalAlpha=Math.sin(u*3.14); cx.fillStyle='rgb('+COL[p.i]+')'; cx.shadowColor='rgb('+COL[p.i]+')'; cx.shadowBlur=10; cx.beginPath(); cx.arc(x,y,2,0,6.283); cx.fill(); cx.shadowBlur=0; }
+    cx.globalAlpha=1; requestAnimationFrame(frame); }
+  function autoplay(){ clearInterval(auto); if(!reduce) auto=setInterval(function(){ if(!manual) ir((act+1)%3); },4200); }
+  cards.forEach(function(c,i){ c.addEventListener('click',function(){ manual=1; ir(i,true); clearTimeout(c._m); setTimeout(function(){manual=0},9000); }); c.addEventListener('pointerenter',function(){ if(matchMedia('(hover:hover)').matches){ manual=1; ir(i); clearTimeout(window._g2m); window._g2m=setTimeout(function(){manual=0},6000); } }); c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); manual=1; ir(i,true); } }); });
+  function cuenta(){ if(reduce) return; sec.querySelectorAll('.g2-v span[data-n]').forEach(function(e){ var to=+e.dataset.n,t=performance.now(); (function f(now){ var k=Math.min(1,(now-t)/1800); k=1-Math.pow(1-k,3); e.textContent=Math.round(to*k); if(k<1) requestAnimationFrame(f); })(t); }); }
+  tam(); addEventListener('resize',tam); if(window.ResizeObserver) new ResizeObserver(tam).observe(stage);
+  decode(T,TXT[0]);
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v){ if(!sec.classList.contains('on')){ sec.classList.add('on'); cuenta(); } if(!run){ run=true; if(!reduce) requestAnimationFrame(frame); else { frame(performance.now()); run=false; } } autoplay(); } else { run=false; clearInterval(auto); } },{threshold:.15}).observe(sec); else sec.classList.add('on');
 })();
 </script>
 </body>
