@@ -1480,6 +1480,70 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 @media (max-width: 900px) { .f2-wrap { grid-template-columns: 1fr; } .f2-term { display: none; } .f2 .faq-answer { padding: 0 20px 0 64px; } .f2 .faq-item.open .faq-answer { padding: 0 20px 20px 64px; max-height: 420px; } .f2-pie-m { display: block; } }
 .f2-pie-m { display: none; text-align: center; margin-top: 14px; }
 @media (prefers-reduced-motion: reduce) { .f2 .faq-item, .f2-term { opacity: 1; transform: none; transition: none; } .f2-orbe::before, .f2-orbe i { animation: none; } }
+
+/* ═══ FORMULARIO 2026 · "Centro de lanzamiento" (sección 10, conversión) ═══ */
+@property --fa { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.fm { position: relative; overflow: clip; isolation: isolate; background: #03060f; border: 0; padding: clamp(72px,9vw,130px) 0; color: #e8eef7; }
+.fm::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(55% 60% at 80% 50%, rgba(26,115,232,.34), transparent 70%), radial-gradient(45% 50% at 5% 80%, rgba(52,168,83,.22), transparent 70%), radial-gradient(40% 40% at 50% 0%, rgba(179,136,255,.16), transparent 70%); }
+.fm::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 5%, transparent 70%); mask-image: radial-gradient(ellipse at 50% 50%, #000 5%, transparent 70%); }
+.fm .container { max-width: 1180px; }
+.fm-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.02fr); gap: clamp(28px,5vw,72px); align-items: center; }
+.fm-izq .badge { color: #5affb0; background: rgba(90,255,176,.1); border: 1px solid rgba(90,255,176,.45); }
+.fm h2 { color: #fff; font-size: clamp(34px, 4.8vw, 66px); letter-spacing: -.035em; line-height: 1.04; margin: 18px 0 16px; text-wrap: balance; text-align: left; }
+.fm h2 em { font-style: normal; background: linear-gradient(90deg, #8ab4f8, #5affb0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fm-sub { font-size: clamp(16px,1.6vw,19px); color: #aab4c5; line-height: 1.6; max-width: 480px; margin: 0 0 26px; text-align: left; }
+.fm-sub b { color: #fff; }
+.fm-radar { position: relative; width: min(100%, 340px); aspect-ratio: 1; margin: 0 0 26px; border-radius: 50%; background: radial-gradient(circle, rgba(26,115,232,.18), rgba(26,115,232,.03) 70%); box-shadow: 0 0 80px -20px rgba(26,115,232,.8), inset 0 0 0 1px rgba(138,180,248,.4); }
+.fm-radar::before, .fm-radar::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(138,180,248,.28); inset: 18%; } .fm-radar::after { inset: 36%; }
+.fm-ejes { position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(rgba(138,180,248,.25), rgba(138,180,248,.25)) center/1px 100% no-repeat, linear-gradient(rgba(138,180,248,.25), rgba(138,180,248,.25)) center/100% 1px no-repeat; }
+.fm-sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(90,255,176,0) 0 70%, rgba(90,255,176,.5) 100%); animation: m2-giro 3.6s linear infinite; -webkit-mask: radial-gradient(circle, #000 69%, transparent 70%); mask: radial-gradient(circle, #000 69%, transparent 70%); }
+.fm-blip { position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #5affb0; box-shadow: 0 0 14px #5affb0; opacity: 0; animation: fm-blip 3.6s linear infinite; }
+@keyframes fm-blip { 0% { opacity: 1; transform: scale(1.6); } 40% { opacity: .25; transform: scale(1); } 100% { opacity: 0; } }
+.fm-centro { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 18px; height: 18px; border-radius: 50%; background: #1a73e8; box-shadow: 0 0 0 6px rgba(26,115,232,.3), 0 0 30px #1a73e8; }
+.fm-centro::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid #8ab4f8; animation: h2-onda 2s ease-out infinite; }
+.fm-etq { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); max-width: 92%; text-align: center; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: .08em; color: #5affb0; background: rgba(3,6,15,.82); border: 1px solid rgba(90,255,176,.45); padding: 7px 12px; border-radius: 99px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fm-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+.fm-lista li { display: flex; align-items: center; gap: 12px; font-size: 15.5px; color: #cfd8e6; }
+.fm-lista li::before { content: ""; width: 22px; height: 22px; border-radius: 50%; flex: none; background: #34a853 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5 9-10'/></svg>") center/13px no-repeat; box-shadow: 0 0 16px rgba(52,168,83,.7); }
+/* tarjeta */
+.fm .form-wrap { max-width: none; }
+.fm-card { position: relative; border-radius: 30px; padding: 2px; background: conic-gradient(from var(--fa), #1a73e8, #5affb0, #fbbc04, #ea4335, #b388ff, #1a73e8); box-shadow: 0 50px 100px -40px #000, 0 0 120px -30px rgba(26,115,232,.8); }
+.fm-in { position: relative; border-radius: 28px; background: linear-gradient(170deg, #0d1530, #070b1a); padding: clamp(24px,3vw,40px); overflow: hidden; }
+.fm-tit { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.fm-tit b { font-size: 18px; color: #fff; letter-spacing: -.01em; } .fm-tit span { font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .16em; color: #5affb0; text-transform: uppercase; }
+.fm-prog { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+.fm-prog i { height: 5px; border-radius: 5px; background: rgba(255,255,255,.12); overflow: hidden; position: relative; }
+.fm-prog i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #8ab4f8, #5affb0); box-shadow: 0 0 12px #5affb0; transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.23,1,.32,1); }
+.fm-prog i.ok::after { transform: none; }
+.fm-est { font: 600 12.5px ui-monospace, Menlo, monospace; color: #8c97ab; margin-bottom: 20px; min-height: 1.4em; transition: color .3s; }
+.fm-est.listo { color: #5affb0; text-shadow: 0 0 14px rgba(90,255,176,.6); }
+.fm .form-group { margin-bottom: 16px; }
+.fm .form-group label { color: #aecbfa; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; display: flex; justify-content: space-between; }
+.fm .form-group label em { font-style: normal; color: #5affb0; opacity: 0; transition: opacity .3s; }
+.fm .form-group.ok label em { opacity: 1; }
+.fm .form-group input { width: 100%; height: 56px; padding: 0 18px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,.16); background: rgba(255,255,255,.05); color: #fff; font: 500 16px var(--font); transition: border-color .25s, box-shadow .25s, background .25s; }
+.fm .form-group input::placeholder { color: #5f6b83; }
+.fm .form-group input:focus { outline: none; border-color: #8ab4f8; background: rgba(138,180,248,.08); box-shadow: 0 0 0 4px rgba(138,180,248,.18), 0 0 40px -10px rgba(138,180,248,.8); }
+.fm .form-group.ok input { border-color: rgba(90,255,176,.6); }
+.fm .form-submit-btn { position: relative; overflow: hidden; height: 64px; font-size: 17px; font-weight: 800; border-radius: 16px; margin-top: 8px; background: linear-gradient(135deg, #25d366, #1faf54); box-shadow: 0 18px 44px -14px rgba(37,211,102,.9); transition: transform .2s, box-shadow .3s, filter .3s; }
+.fm .form-submit-btn::after { content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 38%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: translateX(-160%) skewX(-18deg); animation: p2-brillo 3.4s ease-in-out infinite; }
+.fm.lista .form-submit-btn { animation: fm-pulso 2s ease-in-out infinite; }
+@keyframes fm-pulso { 50% { box-shadow: 0 18px 60px -6px rgba(37,211,102,1); transform: scale(1.015); } }
+.fm .form-submit-btn:active { transform: scale(.98); }
+.fm .form-note { color: #8c97ab; margin-top: 16px; }
+.fm-conf { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-size: 12.5px; color: #8c97ab; }
+.fm-conf span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #5affb0; margin-right: 7px; box-shadow: 0 0 8px #5affb0; }
+.fm .success-msg { position: relative; padding: 36px 10px; color: #fff; }
+.fm .success-msg .check { width: 96px; height: 96px; margin: 0 auto 22px; display: grid; place-items: center; border-radius: 50%; background: rgba(52,168,83,.2); border: 2px solid #5affb0; box-shadow: 0 0 60px rgba(90,255,176,.7); position: relative; }
+.fm .success-msg .check::before, .fm .success-msg .check::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #5affb0; animation: h2-onda 1.8s ease-out infinite; }
+.fm .success-msg .check::after { animation-delay: .9s; }
+.fm .success-msg .check svg { width: 46px; height: 46px; stroke: #5affb0; }
+.fm .success-msg p { font-size: 18px; color: #fff; }
+.fm .success-msg small { display: block; margin-top: 10px; font: 600 12px ui-monospace, Menlo, monospace; letter-spacing: .14em; color: #5affb0; text-transform: uppercase; }
+.fm-card.enviado { box-shadow: 0 50px 100px -40px #000, 0 0 160px -10px rgba(90,255,176,.9); }
+@media (prefers-reduced-motion: no-preference) { .fm-card { animation: p2-giro 8s linear infinite; } }
+@media (max-width: 900px) { .fm-grid { grid-template-columns: 1fr; } .fm-radar { width: 240px; margin-inline: auto; } .fm-izq { text-align: center; } .fm h2, .fm-sub { text-align: center; margin-inline: auto; } .fm-lista { justify-items: start; max-width: 360px; margin-inline: auto; } }
+@media (prefers-reduced-motion: reduce) { .fm-sweep, .fm-blip, .fm-centro::after, .fm .form-submit-btn::after { animation: none; } .fm-blip { opacity: .6; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -2242,42 +2306,51 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- FORMULARIO -->
-<section class="form-section" id="formulario">
+<section class="form-section fm" id="formulario">
   <div class="container">
-    <div class="form-wrap">
-      <div class="section-header fade-in">
-        <div class="badge">Gratis · Sin compromiso</div>
-        <h2>Solicita tu análisis gratuito</h2>
-        <p>Te contactamos en menos de 24 horas con el diagnóstico de tu perfil.</p>
+    <div class="fm-grid">
+      <div class="fm-izq">
+        <div class="badge fade-in">Gratis · Sin compromiso</div>
+        <h2 class="fade-in">Solicita tu <em>análisis gratuito</em></h2>
+        <p class="fm-sub fade-in">Te contactamos en <b>menos de 24 horas</b> con el diagnóstico de tu perfil.</p>
+        <div class="fm-radar fade-in" id="fmradar" role="img" aria-label="Radar que escanea los negocios cercanos al tuyo"><div class="fm-ejes"></div><div class="fm-sweep"></div><i class="fm-blip" style="left:70%;top:30%;animation-delay:0.5s"></i><i class="fm-blip" style="left:28%;top:38%;animation-delay:2.0s"></i><i class="fm-blip" style="left:62%;top:72%;animation-delay:3.1s"></i><i class="fm-blip" style="left:36%;top:66%;animation-delay:2.6s"></i><i class="fm-blip" style="left:78%;top:52%;animation-delay:0.2s"></i><div class="fm-centro"></div><div class="fm-etq" id="fmetq">Tu negocio · listo para analizar</div></div>
+        <ul class="fm-lista fade-in"><li>Diagnóstico de tu perfil de Google Maps</li><li>Sin compromiso ni permanencia</li><li>Respuesta directa por WhatsApp</li></ul>
       </div>
-      <div class="form-card fade-in">
-        <form id="contactForm">
-          <div class="form-group">
-            <label>Nombre del negocio *</label>
-            <input type="text" name="negocio" placeholder="Ej: Restaurante El Mirador" required>
+      <div class="form-wrap">
+        <div class="fm-card fade-in" id="fmcard"><div class="fm-in">
+          <div class="fm-tit"><b>Tu solicitud</b><span>Paso único</span></div>
+          <div class="fm-prog" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="fm-est" id="fmest" aria-live="polite">Completa 3 datos para lanzar tu análisis</div>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="f-neg">Nombre del negocio * <em>✓ listo</em></label>
+              <input id="f-neg" type="text" name="negocio" placeholder="Ej: Restaurante El Mirador" required autocomplete="organization">
+            </div>
+            <div class="form-group">
+              <label for="f-tel">Teléfono de contacto * <em>✓ listo</em></label>
+              <input id="f-tel" type="tel" name="telefono" placeholder="+57 300 000 0000" required autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="f-dir">Dirección del negocio * <em>✓ listo</em></label>
+              <input id="f-dir" type="text" name="direccion" placeholder="Calle 0 # 0-00, Ciudad" required autocomplete="street-address">
+            </div>
+            <div class="form-group">
+              <label for="f-mail">Email (opcional)</label>
+              <input id="f-mail" type="email" name="email" placeholder="tu@email.com" autocomplete="email">
+            </div>
+            <button type="submit" class="btn btn-wa form-submit-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Enviar por WhatsApp
+            </button>
+            <p class="form-note">Al enviar, abriremos WhatsApp con tus datos precargados para respuesta inmediata.</p>
+            <div class="fm-conf"><span>Tus datos solo se usan para tu análisis</span><span>Sin spam</span></div>
+          </form>
+          <div class="success-msg" id="successMsg">
+            <span class="check"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg></span>
+            <p>¡Listo! WhatsApp abierto con tus datos. Te respondemos en minutos.</p>
+            <small>Solicitud transmitida</small>
           </div>
-          <div class="form-group">
-            <label>Teléfono de contacto *</label>
-            <input type="tel" name="telefono" placeholder="+57 300 000 0000" required>
-          </div>
-          <div class="form-group">
-            <label>Dirección del negocio *</label>
-            <input type="text" name="direccion" placeholder="Calle 0 # 0-00, Ciudad" required>
-          </div>
-          <div class="form-group">
-            <label>Email (opcional)</label>
-            <input type="email" name="email" placeholder="tu@email.com">
-          </div>
-          <button type="submit" class="btn btn-wa form-submit-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Enviar por WhatsApp
-          </button>
-          <p class="form-note">Al enviar, abriremos WhatsApp con tus datos precargados para respuesta inmediata.</p>
-        </form>
-        <div class="success-msg" id="successMsg">
-          <span class="check"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg></span>
-          <p>¡Listo! WhatsApp abierto con tus datos. Te respondemos en minutos.</p>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -2870,6 +2943,23 @@ updateBottomNav();
   qi.addEventListener('input',function(){ var q=qi.value.trim().toLowerCase(), n=0; items.forEach(function(it){ var m=!q||it.textContent.toLowerCase().indexOf(q)>-1; it.classList.toggle('oculto',!m); if(m) n++; }); vac.classList.toggle('ver',n===0); if(n&&desk.matches){ var v=visibles(); if(v.indexOf(items[act])<0) abrir(items.indexOf(v[0]),true); manual=!!q; } });
   if('IntersectionObserver' in window) new IntersectionObserver(function(en){ visible=en[0].isIntersecting; if(visible&&!sec.classList.contains('on')){ sec.classList.add('on'); if(desk.matches) { act=-1; abrir(0,true); } else { act=0; } t0=performance.now(); reloj(); } },{threshold:.2}).observe(sec); else { sec.classList.add('on'); abrir(0,true); }
   desk.addEventListener&&desk.addEventListener('change',function(){ act=-1; abrir(0,true); reloj(); });
+})();
+</script>
+
+<script>
+/* Formulario · progreso en vivo, el radar muestra el nombre del negocio y el envío se celebra. */
+(function(){
+  var sec=document.getElementById('formulario'); if(!sec||!sec.classList.contains('fm')) return;
+  var f=document.getElementById('contactForm'), card=document.getElementById('fmcard'), est=document.getElementById('fmest'), etq=document.getElementById('fmetq');
+  var campos=['negocio','telefono','direccion'].map(function(n){ return f.elements[n]; }), segs=[].slice.call(sec.querySelectorAll('.fm-prog i'));
+  function valido(el){ var v=el.value.trim(); if(el.name==='telefono') return v.replace(/\D/g,'').length>=7; return v.length>=3; }
+  function act(){ var n=0; campos.forEach(function(el,i){ var ok=valido(el); el.parentNode.classList.toggle('ok',ok); segs[i].classList.toggle('ok',ok); if(ok) n++; });
+    est.classList.toggle('listo',n===3); sec.classList.toggle('lista',n===3);
+    est.textContent=n===3?'✓ Todo listo. Lanza tu análisis':(n===0?'Completa 3 datos para lanzar tu análisis':'Faltan '+(3-n)+(3-n===1?' dato':' datos')+' para lanzar'); 
+    var nom=campos[0].value.trim(); etq.textContent=nom?('Analizando: '+nom):'Tu negocio · listo para analizar'; }
+  f.addEventListener('input',act); act();
+  var cierre=new MutationObserver(function(){ if(document.getElementById('successMsg').style.display==='block') card.classList.add('enviado'); });
+  cierre.observe(document.getElementById('successMsg'),{attributes:true,attributeFilter:['style']});
 })();
 </script>
 </body>
