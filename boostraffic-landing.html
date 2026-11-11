@@ -1078,6 +1078,86 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 @media (max-width: 560px) { .m2-cap span:nth-child(2) { display: none; } .m2-cap { justify-content: space-between; } }
 @media (max-width: 480px) { .m2-med, .m2-rel { grid-template-columns: 1fr; justify-items: start; } .m2-tel { width: 44px; height: 44px; } }
 @media (prefers-reduced-motion: reduce) { .m2-c { opacity: 1; transform: none; transition: none; } .m2-chart .line { stroke-dashoffset: 0; animation: none !important; } .m2-lista li { opacity: 1; transform: none; transition: none; } }
+
+/* ═══ CÓMO FUNCIONA 2026 · "La ficha se transforma" (sección 3) ═══════ */
+.hw { position: relative; overflow: clip; background: linear-gradient(180deg, #f8f9fa 0%, #eaf1fe 100%); padding: clamp(64px,8vw,110px) 0; }
+.hw::before { content: ""; position: absolute; width: 640px; height: 640px; right: -180px; top: 10%; border-radius: 50%; background: radial-gradient(circle, rgba(26,115,232,.16), transparent 70%); pointer-events: none; }
+.hw .container { max-width: 1240px; position: relative; }
+.hw .section-header h2 { font-size: clamp(30px, 4vw, 52px); letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
+.hw-grid { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); gap: clamp(28px,5vw,72px); align-items: start; margin-top: clamp(28px,4vw,48px); }
+.hw .hw-pasos { position: relative; display: grid; grid-template-columns: 1fr; gap: 16px; padding-left: 34px; padding-bottom: 190px; overflow: visible; margin: 0; }
+.hw .hw-p { margin: 0; min-width: 0; }
+.hw-linea { position: absolute; left: 11px; top: 28px; bottom: 218px; width: 3px; border-radius: 3px; background: #d6e3fb; }
+.hw-linea::after { content: ""; position: absolute; left: 0; top: 0; width: 3px; border-radius: 3px; background: linear-gradient(#1a73e8, #34a853); height: calc((var(--p, 1) - 1) / 2 * 100% + 0%); transition: height .9s cubic-bezier(.23,1,.32,1); box-shadow: 0 0 12px rgba(26,115,232,.6); }
+.hw-p { position: relative; background: #fff; border: 1px solid #dbe4f3; border-radius: 22px; padding: clamp(22px,2.4vw,30px); opacity: .5; transform: scale(.97); cursor: pointer; transition: opacity .5s, transform .6s cubic-bezier(.23,1,.32,1), box-shadow .5s, border-color .5s; }
+.hw-p.act { opacity: 1; transform: none; border-color: #8ab4f8; box-shadow: 0 28px 54px -26px rgba(26,115,232,.5); }
+.hw-p::before { content: ""; position: absolute; left: -34px; top: 30px; width: 25px; height: 25px; border-radius: 50%; background: #fff; border: 3px solid #d6e3fb; transition: border-color .4s, background .4s, box-shadow .4s; z-index: 1; }
+.hw-p.hecho::before { background: #1a73e8; border-color: #1a73e8; }
+.hw-p.act::before { background: #1a73e8; border-color: #1a73e8; box-shadow: 0 0 0 7px rgba(26,115,232,.18); }
+.hw-p .step-number { background: #e8f0fe; }
+.hw-p h3 { font-size: clamp(19px,1.8vw,23px); letter-spacing: -.02em; margin: 14px 0 8px; }
+.hw-p p { color: #5f6368; line-height: 1.65; font-size: 15.5px; }
+.hw-top { display: flex; align-items: center; gap: 14px; }
+.hw-top .step-icon { margin: 0; }
+/* escenario */
+.hw-esc { position: sticky; top: 92px; }
+.hw-card { position: relative; border-radius: 28px; background: #0d1426; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 50px 90px -40px rgba(10,20,50,.85), 0 0 80px -30px rgba(26,115,232,.6); overflow: hidden; color: #e8eaed; }
+.hw-cab { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.05), transparent); }
+.hw-av { width: 46px; height: 46px; border-radius: 14px; background: linear-gradient(135deg, #1a73e8, #34a853); display: grid; place-items: center; font-weight: 800; font-size: 20px; color: #fff; flex: none; }
+.hw-nom strong { display: block; font-size: 16px; color: #fff; }
+.hw-nom span { font-size: 12.5px; color: #8c97ab; }
+.hw-score { margin-left: auto; position: relative; width: 62px; height: 62px; flex: none; }
+.hw-score svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.hw-score .pista { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 6; }
+.hw-score .prog { fill: none; stroke: #ea4335; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 163.4; stroke-dashoffset: 163.4; transition: stroke-dashoffset 1.4s cubic-bezier(.23,1,.32,1), stroke .6s; }
+.hw-score b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 17px; font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; }
+.hw-cuerpo { position: relative; padding: 16px 18px 20px; min-height: 360px; }
+.hw-scan { position: absolute; left: 0; right: 0; top: 0; height: 70px; background: linear-gradient(180deg, transparent, rgba(138,180,248,.28), transparent); border-bottom: 2px solid rgba(138,180,248,.9); box-shadow: 0 8px 30px rgba(138,180,248,.5); opacity: 0; pointer-events: none; z-index: 3; transform: translateY(-80px); }
+.hw[data-s="1"].vivo .hw-scan { animation: hw-scan 2.6s ease-in-out infinite; opacity: 1; }
+@keyframes hw-scan { 0% { transform: translateY(-80px); } 100% { transform: translateY(380px); } }
+.hw-filas { display: grid; gap: 9px; transition: opacity .6s, transform .7s cubic-bezier(.23,1,.32,1); }
+.hw-f { display: grid; grid-template-columns: 24px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.08); opacity: 0; transform: translateX(-14px); transition: opacity .5s, transform .6s cubic-bezier(.23,1,.32,1), background .5s, border-color .5s; }
+.hw.vivo .hw-f { opacity: 1; transform: none; }
+.hw.vivo .hw-f:nth-child(1) { transition-delay: .1s; } .hw.vivo .hw-f:nth-child(2) { transition-delay: .35s; } .hw.vivo .hw-f:nth-child(3) { transition-delay: .6s; } .hw.vivo .hw-f:nth-child(4) { transition-delay: .85s; } .hw.vivo .hw-f:nth-child(5) { transition-delay: 1.1s; }
+.hw-f .ic { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 800; background: rgba(234,67,53,.2); color: #f28b82; transition: background .5s, color .5s; }
+.hw-f .ic::before { content: "!"; }
+.hw-f .tx { position: relative; font-size: 14px; color: #e8eaed; min-height: 20px; }
+.hw-f .tx i { position: absolute; left: 0; top: 0; font-style: normal; white-space: nowrap; transition: opacity .5s, transform .5s; }
+.hw-f .tx .b { opacity: 0; transform: translateY(8px); }
+.hw-f .et { font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 99px; background: rgba(234,67,53,.16); color: #f28b82; white-space: nowrap; transition: background .5s, color .5s; }
+.hw[data-s="2"] .hw-f, .hw[data-s="3"] .hw-f { background: rgba(52,168,83,.09); border-color: rgba(52,168,83,.3); }
+.hw[data-s="2"] .hw-f .ic, .hw[data-s="3"] .hw-f .ic { background: rgba(52,168,83,.25); color: #81c995; }
+.hw[data-s="2"] .hw-f .ic::before, .hw[data-s="3"] .hw-f .ic::before { content: "✓"; }
+.hw[data-s="2"] .hw-f .tx .a, .hw[data-s="3"] .hw-f .tx .a { opacity: 0; transform: translateY(-8px); }
+.hw[data-s="2"] .hw-f .tx .b, .hw[data-s="3"] .hw-f .tx .b { opacity: 1; transform: none; }
+.hw[data-s="2"] .hw-f .et, .hw[data-s="3"] .hw-f .et { background: rgba(52,168,83,.2); color: #81c995; }
+.hw[data-s="2"] .hw-f:nth-child(1) .ic, .hw[data-s="2"] .hw-f:nth-child(1) .tx i, .hw[data-s="2"] .hw-f:nth-child(1) { transition-delay: .1s; }
+.hw[data-s="2"] .hw-f:nth-child(2), .hw[data-s="2"] .hw-f:nth-child(2) .ic, .hw[data-s="2"] .hw-f:nth-child(2) .tx i { transition-delay: .5s; }
+.hw[data-s="2"] .hw-f:nth-child(3), .hw[data-s="2"] .hw-f:nth-child(3) .ic, .hw[data-s="2"] .hw-f:nth-child(3) .tx i { transition-delay: .9s; }
+.hw[data-s="2"] .hw-f:nth-child(4), .hw[data-s="2"] .hw-f:nth-child(4) .ic, .hw[data-s="2"] .hw-f:nth-child(4) .tx i { transition-delay: 1.3s; }
+.hw[data-s="2"] .hw-f:nth-child(5), .hw[data-s="2"] .hw-f:nth-child(5) .ic, .hw[data-s="2"] .hw-f:nth-child(5) .tx i { transition-delay: 1.7s; }
+.hw-ia { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 11px 14px; border-radius: 14px; background: rgba(138,180,248,.12); border: 1px solid rgba(138,180,248,.35); font-size: 13px; color: #aecbfa; opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s; }
+.hw[data-s="2"] .hw-ia { opacity: 1; transform: none; transition-delay: 2.1s; }
+.hw-ia b { color: #fff; }
+.hw-ia::before { content: "✦"; color: #8ab4f8; font-size: 16px; animation: hw-chis 2s ease-in-out infinite; }
+@keyframes hw-chis { 50% { transform: scale(1.3) rotate(20deg); } }
+/* kpis (paso 3) */
+.hw-kpis { position: absolute; left: 18px; right: 18px; top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; opacity: 0; transform: translateY(18px); pointer-events: none; transition: opacity .6s .15s, transform .7s .15s cubic-bezier(.23,1,.32,1); }
+.hw[data-s="3"] .hw-kpis { opacity: 1; transform: none; }
+.hw[data-s="3"] .hw-filas { opacity: 0; transform: translateY(-16px) scale(.97); pointer-events: none; }
+.hw-k { padding: 14px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); }
+.hw-k small { display: block; font-size: 12px; color: #8c97ab; margin-bottom: 4px; }
+.hw-k strong { display: flex; align-items: baseline; gap: 8px; font-size: 26px; color: #fff; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.hw-k em { font-style: normal; font-size: 12px; font-weight: 700; color: #81c995; }
+.hw-k svg { width: 100%; height: 38px; margin-top: 6px; overflow: visible; }
+.hw-k path { fill: none; stroke: #8ab4f8; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 200; stroke-dashoffset: 200; }
+.hw[data-s="3"] .hw-k path { animation: m2-dib 1.6s ease-out .5s forwards; }
+.hw-live { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; font-size: 13px; color: #aecbfa; padding: 12px 14px; border-radius: 14px; background: rgba(138,180,248,.1); border: 1px dashed rgba(138,180,248,.4); }
+.hw-live::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #34a853; animation: h2-vivo 2s infinite; }
+.hw-pie { display: flex; justify-content: space-between; padding: 12px 20px; border-top: 1px solid rgba(255,255,255,.08); font-size: 12px; color: #6f7b91; }
+@media (max-width: 900px) { .hw .hw-pasos { padding-bottom: 0; } .hw-linea { bottom: 28px; } .hw-grid { grid-template-columns: 1fr; } .hw-esc { position: relative; top: 0; order: -1; } .hw-p { opacity: 1; transform: none; } }
+@media (max-width: 480px) { .hw-f { grid-template-columns: 22px 1fr; } .hw-f .et { display: none; } .hw-pasos { padding-left: 28px; } .hw-p::before { left: -28px; } }
+@media (prefers-reduced-motion: reduce) { .hw-scan { display: none; } .hw *, .hw *::before { transition-duration: .01ms !important; transition-delay: 0s !important; animation: none !important; } .hw-k path { stroke-dashoffset: 0; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -1459,36 +1539,40 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 <div class="divider"></div>
 
 <!-- CÓMO FUNCIONA -->
-<section class="how-section" id="servicios">
+<section class="how-section hw" id="servicios" data-s="1">
   <div class="container">
     <div class="section-header fade-in">
       <div class="badge">Proceso claro</div>
       <h2>Cómo optimizamos tu ficha de Google Maps</h2>
       <p>Tres pasos para convertir tu Google Business Profile en una máquina de clientes.</p>
     </div>
-    <div class="steps-grid">
-      <div class="step-card fade-in">
-        <div class="step-number">1</div>
-        <div class="step-content-wrap">
-          <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-          <h3>Análisis completo de visibilidad</h3>
-          <p>Analizamos tu perfil GMB en profundidad: optimización técnica, fotos, reseñas, categorías, palabras clave y posición vs. competidores. Recibes un reporte con score exacto.</p>
-        </div>
+    <div class="hw-grid">
+      <div class="steps-grid hw-pasos" id="hwpasos"><div class="hw-linea" aria-hidden="true"></div>
+      <div class="step-card hw-p act" data-p="1" tabindex="0" role="button" aria-label="Ver el paso 1: Análisis completo de visibilidad">
+        <div class="hw-top"><div class="step-number">1</div><div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div>
+        <h3>Análisis completo de visibilidad</h3>
+        <p>Analizamos tu perfil GMB en profundidad: optimización técnica, fotos, reseñas, categorías, palabras clave y posición vs. competidores. Recibes un reporte con score exacto.</p>
       </div>
-      <div class="step-card fade-in">
-        <div class="step-number">2</div>
-        <div class="step-content-wrap">
-          <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-          <h3>Optimización de ficha Google Maps y contenido</h3>
-          <p>Aplicamos las correcciones técnicas, publicamos contenido estratégico y gestionamos tu reputación online. Todo con IA y supervisión humana.</p>
-        </div>
+      <div class="step-card hw-p" data-p="2" tabindex="0" role="button" aria-label="Ver el paso 2: Optimización de ficha Google Maps y contenido">
+        <div class="hw-top"><div class="step-number">2</div><div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div></div>
+        <h3>Optimización de ficha Google Maps y contenido</h3>
+        <p>Aplicamos las correcciones técnicas, publicamos contenido estratégico y gestionamos tu reputación online. Todo con IA y supervisión humana.</p>
       </div>
-      <div class="step-card fade-in">
-        <div class="step-number">3</div>
-        <div class="step-content-wrap">
-          <div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
-          <h3>Resultados medibles</h3>
-          <p>Monitoreas el crecimiento en tiempo real desde tu dashboard. Impresiones, llamadas, rutas, reseñas — todo medido, todo documentado.</p>
+      <div class="step-card hw-p" data-p="3" tabindex="0" role="button" aria-label="Ver el paso 3: Resultados medibles">
+        <div class="hw-top"><div class="step-number">3</div><div class="step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div></div>
+        <h3>Resultados medibles</h3>
+        <p>Monitoreas el crecimiento en tiempo real desde tu dashboard. Impresiones, llamadas, rutas, reseñas — todo medido, todo documentado.</p>
+      </div>
+      </div>
+      <div class="hw-esc" aria-hidden="true">
+        <div class="hw-card">
+          <div class="hw-cab"><div class="hw-av">T</div><div class="hw-nom"><strong>Tu negocio</strong><span>Ficha de Google Maps · ejemplo</span></div>
+            <div class="hw-score"><svg viewBox="0 0 60 60"><circle class="pista" cx="30" cy="30" r="26"/><circle class="prog" id="hwprog" cx="30" cy="30" r="26"/></svg><b id="hwnum">0</b></div></div>
+          <div class="hw-cuerpo"><div class="hw-scan"></div>
+            <div class="hw-filas"><div class="hw-f"><span class="ic"></span><span class="tx"><i class="a">Fotos del perfil: 4</i><i class="b">Fotos del perfil: 24</i></span><span class="et" data-a="Pocas" data-b="Completas">Pocas</span></div><div class="hw-f"><span class="ic"></span><span class="tx"><i class="a">Categorías incompletas</i><i class="b">Categorías optimizadas</i></span><span class="et" data-a="Falta" data-b="Listo">Falta</span></div><div class="hw-f"><span class="ic"></span><span class="tx"><i class="a">9 reseñas sin responder</i><i class="b">Reseñas respondidas</i></span><span class="et" data-a="Pendiente" data-b="Al día">Pendiente</span></div><div class="hw-f"><span class="ic"></span><span class="tx"><i class="a">Palabras clave ausentes</i><i class="b">Palabras clave aplicadas</i></span><span class="et" data-a="Sin uso" data-b="En uso">Sin uso</span></div><div class="hw-f"><span class="ic"></span><span class="tx"><i class="a">Posición vs. competidores: #7</i><i class="b">Posición vs. competidores: #1</i></span><span class="et" data-a="#7" data-b="#1">#7</span></div><div class="hw-ia"><span><b>IA + supervisión humana</b> · publicación estratégica programada</span></div></div>
+            <div class="hw-kpis"><div class="hw-k"><small>Impresiones</small><strong data-n="33903">33.903<em>▲ 24%</em></strong><svg viewBox="0 0 120 38"><path d="M0 32 C20 30 30 24 45 22 S75 14 90 10 S110 4 120 2"/></svg></div><div class="hw-k"><small>Llamadas</small><strong data-n="412">412<em>▲ 161%</em></strong><svg viewBox="0 0 120 38"><path d="M0 34 C15 33 30 28 50 22 S85 12 100 6 S115 3 120 1"/></svg></div><div class="hw-k"><small>Rutas</small><strong data-n="268">268<em>▲ 38%</em></strong><svg viewBox="0 0 120 38"><path d="M0 30 C20 28 35 26 55 20 S85 14 100 9 S115 6 120 4"/></svg></div><div class="hw-k"><small>Reseñas nuevas</small><strong data-n="57">57<em>▲ 12</em></strong><svg viewBox="0 0 120 38"><path d="M0 33 C20 31 40 29 60 22 S90 14 105 8 S115 5 120 3"/></svg></div><div class="hw-live">Dashboard en tiempo real · todo medido, todo documentado</div></div>
+          </div>
+          <div class="hw-pie"><span>Score de la ficha</span><span id="hwest">Diagnóstico</span></div>
         </div>
       </div>
     </div>
@@ -2221,6 +2305,33 @@ updateBottomNav();
   if('IntersectionObserver' in window) new IntersectionObserver(function(en,o){ if(en[0].isIntersecting){ activar(); o.disconnect(); } },{threshold:.25}).observe(sec); else activar();
   // luz que sigue al mouse en cada tarjeta
   sec.querySelectorAll('.m2-c').forEach(function(c){ c.addEventListener('pointermove',function(e){ var b=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-b.left)+'px'); c.style.setProperty('--my',(e.clientY-b.top)+'px'); }); });
+})();
+</script>
+
+<script>
+/* Cómo funciona · la ficha se transforma con el paso activo. */
+(function(){
+  var sec=document.getElementById('servicios'); if(!sec||!sec.classList.contains('hw')) return;
+  var pasos=[].slice.call(sec.querySelectorAll('.hw-p')), prog=document.getElementById('hwprog'), num=document.getElementById('hwnum'), est=document.getElementById('hwest');
+  var narrow=matchMedia('(max-width:900px)'), reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var act=0, score=0, raf, auto, visible=false, MET={1:[38,'#ea4335','Diagnóstico: score 38'],2:[94,'#34a853','Optimizada: score 94'],3:[94,'#34a853','Midiendo resultados']};
+  function animaScore(to){ cancelAnimationFrame(raf); var from=score,t0=performance.now(),dur=reduce?1:1500; (function f(now){ var k=Math.min(1,(now-t0)/dur); k=1-Math.pow(1-k,3); score=from+(to-from)*k; num.textContent=Math.round(score); prog.style.strokeDashoffset=(163.4*(1-score/100)).toFixed(1); if(k<1) raf=requestAnimationFrame(f); })(t0); }
+  function ir(n){
+    if(n===act) return; act=n; sec.setAttribute('data-s',n); sec.style.setProperty('--p',n);
+    pasos.forEach(function(p,i){ p.classList.toggle('act',i+1===n); p.classList.toggle('hecho',i+1<n); });
+    var m=MET[n]; prog.style.stroke=m[1]; est.textContent=m[2]; animaScore(m[0]);
+    sec.querySelectorAll('.hw-f .et').forEach(function(e){ e.textContent=(n>=2)?e.dataset.b:e.dataset.a; });
+    if(n===3) sec.querySelectorAll('.hw-k strong[data-n]').forEach(function(e){ var to=+e.dataset.n,em=e.querySelector('em'),t0=performance.now(); (function f(now){ var k=Math.min(1,(now-t0)/1600); k=1-Math.pow(1-k,3); e.firstChild.nodeValue=Math.round(to*k).toLocaleString('es-CO'); if(k<1) requestAnimationFrame(f); })(t0); });
+  }
+  function centro(){ var h=innerHeight*.5,best=0,bd=1e9; pasos.forEach(function(p,i){ var r=p.getBoundingClientRect(),d=Math.abs((r.top+r.height/2)-h); if(d<bd){bd=d;best=i;} }); return best+1; }
+  var tick=false;
+  function onScroll(){ if(narrow.matches||!visible) return; if(tick) return; tick=true; requestAnimationFrame(function(){ tick=false; ir(centro()); }); }
+  addEventListener('scroll',onScroll,{passive:true});
+  function autoplay(){ clearInterval(auto); if(narrow.matches&&visible&&!reduce){ auto=setInterval(function(){ ir(act%3+1); },5200); } }
+  pasos.forEach(function(p,i){ p.addEventListener('click',function(){ ir(i+1); clearInterval(auto); }); p.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); ir(i+1); } }); });
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ visible=en[0].isIntersecting; if(visible){ sec.classList.add('vivo'); if(act===0) ir(1); autoplay(); onScroll(); } else clearInterval(auto); },{threshold:0,rootMargin:'0px 0px -25% 0px'}).observe(sec);
+  else { sec.classList.add('vivo'); ir(1); }
+  narrow.addEventListener&&narrow.addEventListener('change',autoplay);
 })();
 </script>
 </body>
