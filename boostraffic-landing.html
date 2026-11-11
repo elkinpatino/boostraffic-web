@@ -1631,6 +1631,11 @@ a.nav-logo:focus-visible, .nv-l a:focus-visible, .nv-burger:focus-visible { outl
   .nv-l a { padding: 13px 18px; font-size: 15px; } .nv-ind { display: none; } .nv-l a.on { background: rgba(26,115,232,.3); }
 }
 @media (max-width: 768px) { .nv-l, .nv-burger { display: none; } }
+
+.nav-logo img.nl-txt { width: auto; height: 30px; border-radius: 0; filter: drop-shadow(0 0 10px rgba(94,242,255,.65)) drop-shadow(0 0 22px rgba(94,242,255,.3)); transition: filter .3s; }
+a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95)) drop-shadow(0 0 32px rgba(94,242,255,.5)); }
+.footer-brand .nav-logo img.nl-txt { height: 26px; }
+@media (max-width: 768px) { .nav-logo img.nl-txt { height: 24px; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -1915,7 +1920,7 @@ a.nav-logo:focus-visible, .nv-l a:focus-visible, .nv-burger:focus-visible { outl
   <div class="nav-inner">
     <a class="nav-logo" href="/" aria-label="Boostraffic, ir al inicio">
       <img src="LogoBoostr.webp" alt="" loading="lazy" decoding="async">
-      <b class="nl-t">Boost<span>raffic</span></b>
+      <img class="nl-txt" src="boostraffic-texto.png" alt="Boostraffic" width="456" height="96">
     </a>
     <button class="nv-burger" id="nvb" aria-expanded="false" aria-controls="nvl" aria-label="Abrir menú"><span></span></button>
     <ul class="nv-l" id="nvl" aria-label="Secciones"><span class="nv-ind" aria-hidden="true"></span>
@@ -2484,7 +2489,7 @@ a.nav-logo:focus-visible, .nv-l a:focus-visible, .nv-burger:focus-visible { outl
       <div class="footer-brand">
         <div class="nav-logo">
           <img src="LogoBoostr.webp" alt="Boostraffic" style="border-radius:6px;" loading="lazy" decoding="async">
-          boost<span style="color:#1a73e8;">traffic</span>
+          <img class="nl-txt" src="boostraffic-texto.png" alt="Boostraffic" width="456" height="96" loading="lazy">
         </div>
         <p class="footer-tagline">Boostraffic S.A.S. | Alta Ingeniería Web<br>y Automatización con IA</p>
 
