@@ -140,9 +140,9 @@ main summary{cursor:pointer;font-weight:600}main details p{margin:10px 0 2px}
 """
 
 PLANES="""<div class="plans">
-<div class="plan"><b>Auditoría Profesional</b><div class="pr">$190.000</div><small>COP · entrega en 48 h · score y comparación con 5 competidores</small></div>
-<div class="plan"><b>Plan Básico</b><div class="pr">$600.000</div><small>COP · pago único · ficha optimizada en 72 h</small></div>
-<div class="plan"><b>Plan Profesional</b><div class="pr">$1.200.000</div><small>COP / mes · sin permanencia · gestión continua</small></div>
+<div class="plan"><b>Auditoría Profesional</b><div class="pr">$290.000</div><small>COP · entrega en 48 h · score y comparación con 5 competidores</small></div>
+<div class="plan"><b>Plan Básico</b><div class="pr">$890.000</div><small>COP · pago único · ficha optimizada en 72 h</small></div>
+<div class="plan"><b>Plan Profesional</b><div class="pr">$1.690.000</div><small>COP / mes · sin permanencia · gestión continua</small></div>
 </div>"""
 
 def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False,parent=None,noindex=False):
@@ -223,11 +223,11 @@ for cs,c in CIUDADES.items():
 <section><h2>Optimización de Google Maps por sector en {n}</h2>
 <p>Cada sector tiene sus propias búsquedas. Mira cómo trabajamos el tuyo:</p>{rel_links(sec_items)}
 <h3>Otras ciudades</h3>{rel_links(otras)}</section>"""
-    faqs=[(f"¿Cuánto cuesta optimizar una ficha de Google Maps en {n}?","La Auditoría Profesional cuesta $190.000 COP, el Plan Básico $600.000 COP en pago único y el Plan Profesional $1.200.000 COP al mes sin permanencia. Los precios son los mismos para todo el país."),
+    faqs=[(f"¿Cuánto cuesta optimizar una ficha de Google Maps en {n}?","La Auditoría Profesional cuesta $290.000 COP, el Plan Básico $890.000 COP en pago único y el Plan Profesional $1.690.000 COP al mes sin permanencia. Los precios son los mismos para todo el país."),
      (f"¿Necesito tener oficina en {n} para aparecer en el mapa?",f"Para aparecer en el mapa de {n} la ficha debe corresponder a un negocio con ubicación física o con un área de servicio en la ciudad. Si tu negocio ofrece servicio a domicilio, se configura un área de cobertura en lugar de mostrar la dirección."),
      (f"¿Cuánto tarda en verse la mejora en {n}?","El Plan Básico aplica los cambios técnicos en 72 horas y el score se refleja en los primeros 30 días. Los resultados en posición dependen de la competencia de tu zona y de tus reseñas, por eso el diagnóstico inicial compara a tus competidores directos."),
      ("¿Trabajan con negocios de otras ciudades?","Sí. Trabajamos de forma remota con negocios de toda Colombia y de otros países de habla hispana.")]
-    desc=f"Optimización de fichas de Google Maps y SEO local en {n}. Aparece en el mapa cuando tus clientes te buscan. Auditoría en 48 h desde $190.000 COP."
+    desc=f"Optimización de fichas de Google Maps y SEO local en {n}. Aparece en el mapa cuando tus clientes te buscan. Auditoría en 48 h desde $290.000 COP."
     schema={"@context":"https://schema.org","@type":"Service","name":f"SEO local y optimización de Google Maps en {n}","provider":{"@id":BASE+"/#negocio"},"areaServed":{"@type":"City","name":n,"containedInPlace":{"@type":"Country","name":"Colombia"}},"serviceType":"Local SEO"}
     paginas[slug]=pagina(slug,f"SEO Local en {n} y Google Maps | Boostraffic",desc,f"SEO local en {n}: tu ficha de Google Maps <em>trabajando por ti</em>",f"Optimizamos tu ficha de Google Maps para que los clientes de {n} te encuentren, te llamen y te visiten.",f"SEO local en {n}",body,faqs,schema)
 
@@ -257,9 +257,9 @@ for ks,v in SECTORES.items():
 <section><h2>Fotos que tu ficha debe tener</h2><ul class="ck">{''.join(f"<li>{esc(x)}</li>" for x in SECTOR_EXTRA[ks]['fotos'])}</ul><p class="mut">Detalle en <a href="/guias/fotos-para-tu-ficha-de-google-maps/">qué fotos subir a tu ficha</a>.</p></section>
 <section><h2>Planes y precios</h2>{PLANES}</section>
 <section><h2>Trabajamos en tu ciudad</h2>{rel_links(ciudades_l)}<h3>Otros sectores</h3>{rel_links(otros)}</section>"""
-    faqs=list(v["faq"])+[(f"¿Cuánto cuesta optimizar la ficha de Google Maps de {v['un']}?","La Auditoría Profesional cuesta $190.000 COP, el Plan Básico $600.000 COP en pago único y el Plan Profesional $1.200.000 COP al mes sin permanencia."),
+    faqs=list(v["faq"])+[(f"¿Cuánto cuesta optimizar la ficha de Google Maps de {v['un']}?","La Auditoría Profesional cuesta $290.000 COP, el Plan Básico $890.000 COP en pago único y el Plan Profesional $1.690.000 COP al mes sin permanencia."),
         ("¿Garantizan el primer lugar en Google Maps?","No. Nadie puede garantizarlo, porque el orden lo decide Google según relevancia, distancia y prominencia. Lo que sí hacemos es optimizar cada factor que depende de ti y medir la evolución de tu ficha con un score claro.")]
-    desc=f"Optimización de Google Maps para {n}: más llamadas, visitas y clientes desde tu ficha. SEO local con auditoría en 48 h desde $190.000 COP."
+    desc=f"Optimización de Google Maps para {n}: más llamadas, visitas y clientes desde tu ficha. SEO local con auditoría en 48 h desde $290.000 COP."
     schema={"@context":"https://schema.org","@type":"Service","name":f"Optimización de Google Maps para {n}","provider":{"@id":BASE+"/#negocio"},"areaServed":{"@type":"Country","name":"Colombia"},"serviceType":"Local SEO"}
     paginas[slug]=pagina(slug,f"Google Maps para {v['s']} | Boostraffic",desc,f"Google Maps para {n}: que te encuentren <em>antes que a tu competencia</em>",f"Optimizamos la ficha de Google Maps de {v['un']} para convertir búsquedas cercanas en llamadas, mensajes y visitas.",f"Google Maps para {n}",body,faqs,schema)
 
@@ -377,7 +377,7 @@ window.open('https://wa.me/573219453933?text='+encodeURIComponent(m),'_blank');}
 contact_css="<style>.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{border:1px solid var(--border);border-radius:var(--r);padding:18px;background:var(--bg2)}.card b{display:block;margin-bottom:4px}form#cf label{display:block;font-weight:600;font-size:15px;margin:14px 0 6px}form#cf input,form#cf textarea{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}form#cf textarea{min-height:110px;resize:vertical}form#cf button{margin-top:18px;border:0;cursor:pointer;font:inherit;font-weight:600;background:#25d366;color:#fff;padding:14px 30px;border-radius:28px}#ok{display:none;padding:18px;border-radius:12px;background:var(--bg3)}</style>"
 contact_body=(contact_css+sec("Elige cómo escribirnos",'<div class="cards"><div class="card"><b>WhatsApp (respuesta más rápida)</b><a href="https://wa.me/573219453933?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20optimizaci%C3%B3n%20de%20Google%20Maps">+57 321 945 3933</a></div><div class="card"><b>Correo</b><a href="mailto:info@boostraffic.com">info@boostraffic.com</a></div><div class="card"><b>Ubicación</b>Bogotá, Colombia · atendemos todo el país de forma remota</div></div>')+
  sec("O déjanos tus datos",'<form id="cf" method="post" action="/contacto/"><label for="n1">Tu nombre</label><input id="n1" name="nombre" required autocomplete="name"><label for="n2">Nombre del negocio</label><input id="n2" name="negocio" required><label for="n3">Teléfono</label><input id="n3" name="telefono" type="tel" required autocomplete="tel"><label for="n4">¿Qué necesitas? (opcional)</label><textarea id="n4" name="mensaje"></textarea><button type="submit">Enviar por WhatsApp</button><p class="mut" style="font-size:14px;margin-top:12px">Al enviar abrimos WhatsApp con tus datos para responderte rápido. Aceptas el tratamiento de datos según la <a href="/politica-de-privacidad/">política de privacidad</a>.</p></form><div id="ok"><b>¡Listo!</b> Abrimos WhatsApp con tus datos. Te respondemos pronto.</div>'+contact_script)+
- sec("Antes de escribir","<p>Si quieres ir directo: la <b>Auditoría Profesional</b> ($190.000 COP, entrega en 48 h) es el mejor primer paso. También puedes leer <a href='/como-aparecer-primero-en-google-maps/'>cómo aparecer primero en Google Maps</a> o conocer <a href='/sobre-nosotros/'>quiénes somos</a>.</p>"))
+ sec("Antes de escribir","<p>Si quieres ir directo: la <b>Auditoría Profesional</b> ($290.000 COP, entrega en 48 h) es el mejor primer paso. También puedes leer <a href='/como-aparecer-primero-en-google-maps/'>cómo aparecer primero en Google Maps</a> o conocer <a href='/sobre-nosotros/'>quiénes somos</a>.</p>"))
 paginas["contacto"]=pagina("contacto","Contacto | Boostraffic SEO Local y Google Maps","Contacta a Boostraffic por WhatsApp, correo o formulario. Auditoría de tu ficha de Google Maps con entrega en 48 horas.","<em>Contacto</em>","Escríbenos y te decimos en qué estado está tu ficha de Google Maps.","Contacto",contact_body,[],{"@context":"https://schema.org","@type":"ContactPage","name":"Contacto Boostraffic","url":BASE+"/contacto/","about":{"@id":BASE+"/#negocio"}},legal=True)
 for slug in ("sobre-nosotros","contacto"):
     os.makedirs(os.path.join(ROOT,slug),exist_ok=True); open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
