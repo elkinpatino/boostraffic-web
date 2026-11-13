@@ -34,4 +34,5 @@ COPY site.css /usr/share/nginx/html/site.css
 COPY site.js /usr/share/nginx/html/site.js
 COPY ciudades /usr/share/nginx/html/ciudades
 COPY sectores /usr/share/nginx/html/sectores
+COPY guias /usr/share/nginx/html/guias
 EXPOSE 80

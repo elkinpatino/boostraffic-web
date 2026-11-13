@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Genera las páginas SEO (ciudades, sectores, guía) de boostraffic.com.
 Uso: python3 tools/generar_paginas.py   (escribe carpetas /slug/index.html y sitemap.xml)"""
-import json, os, html
+import json, os, html, sys
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+from contenido import SECTOR_EXTRA, CIUDAD_EXTRA, GUIAS, GUIA_T, GUIA_FAQ
 from urllib.parse import quote
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE="https://boostraffic.com"
 WA="573219453933"
 HOY="2026-11-13"
+FECHA_HUMANA="13 de noviembre de 2026"
 
 CIUDADES={
  "bogota":dict(n="Bogotá",z=["Chapinero","Usaquén","Teusaquillo","Suba","Kennedy","Fontibón"],
@@ -142,9 +145,9 @@ PLANES="""<div class="plans">
 <div class="plan"><b>Plan Profesional</b><div class="pr">$1.200.000</div><small>COP / mes · sin permanencia · gestión continua</small></div>
 </div>"""
 
-def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False):
+def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False,parent=None):
     url=f"{BASE}/{slug}/"
-    bc=[("Inicio",BASE+"/"),(crumb,url)] if crumb else []
+    bc=[("Inicio",BASE+"/")]+([(parent[0],BASE+parent[1])] if parent else [])+[(crumb,url)] if crumb else []
     ld=[]
     ld.append({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":i+1,"name":n,"item":u} for i,(n,u) in enumerate(bc)]})
     if faqs: ld.append({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faqs]})
@@ -178,13 +181,14 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False
 <body>
 {HEADER}
 <div class="hero"><div class="c">
-<div class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › {esc(crumb)}</div>
+<div class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › {('<a href="'+parent[1]+'">'+esc(parent[0])+'</a> › ') if parent else ''}{esc(crumb)}</div>
 <h1>{h1}</h1>
 <p>{lead}</p>
 {"" if legal else f'<a class="cb cb-wa" href="{msg}" target="_blank" rel="noopener">Quiero mi auditoría por WhatsApp</a><a class="cb cb-o" href="/#precios">Ver planes</a>'}
 </div></div>
 <main><div class="c">
 {body}
+{"" if legal else f'<p class="mut" style="font-size:15px;margin-top:18px">Actualizado el {FECHA_HUMANA} · Contenido del <a href="/sobre-nosotros/">equipo de Boostraffic</a>.</p>'}
 {"" if legal else f'<section><h2>Preguntas frecuentes</h2>{faq_html}</section><section><div class="cta"><h2>Empecemos por saber en qué estado está tu ficha</h2><p class="mut">La Auditoría Profesional te entrega tu score actual y la comparación con 5 competidores en 48 horas.</p><a class="cb cb-wa" href="{msg}" target="_blank" rel="noopener">Pedir mi auditoría</a></div></section>'}
 </div></main>
 {FOOTER}
@@ -204,9 +208,10 @@ for cs,c in CIUDADES.items():
 <p>{c['p']}</p><p>{c['t']}</p>
 <p>En Boostraffic optimizamos la ficha de Google Maps (Perfil de Negocio) de negocios de {n} para que aparezcan cuando un cliente cercano busca lo que ofrecen, y para que al verlos decida llamar, escribir o visitar.</p></section>
 <section><h2>Zonas de {n} donde trabajamos tu visibilidad</h2>
-<p>Una búsqueda local casi siempre incluye la zona. Optimizamos tu ficha para las zonas que realmente te traen clientes:</p>
-<div class="chips">{''.join(f'<span>{esc(z)}</span>' for z in c['z'])}</div>
+<p>Una búsqueda local casi siempre incluye la zona. Así se comporta cada una y por qué conviene hablarle distinto:</p>
+<ul class="ck">{''.join(f"<li><b>{esc(z)}:</b> {esc(d)}</li>" for z,d in CIUDAD_EXTRA[cs]['zonas'].items())}</ul>
 <p class="mut" style="margin-top:12px">¿Tu zona no está en la lista? Trabajamos cualquier barrio o municipio cercano.</p></section>
+<section><h2>Consejos para tu ficha en {n}</h2><ul class="ck">{''.join(f"<li>{esc(c)}</li>" for c in CIUDAD_EXTRA[cs]['consejos'])}</ul></section>
 <section><h2>Qué optimizamos en tu ficha</h2>
 <ul class="ck"><li><b>Categoría principal y secundarias</b> alineadas con lo que realmente vendes.</li>
 <li><b>Descripción, servicios y productos</b> con las palabras que buscan tus clientes en {n}.</li>
@@ -245,13 +250,18 @@ for ks,v in SECTORES.items():
 <section><h2>Errores que hacen perder clientes</h2>
 <ul class="ck er">{''.join(f'<li>{esc(e)}</li>' for e in v['err'])}</ul>
 <p style="margin-top:14px">La Auditoría Profesional los detecta en tu ficha y te dice cuáles corregir primero.</p></section>
+<section><h2>Cómo decide el cliente</h2><p>{esc(SECTOR_EXTRA[ks]['proceso'])}</p></section>
+<section><h2>Modelo de descripción para tu ficha</h2><p>Cámbialo con tus datos reales y mantenlo claro, sin palabras clave de relleno:</p><div class="cta" style="text-align:left"><p style="margin:0">{esc(SECTOR_EXTRA[ks]['desc'])}</p></div></section>
+<section><h2>Plantillas para responder reseñas</h2><h3>Reseña positiva</h3><p><i>{esc(SECTOR_EXTRA[ks]['pos'])}</i></p><h3>Reseña negativa</h3><p><i>{esc(SECTOR_EXTRA[ks]['neg'])}</i></p><p class="mut">Más en la guía <a href="/guias/como-responder-resenas-google-maps/">cómo responder reseñas en Google Maps</a>.</p></section>
+<section><h2>Ideas de publicaciones para tu ficha</h2><ul class="ck">{''.join(f"<li>{esc(x)}</li>" for x in SECTOR_EXTRA[ks]['posts'])}</ul></section>
+<section><h2>Fotos que tu ficha debe tener</h2><ul class="ck">{''.join(f"<li>{esc(x)}</li>" for x in SECTOR_EXTRA[ks]['fotos'])}</ul><p class="mut">Detalle en <a href="/guias/fotos-para-tu-ficha-de-google-maps/">qué fotos subir a tu ficha</a>.</p></section>
 <section><h2>Planes y precios</h2>{PLANES}</section>
 <section><h2>Trabajamos en tu ciudad</h2>{rel_links(ciudades_l)}<h3>Otros sectores</h3>{rel_links(otros)}</section>"""
     faqs=list(v["faq"])+[(f"¿Cuánto cuesta optimizar la ficha de Google Maps de {v['un']}?","La Auditoría Profesional cuesta $190.000 COP, el Plan Básico $600.000 COP en pago único y el Plan Profesional $1.200.000 COP al mes sin permanencia."),
         ("¿Garantizan el primer lugar en Google Maps?","No. Nadie puede garantizarlo, porque el orden lo decide Google según relevancia, distancia y prominencia. Lo que sí hacemos es optimizar cada factor que depende de ti y medir la evolución de tu ficha con un score claro.")]
     desc=f"Optimización de Google Maps para {n}: más llamadas, visitas y clientes desde tu ficha. SEO local con auditoría en 48 h desde $190.000 COP."
     schema={"@context":"https://schema.org","@type":"Service","name":f"Optimización de Google Maps para {n}","provider":{"@id":BASE+"/#negocio"},"areaServed":{"@type":"Country","name":"Colombia"},"serviceType":"Local SEO"}
-    paginas[slug]=pagina(slug,f"Google Maps para {v['s']}: más clientes | Boostraffic",desc,f"Google Maps para {n}: que te encuentren <em>antes que a tu competencia</em>",f"Optimizamos la ficha de Google Maps de {v['un']} para convertir búsquedas cercanas en llamadas, mensajes y visitas.",f"Google Maps para {n}",body,faqs,schema)
+    paginas[slug]=pagina(slug,f"Google Maps para {v['s']} | Boostraffic",desc,f"Google Maps para {n}: que te encuentren <em>antes que a tu competencia</em>",f"Optimizamos la ficha de Google Maps de {v['un']} para convertir búsquedas cercanas en llamadas, mensajes y visitas.",f"Google Maps para {n}",body,faqs,schema)
 
 # ---- GUÍA
 slug="como-aparecer-primero-en-google-maps"
@@ -282,7 +292,7 @@ faqs=[("¿Cuánto tarda una ficha de Google Maps en subir de posición?","Depend
  ("¿Pagar anuncios hace que aparezca primero en el mapa?","Los anuncios aparecen marcados como patrocinados. El posicionamiento orgánico del mapa, el que se gana con una buena ficha, no se compra."),
  ("¿Necesito página web para aparecer en Google Maps?","No es obligatoria, pero ayuda a la prominencia. Una web alineada con tu ficha refuerza tu visibilidad local."),
  ("¿Cuántas reseñas necesito?","No hay un número fijo. Pesan la calidad, la recencia y que respondas. Compárate con los 3 negocios que hoy aparecen primero en tu zona.")]
-paginas[slug]=pagina(slug,"Cómo aparecer primero en Google Maps (guía 2026) | Boostraffic","Guía práctica para aparecer primero en Google Maps: cómo decide Google, checklist de 10 pasos para tu ficha y errores que debes evitar.","Cómo aparecer primero en <em>Google Maps</em>: guía práctica","Qué factores decide Google, qué puedes cambiar tú y una lista de 10 pasos para subir tu ficha en tu zona.","Cómo aparecer primero en Google Maps",body,faqs,{"@context":"https://schema.org","@type":"Article","headline":"Cómo aparecer primero en Google Maps","inLanguage":"es-CO","dateModified":HOY,"author":{"@id":BASE+"/#negocio"},"publisher":{"@id":BASE+"/#negocio"},"mainEntityOfPage":BASE+f"/{slug}/"})
+paginas[slug]=pagina(slug,"Cómo aparecer primero en Google Maps | Boostraffic","Guía práctica para aparecer primero en Google Maps: cómo decide Google, checklist de 10 pasos para tu ficha y errores que debes evitar.","Cómo aparecer primero en <em>Google Maps</em>: guía práctica","Qué factores decide Google, qué puedes cambiar tú y una lista de 10 pasos para subir tu ficha en tu zona.","Cómo aparecer primero en Google Maps",body,faqs,{"@context":"https://schema.org","@type":"Article","headline":"Cómo aparecer primero en Google Maps","inLanguage":"es-CO","dateModified":HOY,"author":{"@id":BASE+"/#negocio"},"publisher":{"@id":BASE+"/#negocio"},"mainEntityOfPage":BASE+f"/{slug}/"})
 
 for slug,h in paginas.items():
     os.makedirs(os.path.join(ROOT,slug),exist_ok=True)
@@ -378,15 +388,33 @@ def _cards(items): return '<div class="rel">'+"".join(f'<a href="/{u}/">{esc(t)}
 hub_c=sec("Elige tu ciudad","<p>Optimizamos fichas de Google Maps en todo el país, con foco en estas ciudades y sus zonas más buscadas.</p>"+_cards([(f"seo-local-{k}",f"SEO local en {v['n']}") for k,v in CIUDADES.items()]))+sec("Y también por sector",_cards([(f"google-maps-para-{k}",v['s']) for k,v in SECTORES.items()]))
 paginas["ciudades"]=pagina("ciudades","SEO Local por Ciudad en Colombia | Boostraffic","SEO local y optimización de Google Maps en Bogotá, Medellín, Cali, Barranquilla, Bucaramanga y Cartagena. Elige tu ciudad.","SEO local <em>en tu ciudad</em>","Optimización de Google Maps para negocios de las principales ciudades de Colombia.","Ciudades",hub_c,[],{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO local por ciudad","url":BASE+"/ciudades/"},legal=True)
 hub_s=sec("Elige tu sector","<p>Cada sector tiene sus propias búsquedas y errores típicos. Mira cómo trabajamos el tuyo.</p>"+_cards([(f"google-maps-para-{k}",v['s']) for k,v in SECTORES.items()]))+sec("Y también por ciudad",_cards([(f"seo-local-{k}",f"SEO local en {v['n']}") for k,v in CIUDADES.items()]))
-paginas["sectores"]=pagina("sectores","Google Maps por Sector: Salud, Restaurantes y más | Boostraffic","Optimización de Google Maps para odontólogos, restaurantes, clínicas estéticas, talleres, abogados y hoteles. Elige tu sector.","Google Maps <em>para tu sector</em>","Optimización de fichas pensada para las búsquedas y los errores típicos de cada negocio.","Sectores",hub_s,[],{"@context":"https://schema.org","@type":"CollectionPage","name":"Google Maps por sector","url":BASE+"/sectores/"},legal=True)
+paginas["sectores"]=pagina("sectores","Google Maps por Sector | Boostraffic","Optimización de Google Maps para odontólogos, restaurantes, clínicas estéticas, talleres, abogados y hoteles. Elige tu sector.","Google Maps <em>para tu sector</em>","Optimización de fichas pensada para las búsquedas y los errores típicos de cada negocio.","Sectores",hub_s,[],{"@context":"https://schema.org","@type":"CollectionPage","name":"Google Maps por sector","url":BASE+"/sectores/"},legal=True)
 for _h in ("ciudades","sectores"):
     os.makedirs(os.path.join(ROOT,_h),exist_ok=True); open(os.path.join(ROOT,_h,"index.html"),"w").write(paginas[_h])
+
+# ================= GUÍAS =================
+def _gbody(g):
+    out=[]
+    for h,c in g["secc"]:
+        out.append(sec(h,c if isinstance(c,str) else lis(c)))
+    return "".join(out)
+SRC='<p class="mut" style="font-size:15px">Fuente de referencia oficial: <a href="https://support.google.com/business/answer/7091" rel="noopener" target="_blank">Google: mejora tu clasificación local</a>.</p>'
+for gs,g in GUIAS.items():
+    slug="guias/"+gs
+    rel=[(f"guias/{r}",GUIAS[r]["titulo"]) for r in g["rel"]]
+    body=_gbody(g)+sec("Sigue leyendo",rel_links(rel)+'<p style="margin-top:12px">¿Quieres que lo hagamos por ti? <a href="/contacto/">Escríbenos</a> o conoce los <a href="/#precios">planes</a>.</p>')+SRC
+    art={"@context":"https://schema.org","@type":"Article","headline":g["titulo"],"description":g["desc"],"inLanguage":"es-CO","datePublished":HOY,"dateModified":HOY,"author":{"@type":"Organization","name":"Equipo Boostraffic","url":BASE+"/sobre-nosotros/"},"publisher":{"@id":BASE+"/#negocio"},"mainEntityOfPage":BASE+f"/{slug}/"}
+    paginas[slug]=pagina(slug,GUIA_T[gs]+" | Boostraffic",g["desc"],g["h1"],g["lead"],g["titulo"],body,GUIA_FAQ[gs],art,legal=False,parent=("Guías","/guias/"))
+    os.makedirs(os.path.join(ROOT,slug),exist_ok=True); open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
+hub_g=sec("Guías de SEO local y Google Maps","<p>Contenido práctico para mejorar tu ficha, escrito por el equipo de Boostraffic y apoyado en la documentación oficial de Google.</p>"+rel_links([(f"guias/{k}",v["titulo"]) for k,v in GUIAS.items()]+[("como-aparecer-primero-en-google-maps","Cómo aparecer primero en Google Maps (guía completa)")]))
+paginas["guias"]=pagina("guias","Guías de SEO Local y Google Maps | Boostraffic","Guías prácticas para mejorar tu ficha de Google Maps: reseñas, categorías, fotos, datos del negocio, publicaciones y errores a evitar.","Guías de <em>SEO local</em>","Aprende a mejorar tu ficha de Google Maps paso a paso.","Guías",hub_g,[],{"@context":"https://schema.org","@type":"CollectionPage","name":"Guías de SEO local","url":BASE+"/guias/"},legal=True)
+os.makedirs(os.path.join(ROOT,"guias"),exist_ok=True); open(os.path.join(ROOT,"guias","index.html"),"w").write(paginas["guias"])
 for slug,(title,desc,h1,lead,crumb,body) in legales.items():
     paginas[slug]=pagina(slug,title,desc,h1,lead,crumb,body,[],None,legal=True)
     os.makedirs(os.path.join(ROOT,slug),exist_ok=True)
     open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
 
-urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else (0.6 if s in ("contacto","sobre-nosotros","ciudades","sectores") else 0.8))) for s in paginas]
+urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else (0.6 if s in ("contacto","sobre-nosotros","ciudades","sectores") else (0.7 if s.startswith("guias") else 0.8)))) for s in paginas]
 xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url>\n    <loc>{BASE}{u}</loc>\n    <lastmod>{HOY}</lastmod>\n    <priority>{p}</priority>\n  </url>\n" for u,p in urls)+"</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w").write(xml)
 print("total",len(paginas))
