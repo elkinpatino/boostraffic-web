@@ -35,4 +35,5 @@ COPY site.js /usr/share/nginx/html/site.js
 COPY ciudades /usr/share/nginx/html/ciudades
 COPY sectores /usr/share/nginx/html/sectores
 COPY guias /usr/share/nginx/html/guias
+COPY 404.html og-boostraffic.png apple-touch-icon.png site.webmanifest /usr/share/nginx/html/
 EXPOSE 80

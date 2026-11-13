@@ -145,7 +145,7 @@ PLANES="""<div class="plans">
 <div class="plan"><b>Plan Profesional</b><div class="pr">$1.200.000</div><small>COP / mes · sin permanencia · gestión continua</small></div>
 </div>"""
 
-def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False,parent=None):
+def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False,parent=None,noindex=False):
     url=f"{BASE}/{slug}/"
     bc=[("Inicio",BASE+"/")]+([(parent[0],BASE+parent[1])] if parent else [])+[(crumb,url)] if crumb else []
     ld=[]
@@ -163,17 +163,17 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{url}">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="robots" content="{'noindex, follow' if noindex else 'index, follow, max-snippet:-1, max-image-preview:large'}">
 <link rel="alternate" hreflang="es-CO" href="{url}">
 <link rel="alternate" hreflang="x-default" href="{url}">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <meta name="theme-color" content="#0a0f1e">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Boostraffic"><meta property="og:locale" content="es_CO">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
-<meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/LogoBoostr.webp">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(desc)}"><meta name="twitter:image" content="{BASE}/LogoBoostr.webp">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6E7PS47XZQ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-6E7PS47XZQ');</script>
+<meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}/og-boostraffic.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(desc)}"><meta name="twitter:image" content="{BASE}/og-boostraffic.png">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-6E7PS47XZQ');addEventListener('load',function(){{var f=function(){{var e=document.createElement('script');e.async=true;e.src='https://www.googletagmanager.com/gtag/js?id=G-6E7PS47XZQ';document.head.appendChild(e);}};('requestIdleCallback' in window)?requestIdleCallback(f,{{timeout:3500}}):setTimeout(f,2000);}});</script>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/site.css">
 <style>{CSS}</style>
 {ldt}
@@ -429,3 +429,7 @@ open(lp,"w").write(L)
 print("landing: header/footer/menú sincronizados")
 import shutil as _sh
 for _f in ("site.css","site.js"): _sh.copy(os.path.join(ROOT,"tools/partials",_f),os.path.join(ROOT,_f))
+
+# ================= 404 =================
+_404=pagina("404","Página no encontrada | Boostraffic","La página que buscas no existe. Vuelve al inicio o explora nuestras guías de SEO local.","Esta página <em>no existe</em>","Puede que el enlace haya cambiado. Estas son las páginas más útiles:","Página no encontrada",sec("¿Qué buscabas?",rel_links([("","Inicio"),("ciudades","SEO local por ciudad"),("sectores","Google Maps por sector"),("guias","Guías de SEO local"),("contacto","Contacto")])),[],None,legal=True,noindex=True)
+open(os.path.join(ROOT,"404.html"),"w").write(_404)
