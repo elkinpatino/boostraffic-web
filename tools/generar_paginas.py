@@ -81,6 +81,13 @@ SECTORES={
 }
 
 NOS=[("sobre-nosotros","Sobre nosotros"),("contacto","Contacto")]
+def _sub(items): return "".join(f'<a href="{u}">{t}</a>' for u,t in items)
+_CIU=[(f"/seo-local-{k}/",v["n"]) for k,v in CIUDADES.items()]
+_SEC=[(f"/google-maps-para-{k}/",v["s"]) for k,v in SECTORES.items()]
+def _dr(t,items): return f'<div class="dr"><a href="{items[0][0]}">{t}</a><div class="sm">{_sub(items)}</div></div>'
+MENU_D='<a href="/">Inicio</a><a href="/#servicios">Servicios</a><a href="/#precios">Planes</a>'+_dr("Ciudades",_CIU)+_dr("Sectores",_SEC)+'<a href="/como-aparecer-primero-en-google-maps/">Guía</a><a href="/sobre-nosotros/">Nosotros</a><a href="/contacto/">Contacto</a>'
+MENU_M='<a href="/">Inicio</a><a href="/#servicios">Servicios</a><a href="/#precios">Planes</a><b class="gt">Ciudades</b>'+_sub(_CIU)+'<b class="gt">Sectores</b>'+_sub(_SEC)+'<a href="/como-aparecer-primero-en-google-maps/">Guía</a><a href="/sobre-nosotros/">Nosotros</a><a href="/contacto/">Contacto</a>'
+MENU=MENU_D
 POLI=[("politica-de-privacidad","Privacidad"),("terminos-y-condiciones","Términos"),("politica-de-cookies","Cookies"),("garantia-y-reembolsos","Garantía y reembolsos"),("eliminacion-de-datos","Eliminar mis datos")]
 POLI_LINKS=" · ".join(f'<a href="/{a}/">{b}</a>' for a,b in NOS+POLI)
 def esc(s): return html.escape(s,quote=True)
@@ -96,6 +103,17 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 header.top{background:#0a0f1e;padding:14px 20px}
 header.top .in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 header.top img{height:26px;width:auto}
+header.top .mn{display:flex;align-items:center;gap:4px;flex:1;justify-content:center}
+header.top .mn a,.dd a{color:rgba(255,255,255,.78);font-size:14px;font-weight:600;padding:8px 12px;border-radius:20px}
+header.top .mn a:hover,.dd a:hover{color:#fff;background:rgba(255,255,255,.1);text-decoration:none}
+.bg{display:none;position:relative}.bg summary{list-style:none;cursor:pointer;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);border-radius:12px}
+.bg summary::-webkit-details-marker{display:none}.bg summary span,.bg summary span::before,.bg summary span::after{display:block;width:18px;height:2px;background:#fff;border-radius:2px;position:relative;content:""}
+.bg summary span::before{position:absolute;top:-6px}.bg summary span::after{position:absolute;top:6px}
+.dd{position:absolute;right:0;top:52px;min-width:210px;background:#0a0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px;display:flex;flex-direction:column;z-index:50}
+.dr{position:relative}.dr .sm{display:none;position:absolute;left:0;top:100%;min-width:200px;background:#0a0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px;flex-direction:column;z-index:50}
+.dr:hover .sm,.dr:focus-within .sm{display:flex}.dr .sm a{padding:8px 12px;white-space:nowrap}
+.dd{max-height:78vh;overflow:auto}.dd .gt{color:#5ef2ff;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 12px 2px}
+@media(max-width:960px){header.top .mn{display:none}.bg{display:block}.nav-cta{display:none}header.top .in{justify-content:space-between}}
 .nav-cta{background:#25d366;color:#fff!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:22px}
 .nav-cta:hover{text-decoration:none;background:#1da851}
 .hero{background:linear-gradient(135deg,#0a0f1e,#1a1f3a 55%,#0d1635);color:#fff;padding:64px 20px 56px}
@@ -172,7 +190,10 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False
 {ldt}
 </head>
 <body>
-<header class="top"><div class="in"><a href="/" aria-label="Boostraffic, inicio"><img src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96"></a><a class="nav-cta" href="{msg}" target="_blank" rel="noopener">Escribir por WhatsApp</a></div></header>
+<header class="top"><div class="in"><a class="lg" href="/" aria-label="Boostraffic, inicio"><img src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96"></a>
+<nav class="mn" aria-label="Principal">{MENU_D}</nav>
+<a class="nav-cta" href="{msg}" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+<details class="bg"><summary aria-label="Abrir menú"><span></span></summary><div class="dd">{MENU_M}</div></details></div></header>
 <div class="hero"><div class="c">
 <nav class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › {esc(crumb)}</nav>
 <h1>{h1}</h1>

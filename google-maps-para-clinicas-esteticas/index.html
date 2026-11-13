@@ -27,6 +27,17 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 header.top{background:#0a0f1e;padding:14px 20px}
 header.top .in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 header.top img{height:26px;width:auto}
+header.top .mn{display:flex;align-items:center;gap:4px;flex:1;justify-content:center}
+header.top .mn a,.dd a{color:rgba(255,255,255,.78);font-size:14px;font-weight:600;padding:8px 12px;border-radius:20px}
+header.top .mn a:hover,.dd a:hover{color:#fff;background:rgba(255,255,255,.1);text-decoration:none}
+.bg{display:none;position:relative}.bg summary{list-style:none;cursor:pointer;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);border-radius:12px}
+.bg summary::-webkit-details-marker{display:none}.bg summary span,.bg summary span::before,.bg summary span::after{display:block;width:18px;height:2px;background:#fff;border-radius:2px;position:relative;content:""}
+.bg summary span::before{position:absolute;top:-6px}.bg summary span::after{position:absolute;top:6px}
+.dd{position:absolute;right:0;top:52px;min-width:210px;background:#0a0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px;display:flex;flex-direction:column;z-index:50}
+.dr{position:relative}.dr .sm{display:none;position:absolute;left:0;top:100%;min-width:200px;background:#0a0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px;flex-direction:column;z-index:50}
+.dr:hover .sm,.dr:focus-within .sm{display:flex}.dr .sm a{padding:8px 12px;white-space:nowrap}
+.dd{max-height:78vh;overflow:auto}.dd .gt{color:#5ef2ff;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 12px 2px}
+@media(max-width:960px){header.top .mn{display:none}.bg{display:block}.nav-cta{display:none}header.top .in{justify-content:space-between}}
 .nav-cta{background:#25d366;color:#fff!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:22px}
 .nav-cta:hover{text-decoration:none;background:#1da851}
 .hero{background:linear-gradient(135deg,#0a0f1e,#1a1f3a 55%,#0d1635);color:#fff;padding:64px 20px 56px}
@@ -68,7 +79,10 @@ footer a{color:rgba(255,255,255,.85)}footer p{margin-bottom:6px}
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Optimización de Google Maps para clínicas estéticas", "provider": {"@id": "https://boostraffic.com/#negocio"}, "areaServed": {"@type": "Country", "name": "Colombia"}, "serviceType": "Local SEO"}</script>
 </head>
 <body>
-<header class="top"><div class="in"><a href="/" aria-label="Boostraffic, inicio"><img src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96"></a><a class="nav-cta" href="https://wa.me/573219453933?text=Hola%2C%20vi%20su%20p%C3%A1gina%20sobre%20Google%20Maps%20para%20cl%C3%ADnicas%20est%C3%A9ticas%20y%20quiero%20optimizar%20mi%20ficha%20de%20Google%20Maps" target="_blank" rel="noopener">Escribir por WhatsApp</a></div></header>
+<header class="top"><div class="in"><a class="lg" href="/" aria-label="Boostraffic, inicio"><img src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96"></a>
+<nav class="mn" aria-label="Principal"><a href="/">Inicio</a><a href="/#servicios">Servicios</a><a href="/#precios">Planes</a><div class="dr"><a href="/seo-local-bogota/">Ciudades</a><div class="sm"><a href="/seo-local-bogota/">Bogotá</a><a href="/seo-local-medellin/">Medellín</a><a href="/seo-local-cali/">Cali</a><a href="/seo-local-barranquilla/">Barranquilla</a><a href="/seo-local-bucaramanga/">Bucaramanga</a><a href="/seo-local-cartagena/">Cartagena</a></div></div><div class="dr"><a href="/google-maps-para-odontologos/">Sectores</a><div class="sm"><a href="/google-maps-para-odontologos/">Odontólogos</a><a href="/google-maps-para-restaurantes/">Restaurantes</a><a href="/google-maps-para-clinicas-esteticas/">Clínicas estéticas</a><a href="/google-maps-para-talleres-mecanicos/">Talleres mecánicos</a><a href="/google-maps-para-abogados/">Abogados</a><a href="/google-maps-para-hoteles/">Hoteles y hostales</a></div></div><a href="/como-aparecer-primero-en-google-maps/">Guía</a><a href="/sobre-nosotros/">Nosotros</a><a href="/contacto/">Contacto</a></nav>
+<a class="nav-cta" href="https://wa.me/573219453933?text=Hola%2C%20vi%20su%20p%C3%A1gina%20sobre%20Google%20Maps%20para%20cl%C3%ADnicas%20est%C3%A9ticas%20y%20quiero%20optimizar%20mi%20ficha%20de%20Google%20Maps" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+<details class="bg"><summary aria-label="Abrir menú"><span></span></summary><div class="dd"><a href="/">Inicio</a><a href="/#servicios">Servicios</a><a href="/#precios">Planes</a><b class="gt">Ciudades</b><a href="/seo-local-bogota/">Bogotá</a><a href="/seo-local-medellin/">Medellín</a><a href="/seo-local-cali/">Cali</a><a href="/seo-local-barranquilla/">Barranquilla</a><a href="/seo-local-bucaramanga/">Bucaramanga</a><a href="/seo-local-cartagena/">Cartagena</a><b class="gt">Sectores</b><a href="/google-maps-para-odontologos/">Odontólogos</a><a href="/google-maps-para-restaurantes/">Restaurantes</a><a href="/google-maps-para-clinicas-esteticas/">Clínicas estéticas</a><a href="/google-maps-para-talleres-mecanicos/">Talleres mecánicos</a><a href="/google-maps-para-abogados/">Abogados</a><a href="/google-maps-para-hoteles/">Hoteles y hostales</a><a href="/como-aparecer-primero-en-google-maps/">Guía</a><a href="/sobre-nosotros/">Nosotros</a><a href="/contacto/">Contacto</a></div></details></div></header>
 <div class="hero"><div class="c">
 <nav class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › Google Maps para clínicas estéticas</nav>
 <h1>Google Maps para clínicas estéticas: que te encuentren <em>antes que a tu competencia</em></h1>
