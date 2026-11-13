@@ -351,7 +351,7 @@ about_body=(sec("Quiénes somos","<p>Boostraffic es una agencia de Bogotá, Colo
  sec("Datos de la empresa",CONT+"<p>Redes: <a href='https://www.facebook.com/boostraffic' rel='noopener'>Facebook</a> · <a href='https://www.instagram.com/boostraffic' rel='noopener'>Instagram</a> · <a href='https://www.linkedin.com/company/boostraffic' rel='noopener'>LinkedIn</a>. ¿Hablamos? Ve a <a href='/contacto/'>contacto</a>.</p>"))
 paginas["sobre-nosotros"]=pagina("sobre-nosotros","Sobre Boostraffic: agencia de SEO local y Google Maps","Conoce a Boostraffic, agencia de Bogotá especializada en SEO local y optimización de fichas de Google Maps para negocios de toda Colombia.","Sobre <em>Boostraffic</em>","Agencia de Bogotá especializada en SEO local y fichas de Google Maps.","Sobre nosotros",about_body,[],{"@context":"https://schema.org","@type":"AboutPage","name":"Sobre Boostraffic","url":BASE+"/sobre-nosotros/","about":{"@id":BASE+"/#negocio"}},legal=True)
 
-contact_script="""<script>
+contact_script=r"""<script>
 (function(){var f=document.getElementById('cf');if(!f)return;
 f.addEventListener('submit',function(e){e.preventDefault();var d=Object.fromEntries(new FormData(f));
 var m='Hola, quiero contactar con Boostraffic.\n\nNombre: '+d.nombre+'\nNegocio: '+d.negocio+'\nTeléfono: '+d.telefono+(d.mensaje?'\nMensaje: '+d.mensaje:'');
