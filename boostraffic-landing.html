@@ -1668,6 +1668,40 @@ a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95))
 .footer-brand .nav-logo img.nl-txt { height: 26px; }
 @media (max-width: 768px) { .nav-logo img.nl-txt { height: 24px; } }
 @media (min-width:901px){ footer .footer-top{ grid-template-columns: 1.8fr 1fr 1fr 1.2fr 1fr; gap:32px; } }
+
+/* ═══ COBERTURA · mapa animado de ciudades ═══ */
+.cv { position: relative; padding: clamp(56px,7vw,100px) 0; background: radial-gradient(60% 50% at 25% 40%, rgba(26,115,232,.2), transparent 70%), radial-gradient(40% 40% at 90% 90%, rgba(94,242,255,.1), transparent 70%), linear-gradient(180deg, #060b18, #0a1226 55%, #060b18); color: #fff; overflow: hidden; }
+.cv-in { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+.cv-top { text-align: center; margin-bottom: clamp(26px,4vw,46px); }
+.cv-tag { display: inline-block; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #5ef2ff; padding: 6px 14px; border-radius: 99px; border: 1px solid rgba(94,242,255,.4); background: rgba(94,242,255,.08); margin-bottom: 16px; }
+.cv h2 { font-size: clamp(30px,4.6vw,56px); line-height: 1.06; letter-spacing: -.03em; color: #fff; margin: 0 0 14px; }
+.cv h2 em { font-style: normal; background: linear-gradient(100deg, #8ab4f8, #5ef2ff 55%, #5affb0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cv-top p { color: #aab4c5; font-size: clamp(15px,1.5vw,18px); max-width: 560px; margin: 0 auto; }
+.cv-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.9fr); gap: clamp(20px,3vw,44px); align-items: center; }
+.cv-stage { position: relative; aspect-ratio: .86 / 1; border-radius: 30px; background: radial-gradient(70% 60% at 50% 45%, rgba(26,115,232,.18), transparent 75%), linear-gradient(170deg, #0c1328, #070b18); border: 1px solid rgba(138,180,248,.2); box-shadow: 0 40px 90px -40px #000, inset 0 0 80px rgba(26,115,232,.08); overflow: hidden; }
+.cv-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+.cv-hud { position: absolute; left: 16px; top: 14px; display: flex; align-items: center; gap: 10px; font: 600 11px ui-monospace, Menlo, monospace; color: #8c97ab; letter-spacing: .06em; pointer-events: none; }
+.cv-hud span { display: inline-flex; align-items: center; gap: 7px; } .cv-hud i { width: 8px; height: 8px; border-radius: 50%; background: #5affb0; box-shadow: 0 0 0 0 rgba(90,255,176,.7); animation: cv-pulso 1.6s infinite; }
+.cv-hud b { color: #5ef2ff; font-size: 14px; font-variant-numeric: tabular-nums; }
+@keyframes cv-pulso { 0% { box-shadow: 0 0 0 0 rgba(90,255,176,.7); } 100% { box-shadow: 0 0 0 10px rgba(90,255,176,0); } }
+.cv-card { padding: 22px 24px; border-radius: 22px; background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); border: 1px solid rgba(138,180,248,.28); box-shadow: 0 30px 70px -30px #000, inset 0 1px 0 rgba(255,255,255,.1); margin-bottom: 20px; }
+.cv-card small { font: 700 10.5px ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #5affb0; }
+.cv-card h3 { font-size: clamp(30px,3.6vw,44px); letter-spacing: -.03em; margin: 4px 0 4px; color: #fff; line-height: 1.05; transition: opacity .25s, transform .25s; }
+.cv-card p { color: #aab4c5; font-size: 14px; margin: 0 0 12px; }
+.cv-card.sw h3, .cv-card.sw p, .cv-card.sw .cv-qs { opacity: 0; transform: translateY(6px); }
+.cv-qs { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 7px; transition: opacity .25s, transform .25s; }
+.cv-qs li { display: flex; align-items: center; gap: 9px; font-size: 13px; color: #e8eaed; padding: 8px 12px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+.cv-qs li::before { content: ""; width: 14px; height: 14px; flex: none; background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235ef2ff' stroke-width='2.6' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E"); }
+.cv-go { display: inline-block; font-weight: 700; font-size: 14px; color: #06101f !important; background: linear-gradient(100deg, #5ef2ff, #5affb0); padding: 11px 20px; border-radius: 99px; text-decoration: none; box-shadow: 0 12px 30px -10px rgba(94,242,255,.6); transition: transform .2s; }
+.cv-go:hover { transform: translateY(-2px); }
+.cv-lbl { font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #6f7b92; margin: 4px 0 8px; }
+.cv-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.cv-chips a { font-size: 13.5px; font-weight: 600; color: #cfe0ff; padding: 8px 15px; border-radius: 99px; border: 1px solid rgba(138,180,248,.28); background: rgba(138,180,248,.07); text-decoration: none; transition: all .2s; }
+.cv-chips a:hover, .cv-chips a.on { color: #06101f; background: #5ef2ff; border-color: #5ef2ff; box-shadow: 0 0 24px rgba(94,242,255,.5); }
+.cv-sec a:hover { background: #5affb0; border-color: #5affb0; box-shadow: 0 0 24px rgba(90,255,176,.45); }
+.cv-more { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 6px 0 0; font-size: 13.5px; font-weight: 600; } .cv-more a { color: #8ab4f8; text-decoration: none; } .cv-more a:hover { color: #fff; }
+@media (max-width: 900px) { .cv-grid { grid-template-columns: 1fr; } .cv-stage { aspect-ratio: .95 / 1; max-width: 560px; margin: 0 auto; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .cv-hud i { animation: none; } .cv-card h3, .cv-qs { transition: none; } }
 </style>
 
 <!-- ── SCHEMA: ProfessionalService ───────────────────────────────── -->
@@ -2442,14 +2476,40 @@ a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95))
 
 <div class="divider"></div>
 
-<!-- COBERTURA (enlaces internos) -->
-<section id="cobertura" style="padding:56px 0;background:var(--bg2)"><div class="container">
-<h2 style="font-size:clamp(24px,3.6vw,32px);margin-bottom:12px;color:var(--text)">Optimización de Google Maps en tu ciudad y en tu sector</h2>
-<p style="color:var(--muted);max-width:720px;margin-bottom:18px">Cada ciudad y cada sector tiene sus propias búsquedas. Elige el tuyo y mira cómo trabajamos tu ficha.</p>
-<p style="margin-bottom:6px;font-weight:700;color:var(--text)">Por ciudad</p><div><a href="/seo-local-bogota/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">SEO local en Bogotá</a><a href="/seo-local-medellin/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">SEO local en Medellín</a><a href="/seo-local-cali/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">SEO local en Cali</a><a href="/seo-local-barranquilla/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">SEO local en Barranquilla</a><a href="/seo-local-bucaramanga/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">SEO local en Bucaramanga</a><a href="/seo-local-cartagena/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">SEO local en Cartagena</a></div>
-<p style="margin:16px 0 6px;font-weight:700;color:var(--text)">Por sector</p><div><a href="/google-maps-para-odontologos/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">Odontólogos</a><a href="/google-maps-para-restaurantes/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">Restaurantes</a><a href="/google-maps-para-clinicas-esteticas/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">Clínicas estéticas</a><a href="/google-maps-para-talleres-mecanicos/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">Talleres mecánicos</a><a href="/google-maps-para-abogados/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">Abogados</a><a href="/google-maps-para-hoteles/" style="display:inline-block;margin:4px 6px 4px 0;padding:8px 16px;border-radius:20px;background:var(--bg3);color:var(--blue);font-size:14px;font-weight:600">Hoteles y hostales</a></div>
-<p style="margin-top:18px"><a href="/guias/" style="font-weight:600">Guías de SEO local →</a> · <a href="/como-aparecer-primero-en-google-maps/" style="font-weight:600">Cómo aparecer primero en Google Maps →</a></p>
-</div></section>
+<!-- COBERTURA · mapa animado de ciudades (los enlaces siguen siendo <a> reales para SEO) -->
+<section class="cv" id="cobertura" aria-labelledby="cv-h">
+  <div class="cv-in">
+    <div class="cv-top">
+      <span class="cv-tag">Cobertura local en Colombia</span>
+      <h2 id="cv-h">Tu ciudad, tu sector,<br><em>tu ficha en el mapa</em></h2>
+      <p>Cada ciudad se busca distinto. Mira dónde trabajamos y qué buscan tus clientes en tu zona.</p>
+    </div>
+    <div class="cv-grid">
+      <div class="cv-stage" id="cvstage">
+        <canvas id="cvcv" role="img" aria-label="Mapa animado de Colombia con Bogotá, Medellín, Cali, Barranquilla, Bucaramanga y Cartagena conectadas por rutas luminosas y búsquedas locales que aparecen sobre cada ciudad."></canvas>
+        <div class="cv-hud" aria-hidden="true"><span><i></i>Búsquedas locales en vivo</span><b id="cvq">0</b></div>
+      </div>
+      <div class="cv-panel">
+        <div class="cv-card" id="cvcard" aria-live="polite">
+          <small>Ciudad seleccionada</small>
+          <h3 id="cvname">Bogotá</h3>
+          <p id="cvzonas">Chapinero · Usaquén · Teusaquillo</p>
+          <ul class="cv-qs" id="cvqs"></ul>
+          <a class="cv-go" id="cvgo" href="/seo-local-bogota/">Ver SEO local en Bogotá →</a>
+        </div>
+        <p class="cv-lbl">Por ciudad</p>
+        <div class="cv-chips" id="cvciud">
+          <a href="/seo-local-bogota/" data-c="0">Bogotá</a><a href="/seo-local-medellin/" data-c="1">Medellín</a><a href="/seo-local-cali/" data-c="2">Cali</a><a href="/seo-local-barranquilla/" data-c="3">Barranquilla</a><a href="/seo-local-bucaramanga/" data-c="4">Bucaramanga</a><a href="/seo-local-cartagena/" data-c="5">Cartagena</a>
+        </div>
+        <p class="cv-lbl">Por sector</p>
+        <div class="cv-chips cv-sec">
+          <a href="/google-maps-para-odontologos/">Odontólogos</a><a href="/google-maps-para-restaurantes/">Restaurantes</a><a href="/google-maps-para-clinicas-esteticas/">Clínicas estéticas</a><a href="/google-maps-para-talleres-mecanicos/">Talleres mecánicos</a><a href="/google-maps-para-abogados/">Abogados</a><a href="/google-maps-para-hoteles/">Hoteles y hostales</a>
+        </div>
+        <p class="cv-more"><a href="/guias/">Guías de SEO local →</a><a href="/como-aparecer-primero-en-google-maps/">Cómo aparecer primero en Google Maps →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="divider"></div>
 
@@ -3189,5 +3249,74 @@ updateBottomNav();
 </script>
 
 <script src="/site.js" defer></script>
+<script>
+/* Cobertura · mapa de Colombia animado: puntos con onda de luz, rutas desde Bogotá, sonar por ciudad y búsquedas locales en vivo. */
+(function(){
+  var sec=document.getElementById('cobertura'); if(!sec||!sec.classList.contains('cv')) return;
+  var cv=document.getElementById('cvcv'), cx=cv.getContext('2d'), stage=document.getElementById('cvstage');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CITY=[
+    {n:'Bogotá',lat:4.711,lon:-74.072,z:'Chapinero · Usaquén · Teusaquillo',q:['dentista en Chapinero','restaurante en Usaquén','taller mecánico en Fontibón'],u:'/seo-local-bogota/',side:1},
+    {n:'Medellín',lat:6.244,lon:-75.581,z:'El Poblado · Laureles · Envigado',q:['restaurante en El Poblado','clínica estética en Laureles','hotel en Envigado'],u:'/seo-local-medellin/',side:-1},
+    {n:'Cali',lat:3.451,lon:-76.532,z:'Granada · San Fernando · Ciudad Jardín',q:['restaurante en Granada','dentista en San Fernando','abogado en Ciudad Jardín'],u:'/seo-local-cali/',side:-1},
+    {n:'Barranquilla',lat:10.964,lon:-74.796,z:'Alto Prado · Riomar · Villa Country',q:['dentista en Alto Prado','restaurante en Riomar','abogado en El Prado'],u:'/seo-local-barranquilla/',side:1},
+    {n:'Bucaramanga',lat:7.119,lon:-73.122,z:'Cabecera · Floridablanca · Girón',q:['dentista en Cabecera','taller en Floridablanca','restaurante en Girón'],u:'/seo-local-bucaramanga/',side:1},
+    {n:'Cartagena',lat:10.391,lon:-75.479,z:'Bocagrande · Centro Histórico · Getsemaní',q:['hotel en Bocagrande','restaurante en Getsemaní','tour en el Centro Histórico'],u:'/seo-local-cartagena/',side:-1}
+  ];
+  // contorno estilizado de Colombia (lon, lat)
+  var OUT=[[-77.35,8.67],[-76.9,8.55],[-76.75,9.3],[-75.7,10.2],[-75.5,10.45],[-74.85,11.0],[-74.2,11.3],[-73.3,11.3],[-72.6,11.8],[-72.0,12.2],[-71.3,12.45],[-71.15,11.6],[-71.9,11.0],[-72.35,10.55],[-72.75,9.9],[-72.5,9.0],[-72.4,8.4],[-72.1,7.7],[-72.45,7.35],[-71.9,6.95],[-71.0,6.95],[-70.1,6.95],[-69.4,6.1],[-67.9,6.2],[-67.5,5.4],[-67.8,4.4],[-67.4,3.3],[-67.6,2.8],[-67.1,1.8],[-67.9,1.2],[-69.5,1.1],[-69.85,0.5],[-69.8,-1.1],[-70.05,-2.2],[-69.95,-4.2],[-70.7,-3.75],[-71.5,-2.2],[-72.6,-2.4],[-73.2,-1.8],[-74.3,-0.95],[-75.3,-0.1],[-76.4,0.2],[-77.4,0.45],[-78.3,1.1],[-78.85,1.65],[-78.6,2.35],[-77.9,2.75],[-77.45,3.9],[-77.4,5.0],[-77.3,6.0],[-77.65,6.9],[-77.45,7.7],[-77.2,8.4]];
+  var LON0=-79.4, LON1=-66.4, LAT0=-4.9, LAT1=12.9;
+  var W=0,H=0,dpr=1,ox=0,oy=0,sc=1, dots=[], pts=[], nodes=[], sel=0, run=false, last=0, t=0, nq=0, bubbles=[], rings=[], bursts=[], pausa=0, auto=0, hover=-1;
+  var card=document.getElementById('cvcard'), nameE=document.getElementById('cvname'), zE=document.getElementById('cvzonas'), qsE=document.getElementById('cvqs'), goE=document.getElementById('cvgo'), qE=document.getElementById('cvq'), chips=[].slice.call(document.querySelectorAll('#cvciud a'));
+  function P(lat,lon){ return [ox+(lon-LON0)*sc, oy+(LAT1-lat)*sc]; }
+  function inside(x,y){ var c=false; for(var i=0,j=pts.length-1;i<pts.length;j=i++){ var a=pts[i],b=pts[j]; if(((a[1]>y)!==(b[1]>y))&&(x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])) c=!c; } return c; }
+  function tam(){ var r=stage.getBoundingClientRect(); W=r.width; H=r.height; dpr=Math.min(devicePixelRatio||1,2); cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0);
+    var pad=Math.max(18,W*.06); sc=Math.min((W-pad*2)/(LON1-LON0),(H-pad*2)/(LAT1-LAT0)); ox=(W-(LON1-LON0)*sc)/2; oy=(H-(LAT1-LAT0)*sc)/2;
+    pts=OUT.map(function(o){ return P(o[1],o[0]); }); nodes=CITY.map(function(c){ return P(c.lat,c.lon); });
+    dots=[]; var st=Math.max(7,Math.round(W/46)); for(var y=0;y<H;y+=st){ for(var x=((y/st)%2)*st/2;x<W;x+=st){ if(inside(x,y)) dots.push([x,y]); } } }
+  function arco(a,b,k){ var mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2, dx=b[0]-a[0], dy=b[1]-a[1], d=Math.sqrt(dx*dx+dy*dy)||1; var nx=-dy/d, ny=dx/d, h=d*.28*(k||1); return [mx+nx*h, my+ny*h-d*.05]; }
+  function q2(a,c,b,u){ var m=1-u; return [m*m*a[0]+2*m*u*c[0]+u*u*b[0], m*m*a[1]+2*m*u*c[1]+u*u*b[1]]; }
+  function elegir(i,manual){ if(i===sel&&!manual) return; sel=i; card.classList.add('sw'); setTimeout(function(){ var c=CITY[i]; nameE.textContent=c.n; zE.textContent=c.z; qsE.innerHTML=c.q.map(function(x){ return '<li>'+x+'</li>'; }).join(''); goE.href=c.u; goE.textContent='Ver SEO local en '+c.n+' →'; card.classList.remove('sw'); },reduce?0:220);
+    chips.forEach(function(a,k){ a.classList.toggle('on',k===i); }); rings.push({i:i,r:0}); if(manual) pausa=performance.now()+9000; }
+  function burbuja(i){ var c=CITY[i], txt=c.q[Math.floor(Math.random()*c.q.length)]; bubbles.push({i:i,txt:txt,age:0,dx:(Math.random()*40-20)+(c.side*36),st:(4+Math.floor(Math.random()*2))+(Math.random()<.5?',8':',6')}); nq++; qE.textContent=nq.toLocaleString('es-CO'); }
+  function pill(x,y,txt,a,col,fs){ cx.font='600 '+fs+'px Inter,system-ui,sans-serif'; var w=cx.measureText(txt).width+18, h=fs+11; cx.globalAlpha=a; cx.fillStyle='rgba(8,14,30,.88)'; cx.strokeStyle=col; cx.lineWidth=1; cx.beginPath(); cx.roundRect(x-w/2,y-h/2,w,h,h/2); cx.fill(); cx.stroke(); cx.fillStyle='#e8f1ff'; cx.textAlign='center'; cx.textBaseline='middle'; cx.fillText(txt,x,y+.5); cx.globalAlpha=1; }
+  function dib(){
+    cx.clearRect(0,0,W,H);
+    // puntos del territorio con onda de luz diagonal
+    for(var i=0;i<dots.length;i++){ var d=dots[i], w=Math.sin(t*1.1-(d[0]*.9+d[1]*.6)*.018); var a=.16+Math.max(0,w)*.5; cx.fillStyle='rgba('+(w>.7?'94,242,255':'138,180,248')+','+a.toFixed(3)+')'; cx.fillRect(d[0]-1,d[1]-1,2,2); }
+    // contorno con brillo
+    cx.save(); cx.beginPath(); pts.forEach(function(p,k){ k?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]); }); cx.closePath(); cx.shadowColor='rgba(94,242,255,.7)'; cx.shadowBlur=18; cx.strokeStyle='rgba(138,200,255,.75)'; cx.lineWidth=1.6; cx.stroke(); cx.restore();
+    // rutas desde Bogotá + luz viajera
+    var b0=nodes[0];
+    for(var k=1;k<nodes.length;k++){ var n=nodes[k], c=arco(b0,n,k%2?1:-1); cx.beginPath(); cx.moveTo(b0[0],b0[1]); cx.quadraticCurveTo(c[0],c[1],n[0],n[1]); cx.strokeStyle=(k===sel||sel===0)?'rgba(94,242,255,.45)':'rgba(138,180,248,.2)'; cx.lineWidth=1.3; cx.setLineDash([4,6]); cx.lineDashOffset=-t*18; cx.stroke(); cx.setLineDash([]);
+      var u=((t*.22)+k*.17)%1; for(var tr=0;tr<9;tr++){ var uu=Math.max(0,u-tr*.018), p=q2(b0,c,n,uu); cx.fillStyle='rgba(94,242,255,'+(.9-tr*.1).toFixed(2)+')'; cx.beginPath(); cx.arc(p[0],p[1],3.2-tr*.25,0,6.283); cx.fill(); }
+      if(u<.03&&Math.random()<.5) bursts.push({i:k,r:0}); }
+    // anillos de sonar
+    for(var r=rings.length-1;r>=0;r--){ var g=rings[r], nd=nodes[g.i]; g.r+=.9; if(g.r>46){ rings.splice(r,1); continue; } cx.strokeStyle='rgba(94,242,255,'+(.7*(1-g.r/46)).toFixed(3)+')'; cx.lineWidth=2; cx.beginPath(); cx.arc(nd[0],nd[1],g.r,0,6.283); cx.stroke(); }
+    for(var r2=bursts.length-1;r2>=0;r2--){ var g2=bursts[r2], nd2=nodes[g2.i]; g2.r+=.7; if(g2.r>26){ bursts.splice(r2,1); continue; } cx.strokeStyle='rgba(90,255,176,'+(.6*(1-g2.r/26)).toFixed(3)+')'; cx.lineWidth=1.5; cx.beginPath(); cx.arc(nd2[0],nd2[1],g2.r,0,6.283); cx.stroke(); }
+    // ciudad seleccionada: radio de servicio + retícula
+    var s=nodes[sel], rad=26+Math.sin(t*2)*3; cx.strokeStyle='rgba(94,242,255,.55)'; cx.lineWidth=1.2; cx.setLineDash([3,5]); cx.beginPath(); cx.arc(s[0],s[1],rad+14,0,6.283); cx.stroke(); cx.setLineDash([]);
+    cx.strokeStyle='rgba(94,242,255,.28)'; cx.beginPath(); cx.moveTo(s[0]-rad-26,s[1]); cx.lineTo(s[0]-rad,s[1]); cx.moveTo(s[0]+rad,s[1]); cx.lineTo(s[0]+rad+26,s[1]); cx.moveTo(s[0],s[1]-rad-26); cx.lineTo(s[0],s[1]-rad); cx.moveTo(s[0],s[1]+rad); cx.lineTo(s[0],s[1]+rad+26); cx.stroke();
+    // nodos y etiquetas
+    for(var j=0;j<nodes.length;j++){ var nn=nodes[j], on=j===sel, h=j===hover; var rr=on?7:5; cx.shadowColor=on?'#5ef2ff':'#8ab4f8'; cx.shadowBlur=on?22:10; cx.fillStyle=on?'#5ef2ff':(h?'#fff':'#8ab4f8'); cx.beginPath(); cx.arc(nn[0],nn[1],rr,0,6.283); cx.fill(); cx.shadowBlur=0; cx.fillStyle='#06101f'; cx.beginPath(); cx.arc(nn[0],nn[1],rr*.4,0,6.283); cx.fill();
+      cx.font=(on?'800 ':'600 ')+(on?14:12)+'px Inter,system-ui,sans-serif'; cx.textBaseline='middle'; var side=CITY[j].side; cx.textAlign=side>0?'left':'right'; cx.fillStyle=on?'#fff':'#aab4c5'; cx.fillText(CITY[j].n,nn[0]+side*(rr+9),nn[1]+(j===3?-9:(j===5?10:0))); }
+    // burbujas de búsqueda
+    for(var m=bubbles.length-1;m>=0;m--){ var bb=bubbles[m], nd3=nodes[bb.i]; bb.age+=.012; if(bb.age>1){ bubbles.splice(m,1); continue; } var al=bb.age<.12?bb.age/.12:(bb.age>.8?(1-bb.age)/.2:1); var by=Math.max(58,nd3[1]-24-bb.age*46), bx=Math.max(80,Math.min(W-80,nd3[0]+bb.dx*bb.age+bb.dx*.5)); pill(bx,by,'🔎 '+bb.txt,al,'rgba(94,242,255,.55)',11); cx.globalAlpha=al; cx.fillStyle='#fbbc04'; cx.font='700 10px Inter,system-ui,sans-serif'; cx.textAlign='center'; cx.fillText('★ '+bb.st,bx,by+17); cx.globalAlpha=1; }
+  }
+  var acc=0;
+  function frame(now){ if(!run) return; var dt=Math.min(.05,(now-last)/1000); last=now; t+=dt; acc+=dt; if(acc>.85&&bubbles.length<4){ acc=0; burbuja(Math.random()<.5?sel:Math.floor(Math.random()*CITY.length)); }
+    if(now>pausa&&now-auto>4200){ auto=now; elegir((sel+1)%CITY.length,false); }
+    dib(); requestAnimationFrame(frame); }
+  function idxAt(e){ var r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top, best=-1, bd=900; nodes.forEach(function(n,i){ var d=(n[0]-x)*(n[0]-x)+(n[1]-y)*(n[1]-y); if(d<bd&&d<34*34){ bd=d; best=i; } }); return best; }
+  cv.addEventListener('pointermove',function(e){ var i=idxAt(e); hover=i; cv.style.cursor=i>=0?'pointer':'default'; });
+  cv.addEventListener('pointerleave',function(){ hover=-1; });
+  cv.addEventListener('click',function(e){ var i=idxAt(e); if(i>=0) elegir(i,true); });
+  chips.forEach(function(a,i){ a.addEventListener('pointerenter',function(){ elegir(i,true); }); a.addEventListener('focus',function(){ elegir(i,true); }); });
+  tam(); if(window.ResizeObserver) new ResizeObserver(function(){ tam(); if(reduce) dib(); }).observe(stage); else addEventListener('resize',tam);
+  elegir(0,true); setTimeout(function(){ pausa=0; },50);
+  if(reduce){ for(var k=0;k<3;k++) burbuja(k); bubbles.forEach(function(b){ b.age=.45; }); dib(); return; }
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v&&!run){ run=true; last=performance.now(); requestAnimationFrame(frame); } else if(!v) run=false; },{threshold:.12}).observe(sec); else { run=true; requestAnimationFrame(frame); }
+})();
+</script>
 </body>
 </html>
