@@ -30,4 +30,8 @@ COPY garantia-y-reembolsos /usr/share/nginx/html/garantia-y-reembolsos
 COPY eliminacion-de-datos /usr/share/nginx/html/eliminacion-de-datos
 COPY sobre-nosotros /usr/share/nginx/html/sobre-nosotros
 COPY contacto /usr/share/nginx/html/contacto
+COPY site.css /usr/share/nginx/html/site.css
+COPY site.js /usr/share/nginx/html/site.js
+COPY ciudades /usr/share/nginx/html/ciudades
+COPY sectores /usr/share/nginx/html/sectores
 EXPOSE 80

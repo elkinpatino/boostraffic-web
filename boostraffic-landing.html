@@ -1928,12 +1928,12 @@ a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95))
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="/" aria-label="Boostraffic, ir al inicio">
-      <img src="LogoBoostr.webp" alt="" loading="lazy" decoding="async">
-      <img class="nl-txt" src="boostraffic-texto.png" alt="Boostraffic" width="456" height="96">
+      <img src="/LogoBoostr.webp" alt="" loading="lazy" decoding="async">
+      <img class="nl-txt" src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96">
     </a>
     <button class="nv-burger" id="nvb" aria-expanded="false" aria-controls="nvl" aria-label="Abrir menú"><span></span></button>
     <ul class="nv-l" id="nvl" aria-label="Secciones"><span class="nv-ind" aria-hidden="true"></span>
-      <li><a href="#resultados">Resultados</a></li><li><a href="#servicios">Cómo funciona</a></li><li><a href="#precios">Planes</a></li><li><a href="#caso">Casos</a></li><li><a href="#garantias">Garantías</a></li><li><a href="#faq">Preguntas</a></li><li><a href="#formulario">Contacto</a></li>
+      <li><a href="/#servicios">Cómo funciona</a></li><li><a href="/#precios">Planes</a></li><li><a href="/#caso">Casos</a></li><li><a href="/ciudades/" data-p="seo-local-,ciudades">Ciudades</a></li><li><a href="/sectores/" data-p="google-maps-para-,sectores">Sectores</a></li><li><a href="/como-aparecer-primero-en-google-maps/" data-p="como-aparecer">Guía</a></li><li><a href="/sobre-nosotros/" data-p="sobre-nosotros">Nosotros</a></li><li><a href="/contacto/" data-p="contacto">Contacto</a></li>
     </ul>
     <button class="btn btn-primary nav-cta" onclick="openForm()">Análisis gratuito</button>
   </div>
@@ -2509,8 +2509,8 @@ a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95))
       <!-- BRAND -->
       <div class="footer-brand">
         <div class="nav-logo">
-          <img src="LogoBoostr.webp" alt="Boostraffic" style="border-radius:6px;" loading="lazy" decoding="async">
-          <img class="nl-txt" src="boostraffic-texto.png" alt="Boostraffic" width="456" height="96" loading="lazy">
+          <img src="/LogoBoostr.webp" alt="Boostraffic" style="border-radius:6px;" loading="lazy" decoding="async">
+          <img class="nl-txt" src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96" loading="lazy">
         </div>
         <p class="footer-tagline">Boostraffic S.A.S. | Alta Ingeniería Web<br>y Automatización con IA</p>
 
@@ -2559,9 +2559,9 @@ a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95))
           <svg class="footer-col-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="footer-col-body">
-          <a href="#casos">Casos de éxito</a>
-          <a href="#servicios">Metodología Boostraffic</a>
-          <a href="#servicios">Cómo funciona</a>
+          <a href="/#caso">Casos de éxito</a>
+          <a href="/#servicios">Metodología Boostraffic</a>
+          <a href="/#servicios">Cómo funciona</a>
           <a href="/sobre-nosotros/">Sobre nosotros</a>
           <a href="/contacto/">Contacto</a>
           <a onclick="openForm()">Análisis gratuito</a>
@@ -3200,24 +3200,6 @@ updateBottomNav();
 })();
 </script>
 
-<script>
-/* Menú · indicador deslizante, sección activa, logo al inicio. */
-(function(){
-  var ul=document.getElementById('nvl'); if(!ul) return;
-  var ind=ul.querySelector('.nv-ind'), links=[].slice.call(ul.querySelectorAll('a')), btn=document.getElementById('nvb'), nav=document.querySelector('nav');
-  var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); }), act=-1, prog=document.createElement('span'); prog.className='nv-prog'; nav.appendChild(prog); nav.style.position='sticky';
-  function mover(i){ if(i<0||!links[i]||getComputedStyle(ind).display==='none'){ ul.classList.remove('listo'); return; } var a=links[i]; ind.style.width=a.offsetWidth+'px'; ind.style.transform='translateX('+a.offsetLeft+'px)'; ul.classList.add('listo'); }
-  function espia(){ var y=innerHeight*.38, mejor=-1; secs.forEach(function(s,i){ if(!s) return; var r=s.getBoundingClientRect(); if(r.top<=y&&r.bottom>y) mejor=i; });
-    if(mejor!==act){ act=mejor; links.forEach(function(a,i){ a.classList.toggle('on',i===act); if(i===act) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); }); mover(act); }
-    var e=document.documentElement, max=e.scrollHeight-e.clientHeight; prog.style.setProperty('--sp',max>0?Math.min(1,scrollY/max).toFixed(4):0); }
-  var tick=false; addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(function(){ tick=false; espia(); }); } },{passive:true});
-  addEventListener('resize',function(){ mover(act); }); espia(); setTimeout(function(){ mover(act); },400);
-  links.forEach(function(a){ a.addEventListener('click',function(e){ var t=document.querySelector(a.getAttribute('href')); if(!t) return; e.preventDefault(); t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); ul.classList.remove('abierto'); btn.setAttribute('aria-expanded','false'); history.replaceState(null,'',a.getAttribute('href')); }); });
-  btn&&btn.addEventListener('click',function(){ var o=ul.classList.toggle('abierto'); btn.setAttribute('aria-expanded',o); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ ul.classList.remove('abierto'); btn.setAttribute('aria-expanded','false'); } });
-  // logo: si ya estás en el inicio, sube suave; si no, va a la página principal
-  var lg=document.querySelector('a.nav-logo'); lg.addEventListener('click',function(e){ var p=location.pathname.replace(/index\.html$/,''); if(p==='/'||p===''){ e.preventDefault(); scrollTo({top:0,behavior:'smooth'}); history.replaceState(null,'',location.pathname); } });
-})();
-</script>
+<script src="/site.js" defer></script>
 </body>
 </html>

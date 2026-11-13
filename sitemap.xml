@@ -81,6 +81,16 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://boostraffic.com/ciudades/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://boostraffic.com/sectores/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://boostraffic.com/politica-de-privacidad/</loc>
     <lastmod>2026-11-13</lastmod>
     <priority>0.3</priority>

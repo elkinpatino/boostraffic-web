@@ -90,47 +90,33 @@ MENU_M='<a href="/">Inicio</a><a href="/#servicios">Servicios</a><a href="/#prec
 MENU=MENU_D
 POLI=[("politica-de-privacidad","Privacidad"),("terminos-y-condiciones","Términos"),("politica-de-cookies","Cookies"),("garantia-y-reembolsos","Garantía y reembolsos"),("eliminacion-de-datos","Eliminar mis datos")]
 POLI_LINKS=" · ".join(f'<a href="/{a}/">{b}</a>' for a,b in NOS+POLI)
+HEADER=open(os.path.join(ROOT,"tools/partials/header.html")).read()
+FOOTER=open(os.path.join(ROOT,"tools/partials/footer.html")).read()
 def esc(s): return html.escape(s,quote=True)
 def wa(msg): return f"https://wa.me/{WA}?text={quote(msg)}"
 
 CSS="""
 :root{--blue:#1a73e8;--blue-d:#1557b0;--text:#202124;--muted:#5f6368;--border:#dadce0;--bg:#fff;--bg2:#f8f9fa;--bg3:#e8f0fe;--green:#34a853;--r:12px}
 @media(prefers-color-scheme:dark){:root{--text:#e8eaed;--muted:#aab0b8;--border:#33384a;--bg:#0f1320;--bg2:#161b2e;--bg3:#1a2a4a;--blue:#6ea8ff;--blue-d:#9cc2ff}}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:17px}
-a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+
+body{font-size:17px;line-height:1.65}
+main a{color:var(--blue)}main a:hover{text-decoration:underline}
 .c{max-width:880px;margin:0 auto;padding:0 20px}
-header.top{background:#0a0f1e;padding:14px 20px}
-header.top .in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-header.top img{height:26px;width:auto}
-header.top .mn{display:flex;align-items:center;gap:4px;flex:1;justify-content:center}
-header.top .mn a,.dd a{color:rgba(255,255,255,.78);font-size:14px;font-weight:600;padding:8px 12px;border-radius:20px}
-header.top .mn a:hover,.dd a:hover{color:#fff;background:rgba(255,255,255,.1);text-decoration:none}
-.bg{display:none;position:relative}.bg summary{list-style:none;cursor:pointer;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.25);border-radius:12px}
-.bg summary::-webkit-details-marker{display:none}.bg summary span,.bg summary span::before,.bg summary span::after{display:block;width:18px;height:2px;background:#fff;border-radius:2px;position:relative;content:""}
-.bg summary span::before{position:absolute;top:-6px}.bg summary span::after{position:absolute;top:6px}
-.dd{position:absolute;right:0;top:52px;min-width:210px;background:#0a0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px;display:flex;flex-direction:column;z-index:50}
-.dr{position:relative}.dr .sm{display:none;position:absolute;left:0;top:100%;min-width:200px;background:#0a0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px;flex-direction:column;z-index:50}
-.dr:hover .sm,.dr:focus-within .sm{display:flex}.dr .sm a{padding:8px 12px;white-space:nowrap}
-.dd{max-height:78vh;overflow:auto}.dd .gt{color:#5ef2ff;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 12px 2px}
-@media(max-width:960px){header.top .mn{display:none}.bg{display:block}.nav-cta{display:none}header.top .in{justify-content:space-between}}
-.nav-cta{background:#25d366;color:#fff!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:22px}
-.nav-cta:hover{text-decoration:none;background:#1da851}
 .hero{background:linear-gradient(135deg,#0a0f1e,#1a1f3a 55%,#0d1635);color:#fff;padding:64px 20px 56px}
 .hero .c{max-width:880px}
 .crumbs{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:18px}.crumbs a{color:rgba(255,255,255,.75)}
 .hero h1{font-size:clamp(30px,5.5vw,50px);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
 .hero h1 em{font-style:normal;color:#5ef2ff}
 .hero p{font-size:18px;color:rgba(255,255,255,.78);max-width:660px;margin-bottom:28px}
-.btn{display:inline-block;font-weight:600;font-size:16px;padding:14px 30px;border-radius:28px}
-.btn:hover{text-decoration:none}
-.btn-wa{background:#25d366;color:#fff}.btn-wa:hover{background:#1da851}
-.btn-o{border:1.5px solid rgba(255,255,255,.4);color:#fff;margin-left:10px}
+.cb{display:inline-block;font-weight:600;font-size:16px;padding:14px 30px;border-radius:28px}
+.cb:hover{text-decoration:none}
+.cb-wa{background:#25d366;color:#fff}.cb-wa:hover{background:#1da851}
+.cb-o{border:1.5px solid rgba(255,255,255,.4);color:#fff;margin-left:10px}
 main section{padding:44px 0;border-bottom:1px solid var(--border)}
 main section:last-of-type{border-bottom:0}
-h2{font-size:clamp(24px,3.6vw,31px);line-height:1.2;letter-spacing:-.015em;margin-bottom:16px}
-h3{font-size:19px;margin:22px 0 8px}
-p{margin-bottom:14px}.mut{color:var(--muted)}
+main h2{font-size:clamp(24px,3.6vw,31px);line-height:1.2;letter-spacing:-.015em;margin-bottom:16px}
+main h3{font-size:19px;margin:22px 0 8px}
+main p,.hero p{margin-bottom:14px}.mut{color:var(--muted)}
 ul.ck{list-style:none;margin:10px 0 6px}
 ul.ck li{padding:9px 0 9px 32px;position:relative;border-bottom:1px solid var(--border)}
 ul.ck li::before{content:"✓";position:absolute;left:0;top:9px;color:var(--green);font-weight:800}
@@ -140,15 +126,13 @@ ul.er li::before{content:"✕";color:#ea4335}
 .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px}
 .plan{border:1px solid var(--border);border-radius:var(--r);padding:18px;background:var(--bg2)}
 .plan b{display:block;font-size:15px}.plan .pr{font-size:22px;font-weight:800;margin:4px 0}.plan small{color:var(--muted);font-size:14px}
-details{border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:10px;background:var(--bg2)}
-summary{cursor:pointer;font-weight:600}details p{margin:10px 0 2px}
+main details{border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:10px;background:var(--bg2)}
+main summary{cursor:pointer;font-weight:600}main details p{margin:10px 0 2px}
 .cta{background:var(--bg3);border-radius:16px;padding:34px 26px;text-align:center}
-.cta h2{margin-bottom:10px}.cta .btn{margin-top:8px}
+.cta h2{margin-bottom:10px}.cta .cb{margin-top:8px}
 .rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:8px}
 .rel a{border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:15px;font-weight:600}
-footer{background:#0a0f1e;color:rgba(255,255,255,.65);padding:34px 20px;font-size:14px;text-align:center}
-footer a{color:rgba(255,255,255,.85)}footer p{margin-bottom:6px}
-@media(max-width:600px){.btn-o{margin:12px 0 0}.hero{padding:44px 20px 40px}}
+@media(max-width:600px){.cb-o{margin:12px 0 0}.hero{padding:44px 20px 40px}}
 """
 
 PLANES="""<div class="plans">
@@ -186,25 +170,24 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(desc)}"><meta name="twitter:image" content="{BASE}/LogoBoostr.webp">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6E7PS47XZQ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-6E7PS47XZQ');</script>
+<link rel="stylesheet" href="/site.css">
 <style>{CSS}</style>
 {ldt}
 </head>
 <body>
-<header class="top"><div class="in"><a class="lg" href="/" aria-label="Boostraffic, inicio"><img src="/boostraffic-texto.png" alt="Boostraffic" width="456" height="96"></a>
-<nav class="mn" aria-label="Principal">{MENU_D}</nav>
-<a class="nav-cta" href="{msg}" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-<details class="bg"><summary aria-label="Abrir menú"><span></span></summary><div class="dd">{MENU_M}</div></details></div></header>
+{HEADER}
 <div class="hero"><div class="c">
-<nav class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › {esc(crumb)}</nav>
+<div class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › {esc(crumb)}</div>
 <h1>{h1}</h1>
 <p>{lead}</p>
-{"" if legal else f'<a class="btn btn-wa" href="{msg}" target="_blank" rel="noopener">Quiero mi auditoría por WhatsApp</a><a class="btn btn-o" href="/#precios">Ver planes</a>'}
+{"" if legal else f'<a class="cb cb-wa" href="{msg}" target="_blank" rel="noopener">Quiero mi auditoría por WhatsApp</a><a class="cb cb-o" href="/#precios">Ver planes</a>'}
 </div></div>
 <main><div class="c">
 {body}
-{"" if legal else f'<section><h2>Preguntas frecuentes</h2>{faq_html}</section><section><div class="cta"><h2>Empecemos por saber en qué estado está tu ficha</h2><p class="mut">La Auditoría Profesional te entrega tu score actual y la comparación con 5 competidores en 48 horas.</p><a class="btn btn-wa" href="{msg}" target="_blank" rel="noopener">Pedir mi auditoría</a></div></section>'}
+{"" if legal else f'<section><h2>Preguntas frecuentes</h2>{faq_html}</section><section><div class="cta"><h2>Empecemos por saber en qué estado está tu ficha</h2><p class="mut">La Auditoría Profesional te entrega tu score actual y la comparación con 5 competidores en 48 horas.</p><a class="cb cb-wa" href="{msg}" target="_blank" rel="noopener">Pedir mi auditoría</a></div></section>'}
 </div></main>
-<footer><p><a href="/">Boostraffic</a> · SEO local y optimización de Google Maps · Bogotá, Colombia</p><p><a href="mailto:info@boostraffic.com">info@boostraffic.com</a></p><p>{POLI_LINKS}</p></footer>
+{FOOTER}
+<script src="/site.js" defer></script>
 </body></html>"""
 
 def rel_links(items): return '<div class="rel">'+"".join(f'<a href="/{s}/">{esc(t)}</a>' for s,t in items)+'</div>'
@@ -388,12 +371,32 @@ paginas["contacto"]=pagina("contacto","Contacto | Boostraffic SEO Local y Google
 for slug in ("sobre-nosotros","contacto"):
     os.makedirs(os.path.join(ROOT,slug),exist_ok=True); open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
 
+
+# ================= HUBS =================
+def _cards(items): return '<div class="rel">'+"".join(f'<a href="/{u}/">{esc(t)}</a>' for u,t in items)+'</div>'
+hub_c=sec("Elige tu ciudad","<p>Optimizamos fichas de Google Maps en todo el país, con foco en estas ciudades y sus zonas más buscadas.</p>"+_cards([(f"seo-local-{k}",f"SEO local en {v['n']}") for k,v in CIUDADES.items()]))+sec("Y también por sector",_cards([(f"google-maps-para-{k}",v['s']) for k,v in SECTORES.items()]))
+paginas["ciudades"]=pagina("ciudades","SEO Local por Ciudad en Colombia | Boostraffic","SEO local y optimización de Google Maps en Bogotá, Medellín, Cali, Barranquilla, Bucaramanga y Cartagena. Elige tu ciudad.","SEO local <em>en tu ciudad</em>","Optimización de Google Maps para negocios de las principales ciudades de Colombia.","Ciudades",hub_c,[],{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO local por ciudad","url":BASE+"/ciudades/"},legal=True)
+hub_s=sec("Elige tu sector","<p>Cada sector tiene sus propias búsquedas y errores típicos. Mira cómo trabajamos el tuyo.</p>"+_cards([(f"google-maps-para-{k}",v['s']) for k,v in SECTORES.items()]))+sec("Y también por ciudad",_cards([(f"seo-local-{k}",f"SEO local en {v['n']}") for k,v in CIUDADES.items()]))
+paginas["sectores"]=pagina("sectores","Google Maps por Sector: Salud, Restaurantes y más | Boostraffic","Optimización de Google Maps para odontólogos, restaurantes, clínicas estéticas, talleres, abogados y hoteles. Elige tu sector.","Google Maps <em>para tu sector</em>","Optimización de fichas pensada para las búsquedas y los errores típicos de cada negocio.","Sectores",hub_s,[],{"@context":"https://schema.org","@type":"CollectionPage","name":"Google Maps por sector","url":BASE+"/sectores/"},legal=True)
+for _h in ("ciudades","sectores"):
+    os.makedirs(os.path.join(ROOT,_h),exist_ok=True); open(os.path.join(ROOT,_h,"index.html"),"w").write(paginas[_h])
 for slug,(title,desc,h1,lead,crumb,body) in legales.items():
     paginas[slug]=pagina(slug,title,desc,h1,lead,crumb,body,[],None,legal=True)
     os.makedirs(os.path.join(ROOT,slug),exist_ok=True)
     open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
 
-urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else (0.6 if s in ("contacto","sobre-nosotros") else 0.8))) for s in paginas]
+urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else (0.6 if s in ("contacto","sobre-nosotros","ciudades","sectores") else 0.8))) for s in paginas]
 xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url>\n    <loc>{BASE}{u}</loc>\n    <lastmod>{HOY}</lastmod>\n    <priority>{p}</priority>\n  </url>\n" for u,p in urls)+"</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w").write(xml)
 print("total",len(paginas))
+
+# ================= LANDING: header/footer/menú desde las plantillas =================
+import re as _re
+lp=os.path.join(ROOT,"boostraffic-landing.html"); L=open(lp).read()
+L=_re.sub(r'<nav>\n  <div class="nav-inner">.*?</nav>',lambda m:HEADER.strip(),L,count=1,flags=_re.S)
+L=_re.sub(r'<footer>.*?</footer>',lambda m:FOOTER.strip(),L,count=1,flags=_re.S)
+L=_re.sub(r'<script>\n/\* Menú · indicador deslizante.*?</script>\n','<script src="/site.js" defer></script>\n',L,count=1,flags=_re.S)
+open(lp,"w").write(L)
+print("landing: header/footer/menú sincronizados")
+import shutil as _sh
+for _f in ("site.css","site.js"): _sh.copy(os.path.join(ROOT,"tools/partials",_f),os.path.join(ROOT,_f))
