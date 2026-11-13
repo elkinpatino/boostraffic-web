@@ -80,6 +80,8 @@ SECTORES={
    ("¿Los atributos del hotel realmente influyen?","Sí. Marcar correctamente Wi-Fi, parqueadero, desayuno o acepta mascotas lo hace aparecer cuando el huésped filtra por esas necesidades.")]),
 }
 
+POLI=[("politica-de-privacidad","Privacidad"),("terminos-y-condiciones","Términos"),("politica-de-cookies","Cookies"),("garantia-y-reembolsos","Garantía y reembolsos"),("eliminacion-de-datos","Eliminar mis datos")]
+POLI_LINKS=" · ".join(f'<a href="/{a}/">{b}</a>' for a,b in POLI)
 def esc(s): return html.escape(s,quote=True)
 def wa(msg): return f"https://wa.me/{WA}?text={quote(msg)}"
 
@@ -136,7 +138,7 @@ PLANES="""<div class="plans">
 <div class="plan"><b>Plan Profesional</b><div class="pr">$1.200.000</div><small>COP / mes · sin permanencia · gestión continua</small></div>
 </div>"""
 
-def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None):
+def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False):
     url=f"{BASE}/{slug}/"
     bc=[("Inicio",BASE+"/"),(crumb,url)] if crumb else []
     ld=[]
@@ -174,14 +176,13 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None):
 <nav class="crumbs" aria-label="Ruta"><a href="/">Inicio</a> › {esc(crumb)}</nav>
 <h1>{h1}</h1>
 <p>{lead}</p>
-<a class="btn btn-wa" href="{msg}" target="_blank" rel="noopener">Quiero mi auditoría por WhatsApp</a><a class="btn btn-o" href="/#precios">Ver planes</a>
+{"" if legal else f'<a class="btn btn-wa" href="{msg}" target="_blank" rel="noopener">Quiero mi auditoría por WhatsApp</a><a class="btn btn-o" href="/#precios">Ver planes</a>'}
 </div></div>
 <main><div class="c">
 {body}
-<section><h2>Preguntas frecuentes</h2>{faq_html}</section>
-<section><div class="cta"><h2>Empecemos por saber en qué estado está tu ficha</h2><p class="mut">La Auditoría Profesional te entrega tu score actual y la comparación con 5 competidores en 48 horas.</p><a class="btn btn-wa" href="{msg}" target="_blank" rel="noopener">Pedir mi auditoría</a></div></section>
+{"" if legal else f'<section><h2>Preguntas frecuentes</h2>{faq_html}</section><section><div class="cta"><h2>Empecemos por saber en qué estado está tu ficha</h2><p class="mut">La Auditoría Profesional te entrega tu score actual y la comparación con 5 competidores en 48 horas.</p><a class="btn btn-wa" href="{msg}" target="_blank" rel="noopener">Pedir mi auditoría</a></div></section>'}
 </div></main>
-<footer><p><a href="/">Boostraffic</a> · SEO local y optimización de Google Maps · Bogotá, Colombia</p><p><a href="mailto:info@boostraffic.com">info@boostraffic.com</a> · <a href="/privacy.html">Privacidad</a></p></footer>
+<footer><p><a href="/">Boostraffic</a> · SEO local y optimización de Google Maps · Bogotá, Colombia</p><p><a href="mailto:info@boostraffic.com">info@boostraffic.com</a></p><p>{POLI_LINKS}</p></footer>
 </body></html>"""
 
 def rel_links(items): return '<div class="rel">'+"".join(f'<a href="/{s}/">{esc(t)}</a>' for s,t in items)+'</div>'
@@ -285,3 +286,66 @@ urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-
 xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url>\n    <loc>{BASE}{u}</loc>\n    <lastmod>{HOY}</lastmod>\n    <priority>{p}</priority>\n  </url>\n" for u,p in urls)+"</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w").write(xml)
 print(len(paginas),"páginas:",", ".join(paginas))
+
+# ================= PÁGINAS LEGALES =================
+FECHA="13 de noviembre de 2026"
+EMP="Boostraffic S.A.S."
+CONT='<p><b>Responsable:</b> '+EMP+', Bogotá, Colombia · <a href="mailto:info@boostraffic.com">info@boostraffic.com</a> · WhatsApp <a href="https://wa.me/573219453933">+57 321 945 3933</a> · <a href="https://boostraffic.com/">boostraffic.com</a></p>'
+def sec(h,b): return f"<section><h2>{h}</h2>{b}</section>"
+def lis(items): return '<ul class="ck">'+"".join(f"<li>{i}</li>" for i in items)+"</ul>"
+legales={}
+
+legales["politica-de-privacidad"]=("Política de Privacidad y Tratamiento de Datos | Boostraffic","Cómo Boostraffic recolecta, usa y protege tus datos personales conforme a la Ley 1581 de 2012 de Colombia. Tus derechos y cómo ejercerlos.","Política de privacidad y tratamiento de datos","Última actualización: "+FECHA,"Política de privacidad",
+ sec("1. Quién es el responsable",CONT+"<p>Esta política aplica al sitio boostraffic.com y a la atención que prestamos por WhatsApp, correo y formulario. Se rige por la Ley 1581 de 2012, el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015) y demás normas colombianas de protección de datos personales.</p>")+
+ sec("2. Qué datos recolectamos",'<p>Recolectamos únicamente los datos que tú nos entregas:</p>'+lis(["<b>Formulario de análisis gratuito:</b> nombre del negocio, teléfono, dirección del negocio y, opcionalmente, correo electrónico.","<b>Conversaciones por WhatsApp o correo:</b> el contenido de tus mensajes, tu número y el nombre de tu perfil.","<b>Datos del negocio para prestar el servicio:</b> acceso a la ficha de Google Maps (Perfil de Negocio), fotos, horarios y otra información que decidas compartir.","<b>Datos de navegación:</b> páginas visitadas, tiempo en el sitio, tipo de dispositivo y ubicación aproximada, mediante analítica (ver la <a href='/politica-de-cookies/'>política de cookies</a>)."])+"<p>No solicitamos datos de pago en el sitio, documentos de identidad ni datos sensibles. Si algún día pudiéramos requerirlos, te lo informaremos antes y será opcional.</p>")+
+ sec("3. Para qué usamos tus datos (finalidades)",lis(["Responder tu solicitud y enviarte el análisis o la propuesta.","Prestar, facturar y dar soporte a los servicios contratados.","Contactarte por WhatsApp, teléfono o correo en relación con tu solicitud o tu servicio.","Medir y mejorar el funcionamiento del sitio.","Cumplir obligaciones legales, contables y tributarias."])+"<p>No usamos tus datos para fines distintos sin tu autorización previa.</p>")+
+ sec("4. Con quién los compartimos",'<p><b>No vendemos ni arrendamos tus datos personales.</b> Solo los compartimos con proveedores que nos ayudan a operar, quienes los tratan bajo nuestras instrucciones:</p>'+lis(["<b>WhatsApp (Meta):</b> cuando nos escribes o envías el formulario, el mensaje viaja por WhatsApp y queda sujeto a las condiciones de esa plataforma.","<b>Web3Forms:</b> servicio que nos reenvía por correo los datos del formulario.","<b>Google (Analytics 4 y Google Fonts):</b> analítica del sitio y tipografías.","<b>StatCounter:</b> contador de visitas del sitio.","Proveedores de infraestructura y alojamiento del sitio y de correo.","Autoridades, cuando una norma o una orden judicial lo exija."])+"<p>Algunos de estos proveedores pueden tratar datos fuera de Colombia. Al usar el sitio autorizas esta transferencia y transmisión en las condiciones aquí descritas.</p>")+
+ sec("5. Tus derechos como titular",'<p>De acuerdo con la Ley 1581 de 2012 puedes:</p>'+lis(["Conocer, actualizar y rectificar tus datos.","Solicitar prueba de la autorización que nos diste.","Ser informado sobre el uso que damos a tus datos.","Presentar quejas ante la Superintendencia de Industria y Comercio (SIC).","Revocar la autorización y solicitar la supresión de tus datos, cuando no exista un deber legal de conservarlos.","Acceder gratuitamente a tus datos."]))+
+ sec("6. Cómo ejercer tus derechos",'<p>Escríbenos a <a href="mailto:info@boostraffic.com">info@boostraffic.com</a> con el asunto «Datos personales», indicando tu nombre, un medio de contacto y qué quieres hacer. Respondemos las consultas en máximo 10 días hábiles y los reclamos en máximo 15 días hábiles, prorrogables según la ley. Para borrar tus datos también puedes seguir las instrucciones de <a href="/eliminacion-de-datos/">eliminación de datos</a>.</p>')+
+ sec("7. Conservación y seguridad","<p>Conservamos tus datos mientras exista una relación contigo o una obligación legal, y luego los eliminamos o anonimizamos. Aplicamos medidas razonables de seguridad técnica y organizacional, aunque ningún sistema conectado a internet es completamente invulnerable.</p>")+
+ sec("8. Menores de edad","<p>Nuestros servicios están dirigidos a empresas y personas mayores de edad. No recolectamos datos de menores de forma intencional.</p>")+
+ sec("9. Cambios a esta política","<p>Podemos actualizarla cuando cambien la ley o nuestras prácticas. Publicaremos la versión vigente en esta página con su fecha de actualización.</p>"))
+
+legales["terminos-y-condiciones"]=("Términos y Condiciones del Servicio | Boostraffic","Términos y condiciones de uso del sitio y de contratación de los servicios de SEO local y optimización de Google Maps de Boostraffic.","Términos y condiciones","Última actualización: "+FECHA,"Términos y condiciones",
+ sec("1. Aceptación",CONT+"<p>Al usar boostraffic.com o contratar nuestros servicios aceptas estos términos. Si no estás de acuerdo, no uses el sitio ni contrates el servicio.</p>")+
+ sec("2. Qué hacemos","<p>Boostraffic presta servicios de SEO local y optimización de fichas de Google Maps (Perfil de Negocio): auditoría, ajustes técnicos y de contenido de la ficha, gestión de reseñas y publicaciones, y reportes de seguimiento. El alcance exacto de cada plan es el publicado en <a href='/#precios'>la sección de planes</a> o el acordado por escrito contigo.</p>")+
+ sec("3. Planes y precios",PLANES+"<p style='margin-top:12px'>Los precios están en pesos colombianos (COP) y pueden cambiar; el precio aplicable es el que se te confirmó al contratar. El Plan Enterprise se cotiza a medida. Si requieres factura, la emitimos según la normativa vigente.</p>")+
+ sec("4. Pagos","<p>La Auditoría y el Plan Básico se pagan una sola vez y el Plan Profesional mensualmente, por los medios que acordemos al contratar. El servicio inicia una vez confirmado el pago. El Plan Profesional y el Enterprise son mes a mes, sin permanencia mínima.</p>")+
+ sec("5. Lo que necesitamos de ti",lis(["Información veraz y actualizada de tu negocio.","Acceso a tu ficha de Google Maps con los permisos necesarios (como administrador o propietario) y, si aplica, la verificación de la ficha.","Que seas titular o tengas autorización para gestionar el negocio y sus contenidos.","Respuesta oportuna a nuestras solicitudes de información o aprobación."])+"<p>Los retrasos por falta de acceso o de información no cuentan como incumplimiento nuestro.</p>")+
+ sec("6. Resultados: sin garantía de posición","<p>El orden en Google Maps lo define Google con sus propios algoritmos, que cambian sin aviso, y depende de factores fuera de nuestro control (competencia, distancia, reseñas de terceros, decisiones de Google). Por eso <b>no garantizamos una posición, un número de llamadas o de clientes concretos</b>. Nos obligamos a ejecutar el trabajo contratado con diligencia profesional y a reportar su avance. Las garantías aplicables están en la <a href='/garantia-y-reembolsos/'>política de garantía y reembolsos</a>.</p>")+
+ sec("7. Reseñas y cumplimiento de las reglas de Google","<p>Trabajamos de acuerdo con las políticas de Google. No compramos, fabricamos ni ofrecemos reseñas falsas, ni creamos fichas duplicadas o engañosas. Google puede modificar, suspender o eliminar una ficha por sus propias decisiones; no controlamos esas decisiones.</p>")+
+ sec("8. Propiedad intelectual","<p>El sitio, su diseño, textos, marca y metodología son de Boostraffic. Tu marca, tus fotos y tus contenidos siguen siendo tuyos; nos autorizas a usarlos únicamente para prestar el servicio. Podremos mencionar que eres cliente solo si nos lo autorizas.</p>")+
+ sec("9. Confidencialidad y datos personales","<p>Tratamos la información de tu negocio como confidencial. El tratamiento de datos personales se rige por la <a href='/politica-de-privacidad/'>política de privacidad</a>.</p>")+
+ sec("10. Limitación de responsabilidad","<p>En la máxima medida permitida por la ley, nuestra responsabilidad por cualquier reclamación se limita al valor pagado por el servicio del período en que ocurrió el hecho. No respondemos por lucro cesante, por decisiones de Google ni por fallas de servicios de terceros.</p>")+
+ sec("11. Terminación","<p>Puedes cancelar el Plan Profesional o Enterprise cuando quieras avisándonos por escrito (correo o WhatsApp), sin penalidad. Podemos suspender el servicio por incumplimiento de pago, uso contrario a las políticas de Google o información falsa.</p>")+
+ sec("12. Ley aplicable y contacto","<p>Estos términos se rigen por las leyes de la República de Colombia. Las controversias se resolverán primero de forma directa y, si no hay acuerdo, ante los jueces competentes de Bogotá. Escríbenos a <a href='mailto:info@boostraffic.com'>info@boostraffic.com</a> para cualquier duda.</p>")+
+ sec("13. Cambios","<p>Podemos actualizar estos términos; la versión vigente es la publicada en esta página. Los cambios no afectan los servicios ya pagados en su período en curso.</p>"))
+
+legales["politica-de-cookies"]=("Política de Cookies | Boostraffic","Qué cookies y tecnologías similares usa boostraffic.com, para qué sirven y cómo desactivarlas.","Política de cookies","Última actualización: "+FECHA,"Política de cookies",
+ sec("1. Qué son",CONT+"<p>Las cookies son pequeños archivos que el navegador guarda al visitar un sitio. Sirven para recordar preferencias y para medir cómo se usa la página.</p>")+
+ sec("2. Cuáles usamos",'<p>Usamos únicamente cookies de analítica; no usamos cookies publicitarias ni de perfilamiento propias.</p>'+lis(["<b>Google Analytics 4 (_ga, _ga_*):</b> miden visitas, páginas vistas, tiempo en el sitio, dispositivo y ubicación aproximada, de forma agregada. Duran hasta 2 años.","<b>StatCounter:</b> contador de visitas del sitio (cookies propias del servicio para distinguir visitantes únicos).","<b>Google Fonts:</b> carga la tipografía desde servidores de Google; Google puede registrar la dirección IP para entregar el archivo."]))+
+ sec("3. Cómo desactivarlas",lis(["Desde la configuración de tu navegador puedes bloquear o borrar cookies (Chrome, Safari, Firefox y Edge lo permiten).","Para Google Analytics puedes instalar el <a href='https://tools.google.com/dlpage/gaoptout' rel='noopener' target='_blank'>complemento oficial de inhabilitación</a>.","Si bloqueas las cookies, el sitio sigue funcionando; solo dejaremos de medir tu visita."]))+
+ sec("4. Más información","<p>El tratamiento de los datos que se obtienen se explica en la <a href='/politica-de-privacidad/'>política de privacidad</a>. Si tienes dudas, escríbenos a <a href='mailto:info@boostraffic.com'>info@boostraffic.com</a>.</p>"))
+
+legales["garantia-y-reembolsos"]=("Garantía y Política de Reembolsos | Boostraffic","Qué garantía tiene cada plan de Boostraffic, cuándo aplica un reembolso y cómo solicitarlo. Sin permanencia.","Garantía y política de reembolsos","Última actualización: "+FECHA,"Garantía y reembolsos",
+ sec("Nuestro compromiso",CONT+"<p>Queremos que te quedes por resultados, no por contrato. Estas son las garantías de cada plan:</p>")+
+ sec("Garantías por plan",lis(["<b>Auditoría Profesional:</b> es un diagnóstico con entrega en 48 horas; no incluye promesa de resultados, sino el informe con tu score y la comparación con 5 competidores.","<b>Plan Básico:</b> si en 30 días no percibes mejora, te damos soporte extendido sin costo adicional.","<b>Plan Profesional:</b> sin permanencia; puedes pausar o cancelar en cualquier momento sin penalización.","<b>Plan Enterprise:</b> si en 90 días no hay resultados medibles frente a lo pactado, reembolsamos 2 meses."])+"<p>Los «resultados medibles» se verifican con los indicadores de la ficha (impresiones, llamadas, rutas, visitas al perfil) comparados con el punto de partida del diagnóstico inicial.</p>")+
+ sec("Qué no cubre la garantía",lis(["Garantizar una posición específica en Google Maps (ver <a href='/terminos-y-condiciones/'>términos</a>).","Afectaciones causadas por decisiones de Google, como suspensiones o cambios de algoritmo.","Retrasos o resultados limitados por falta de acceso a la ficha o de información de tu parte.","Servicios ya prestados y entregados conforme a lo contratado."]))+
+ sec("Derecho de retracto","<p>Si contratas a distancia (por internet, WhatsApp o teléfono), puedes ejercer el derecho de retracto dentro de los 5 días hábiles siguientes a la contratación, conforme a la Ley 1480 de 2011, salvo en los casos que la ley exceptúa, como los servicios cuya prestación ya comenzó con tu consentimiento expreso. Te lo explicamos antes de iniciar.</p>")+
+ sec("Cómo solicitar un reembolso","<p>Escríbenos a <a href='mailto:info@boostraffic.com'>info@boostraffic.com</a> o por <a href='https://wa.me/573219453933'>WhatsApp</a> indicando tu nombre, el plan y el motivo. Respondemos en máximo 5 días hábiles y, si procede, devolvemos el dinero por el mismo medio de pago en un plazo máximo de 30 días calendario.</p>"))
+
+legales["eliminacion-de-datos"]=("Eliminación de Datos Personales | Boostraffic","Cómo solicitar que Boostraffic elimine tus datos personales: pasos, plazos y qué sucede con tu información.","Eliminación de datos personales","Última actualización: "+FECHA,"Eliminación de datos",
+ sec("Cómo pedir que borremos tus datos",CONT+"<p>Tienes derecho a solicitar la supresión de tus datos personales (Ley 1581 de 2012). Para hacerlo:</p><ol style='margin:0 0 14px 22px'><li>Escribe a <a href='mailto:info@boostraffic.com?subject=Eliminaci%C3%B3n%20de%20datos'>info@boostraffic.com</a> con el asunto «Eliminación de datos», o por <a href='https://wa.me/573219453933?text=Quiero%20solicitar%20la%20eliminaci%C3%B3n%20de%20mis%20datos'>WhatsApp</a>.</li><li>Indica tu nombre, el negocio y el teléfono o correo con el que nos contactaste, para poder ubicar tus datos.</li><li>Te confirmamos la recepción y, en máximo 15 días hábiles, eliminamos tus datos y te avisamos.</li></ol>")+
+ sec("Qué eliminamos",lis(["Los datos del formulario (nombre del negocio, teléfono, dirección y correo).","Las conversaciones y archivos que tengamos asociados a tu solicitud.","Tus datos en nuestras bases y en el correo donde se reciben los formularios."])+"<p>Si la solicitud se refiere a una conversación de WhatsApp, también puedes borrarla desde tu propio teléfono; nosotros eliminamos nuestra copia.</p>")+
+ sec("Excepciones","<p>Podemos conservar los datos mínimos que una norma nos obligue a guardar (por ejemplo, soportes contables y de facturación) durante el tiempo legal, y solo para ese fin.</p>")+
+ sec("Más información","<p>Consulta la <a href='/politica-de-privacidad/'>política de privacidad</a> para conocer todos tus derechos. Si no quedas satisfecho con la respuesta, puedes acudir a la Superintendencia de Industria y Comercio (SIC).</p>"))
+
+for slug,(title,desc,h1,lead,crumb,body) in legales.items():
+    paginas[slug]=pagina(slug,title,desc,h1,lead,crumb,body,[],None,legal=True)
+    os.makedirs(os.path.join(ROOT,slug),exist_ok=True)
+    open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
+
+urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else 0.8)) for s in paginas]
+xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url>\n    <loc>{BASE}{u}</loc>\n    <lastmod>{HOY}</lastmod>\n    <priority>{p}</priority>\n  </url>\n" for u,p in urls)+"</urlset>\n"
+open(os.path.join(ROOT,"sitemap.xml"),"w").write(xml)
+print("total",len(paginas))

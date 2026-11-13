@@ -23,4 +23,9 @@ COPY google-maps-para-talleres-mecanicos /usr/share/nginx/html/google-maps-para-
 COPY google-maps-para-abogados /usr/share/nginx/html/google-maps-para-abogados
 COPY google-maps-para-hoteles /usr/share/nginx/html/google-maps-para-hoteles
 COPY como-aparecer-primero-en-google-maps /usr/share/nginx/html/como-aparecer-primero-en-google-maps
+COPY politica-de-privacidad /usr/share/nginx/html/politica-de-privacidad
+COPY terminos-y-condiciones /usr/share/nginx/html/terminos-y-condiciones
+COPY politica-de-cookies /usr/share/nginx/html/politica-de-cookies
+COPY garantia-y-reembolsos /usr/share/nginx/html/garantia-y-reembolsos
+COPY eliminacion-de-datos /usr/share/nginx/html/eliminacion-de-datos
 EXPOSE 80

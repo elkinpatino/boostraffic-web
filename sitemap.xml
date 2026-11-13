@@ -71,7 +71,27 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://boostraffic.com/privacy.html</loc>
+    <loc>https://boostraffic.com/politica-de-privacidad/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://boostraffic.com/terminos-y-condiciones/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://boostraffic.com/politica-de-cookies/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://boostraffic.com/garantia-y-reembolsos/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://boostraffic.com/eliminacion-de-datos/</loc>
     <lastmod>2026-11-13</lastmod>
     <priority>0.3</priority>
   </url>
