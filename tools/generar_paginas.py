@@ -174,7 +174,7 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(desc)}"><meta name="twitter:image" content="{BASE}/og-boostraffic.png">
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-6E7PS47XZQ');addEventListener('load',function(){{var f=function(){{var e=document.createElement('script');e.async=true;e.src='https://www.googletagmanager.com/gtag/js?id=G-6E7PS47XZQ';document.head.appendChild(e);}};('requestIdleCallback' in window)?requestIdleCallback(f,{{timeout:3500}}):setTimeout(f,2000);}});</script>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
-<link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/site.css?v=20261113b">
 <style>{CSS}</style>
 {ldt}
 </head>
@@ -192,7 +192,7 @@ def pagina(slug,title,desc,h1,lead,crumb,body,faqs,extra_schema=None,legal=False
 {"" if legal else f'<section><h2>Preguntas frecuentes</h2>{faq_html}</section><section><div class="cta"><h2>Empecemos por saber en qué estado está tu ficha</h2><p class="mut">La Auditoría Profesional te entrega tu score actual y la comparación con 5 competidores en 48 horas.</p><a class="cb cb-wa" href="{msg}" target="_blank" rel="noopener">Pedir mi auditoría</a></div></section>'}
 </div></main>
 {FOOTER}
-<script src="/site.js" defer></script>
+<script src="/site.js?v=20261113b" defer></script>
 </body></html>"""
 
 def rel_links(items): return '<div class="rel">'+"".join(f'<a href="/{s}/">{esc(t)}</a>' for s,t in items)+'</div>'
@@ -424,7 +424,7 @@ import re as _re
 lp=os.path.join(ROOT,"boostraffic-landing.html"); L=open(lp).read()
 L=_re.sub(r'<nav>\n  <div class="nav-inner">.*?</nav>',lambda m:HEADER.strip(),L,count=1,flags=_re.S)
 L=_re.sub(r'<footer>.*?</footer>',lambda m:FOOTER.strip(),L,count=1,flags=_re.S)
-L=_re.sub(r'<script>\n/\* Menú · indicador deslizante.*?</script>\n','<script src="/site.js" defer></script>\n',L,count=1,flags=_re.S)
+L=_re.sub(r'<script>\n/\* Menú · indicador deslizante.*?</script>\n','<script src="/site.js?v=20261113b" defer></script>\n',L,count=1,flags=_re.S)
 open(lp,"w").write(L)
 print("landing: header/footer/menú sincronizados")
 import shutil as _sh
