@@ -28,4 +28,6 @@ COPY terminos-y-condiciones /usr/share/nginx/html/terminos-y-condiciones
 COPY politica-de-cookies /usr/share/nginx/html/politica-de-cookies
 COPY garantia-y-reembolsos /usr/share/nginx/html/garantia-y-reembolsos
 COPY eliminacion-de-datos /usr/share/nginx/html/eliminacion-de-datos
+COPY sobre-nosotros /usr/share/nginx/html/sobre-nosotros
+COPY contacto /usr/share/nginx/html/contacto
 EXPOSE 80

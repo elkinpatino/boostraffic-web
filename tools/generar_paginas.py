@@ -80,8 +80,9 @@ SECTORES={
    ("¿Los atributos del hotel realmente influyen?","Sí. Marcar correctamente Wi-Fi, parqueadero, desayuno o acepta mascotas lo hace aparecer cuando el huésped filtra por esas necesidades.")]),
 }
 
+NOS=[("sobre-nosotros","Sobre nosotros"),("contacto","Contacto")]
 POLI=[("politica-de-privacidad","Privacidad"),("terminos-y-condiciones","Términos"),("politica-de-cookies","Cookies"),("garantia-y-reembolsos","Garantía y reembolsos"),("eliminacion-de-datos","Eliminar mis datos")]
-POLI_LINKS=" · ".join(f'<a href="/{a}/">{b}</a>' for a,b in POLI)
+POLI_LINKS=" · ".join(f'<a href="/{a}/">{b}</a>' for a,b in NOS+POLI)
 def esc(s): return html.escape(s,quote=True)
 def wa(msg): return f"https://wa.me/{WA}?text={quote(msg)}"
 
@@ -340,12 +341,38 @@ legales["eliminacion-de-datos"]=("Eliminación de Datos Personales | Boostraffic
  sec("Excepciones","<p>Podemos conservar los datos mínimos que una norma nos obligue a guardar (por ejemplo, soportes contables y de facturación) durante el tiempo legal, y solo para ese fin.</p>")+
  sec("Más información","<p>Consulta la <a href='/politica-de-privacidad/'>política de privacidad</a> para conocer todos tus derechos. Si no quedas satisfecho con la respuesta, puedes acudir a la Superintendencia de Industria y Comercio (SIC).</p>"))
 
+
+# ================= SOBRE NOSOTROS / CONTACTO =================
+CIUD_REL=rel_links([('seo-local-'+k,'SEO local en '+x['n']) for k,x in CIUDADES.items()])
+about_body=(sec("Quiénes somos","<p>Boostraffic es una agencia de Bogotá, Colombia, especializada en <b>SEO local y optimización de fichas de Google Maps</b> (Perfil de Negocio). Ayudamos a negocios locales a aparecer cuando sus clientes los buscan cerca, y a que quien los encuentra decida llamar, escribir o visitar.</p><p>Combinamos ingeniería web, análisis de datos y automatización con inteligencia artificial con revisión humana, para que cada ficha se trabaje con método y se pueda medir.</p>")+
+ sec("Qué hacemos",lis(["<b>Auditoría de tu ficha</b> con score y comparación frente a tus 5 competidores directos.","<b>Optimización técnica y de contenido:</b> categorías, descripción, servicios, fotos, horarios y datos de contacto.","<b>Gestión de reseñas y publicaciones</b> para ganar confianza y actividad.","<b>Seguimiento medible:</b> impresiones, llamadas, rutas y visitas al perfil."])+f"<p>Mira los <a href='/#precios'>planes y precios</a> o cómo <a href='/como-aparecer-primero-en-google-maps/'>aparecer primero en Google Maps</a>.</p>")+
+ sec("Cómo trabajamos",lis(["<b>Diagnóstico primero.</b> Medimos dónde estás antes de proponer nada.","<b>Sin atajos.</b> No compramos reseñas ni creamos fichas falsas; seguimos las reglas de Google.","<b>Sin permanencia.</b> Te quedas por resultados, no por contrato.","<b>Transparencia.</b> Te mostramos qué se hizo y qué cambió en tu ficha.","<b>Sin promesas imposibles.</b> El orden en el mapa lo decide Google; nosotros optimizamos todo lo que depende de ti."]))+
+ sec("Dónde trabajamos",f"<p>Atendemos negocios de toda Colombia de forma remota, con foco en:</p>{CIUD_REL}<p style='margin-top:12px'>Y en sectores como <a href='/google-maps-para-odontologos/'>odontólogos</a>, <a href='/google-maps-para-restaurantes/'>restaurantes</a>, <a href='/google-maps-para-clinicas-esteticas/'>clínicas estéticas</a>, <a href='/google-maps-para-talleres-mecanicos/'>talleres</a>, <a href='/google-maps-para-abogados/'>abogados</a> y <a href='/google-maps-para-hoteles/'>hoteles</a>.</p>")+
+ sec("Datos de la empresa",CONT+"<p>Redes: <a href='https://www.facebook.com/boostraffic' rel='noopener'>Facebook</a> · <a href='https://www.instagram.com/boostraffic' rel='noopener'>Instagram</a> · <a href='https://www.linkedin.com/company/boostraffic' rel='noopener'>LinkedIn</a>. ¿Hablamos? Ve a <a href='/contacto/'>contacto</a>.</p>"))
+paginas["sobre-nosotros"]=pagina("sobre-nosotros","Sobre Boostraffic: agencia de SEO local y Google Maps","Conoce a Boostraffic, agencia de Bogotá especializada en SEO local y optimización de fichas de Google Maps para negocios de toda Colombia.","Sobre <em>Boostraffic</em>","Agencia de Bogotá especializada en SEO local y fichas de Google Maps.","Sobre nosotros",about_body,[],{"@context":"https://schema.org","@type":"AboutPage","name":"Sobre Boostraffic","url":BASE+"/sobre-nosotros/","about":{"@id":BASE+"/#negocio"}},legal=True)
+
+contact_script="""<script>
+(function(){var f=document.getElementById('cf');if(!f)return;
+f.addEventListener('submit',function(e){e.preventDefault();var d=Object.fromEntries(new FormData(f));
+var m='Hola, quiero contactar con Boostraffic.\n\nNombre: '+d.nombre+'\nNegocio: '+d.negocio+'\nTeléfono: '+d.telefono+(d.mensaje?'\nMensaje: '+d.mensaje:'');
+fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:'def4872d-b1e7-44a3-8df2-07b609020582',subject:'Contacto web Boostraffic: '+d.negocio,from_name:'Boostraffic Contacto',Nombre:d.nombre,Negocio:d.negocio,Teléfono:d.telefono,Mensaje:d.mensaje||'—'})}).catch(function(){});
+f.style.display='none';document.getElementById('ok').style.display='block';
+window.open('https://wa.me/573219453933?text='+encodeURIComponent(m),'_blank');});})();
+</script>"""
+contact_css="<style>.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{border:1px solid var(--border);border-radius:var(--r);padding:18px;background:var(--bg2)}.card b{display:block;margin-bottom:4px}form#cf label{display:block;font-weight:600;font-size:15px;margin:14px 0 6px}form#cf input,form#cf textarea{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}form#cf textarea{min-height:110px;resize:vertical}form#cf button{margin-top:18px;border:0;cursor:pointer;font:inherit;font-weight:600;background:#25d366;color:#fff;padding:14px 30px;border-radius:28px}#ok{display:none;padding:18px;border-radius:12px;background:var(--bg3)}</style>"
+contact_body=(contact_css+sec("Elige cómo escribirnos",'<div class="cards"><div class="card"><b>WhatsApp (respuesta más rápida)</b><a href="https://wa.me/573219453933?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20optimizaci%C3%B3n%20de%20Google%20Maps">+57 321 945 3933</a></div><div class="card"><b>Correo</b><a href="mailto:info@boostraffic.com">info@boostraffic.com</a></div><div class="card"><b>Ubicación</b>Bogotá, Colombia · atendemos todo el país de forma remota</div></div>')+
+ sec("O déjanos tus datos",'<form id="cf"><label for="n1">Tu nombre</label><input id="n1" name="nombre" required autocomplete="name"><label for="n2">Nombre del negocio</label><input id="n2" name="negocio" required><label for="n3">Teléfono</label><input id="n3" name="telefono" type="tel" required autocomplete="tel"><label for="n4">¿Qué necesitas? (opcional)</label><textarea id="n4" name="mensaje"></textarea><button type="submit">Enviar por WhatsApp</button><p class="mut" style="font-size:14px;margin-top:12px">Al enviar abrimos WhatsApp con tus datos para responderte rápido. Aceptas el tratamiento de datos según la <a href="/politica-de-privacidad/">política de privacidad</a>.</p></form><div id="ok"><b>¡Listo!</b> Abrimos WhatsApp con tus datos. Te respondemos pronto.</div>'+contact_script)+
+ sec("Antes de escribir","<p>Si quieres ir directo: la <b>Auditoría Profesional</b> ($190.000 COP, entrega en 48 h) es el mejor primer paso. También puedes leer <a href='/como-aparecer-primero-en-google-maps/'>cómo aparecer primero en Google Maps</a> o conocer <a href='/sobre-nosotros/'>quiénes somos</a>.</p>"))
+paginas["contacto"]=pagina("contacto","Contacto | Boostraffic SEO Local y Google Maps","Contacta a Boostraffic por WhatsApp, correo o formulario. Auditoría de tu ficha de Google Maps con entrega en 48 horas.","<em>Contacto</em>","Escríbenos y te decimos en qué estado está tu ficha de Google Maps.","Contacto",contact_body,[],{"@context":"https://schema.org","@type":"ContactPage","name":"Contacto Boostraffic","url":BASE+"/contacto/","about":{"@id":BASE+"/#negocio"}},legal=True)
+for slug in ("sobre-nosotros","contacto"):
+    os.makedirs(os.path.join(ROOT,slug),exist_ok=True); open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
+
 for slug,(title,desc,h1,lead,crumb,body) in legales.items():
     paginas[slug]=pagina(slug,title,desc,h1,lead,crumb,body,[],None,legal=True)
     os.makedirs(os.path.join(ROOT,slug),exist_ok=True)
     open(os.path.join(ROOT,slug,"index.html"),"w").write(paginas[slug])
 
-urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else 0.8)) for s in paginas]
+urls=[("/",1.0)]+[(f"/{s}/",0.9 if s.startswith("seo-local-bogota") or s=="como-aparecer-primero-en-google-maps" else (0.3 if s in legales else (0.6 if s in ("contacto","sobre-nosotros") else 0.8))) for s in paginas]
 xml='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+"".join(f"  <url>\n    <loc>{BASE}{u}</loc>\n    <lastmod>{HOY}</lastmod>\n    <priority>{p}</priority>\n  </url>\n" for u,p in urls)+"</urlset>\n"
 open(os.path.join(ROOT,"sitemap.xml"),"w").write(xml)
 print("total",len(paginas))
