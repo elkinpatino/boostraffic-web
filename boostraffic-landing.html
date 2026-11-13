@@ -3103,7 +3103,7 @@ updateBottomNav();
   function valido(el){ var v=el.value.trim(); if(el.name==='telefono') return v.replace(/\D/g,'').length>=7; return v.length>=3; }
   function act(){ var n=0; campos.forEach(function(el,i){ var ok=valido(el); el.parentNode.classList.toggle('ok',ok); segs[i].classList.toggle('ok',ok); if(ok) n++; });
     est.classList.toggle('listo',n===3); sec.classList.toggle('lista',n===3);
-    est.textContent=n===3?'✓ Todo listo. Lanza tu análisis':(n===0?'Completa 3 datos para recibir tu diagnóstico':'Faltan '+(3-n)+(3-n===1?' dato':' datos')+' para lanzar'); 
+    est.textContent=n===3?'✓ Todo listo. Recibe tu diagnóstico':(n===0?'Completa 3 datos para recibir tu diagnóstico':'Faltan '+(3-n)+(3-n===1?' dato':' datos')+' para recibir tu diagnóstico'); 
     var nom=campos[0].value.trim(); etq.textContent=nom?('Analizando: '+nom):'Tu negocio · listo para analizar'; }
   f.addEventListener('input',act); act();
   var cierre=new MutationObserver(function(){ if(document.getElementById('successMsg').style.display==='block') card.classList.add('enviado'); });
