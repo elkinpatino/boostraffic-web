@@ -1221,18 +1221,55 @@ nav { background: rgba(6,11,24,.94); border-bottom: 1px solid rgba(255,255,255,.
 .c2-reloj b { display: block; font: 800 22px ui-monospace, Menlo, monospace; color: #ff7d70; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .c2 .calc-card > .btn { background: #ea4335; box-shadow: 0 14px 34px -12px rgba(234,67,53,.9); }
 .c2 .calc-card > .btn:hover { background: #f05a4d; }
-/* panel del embudo */
-.c2-viz { position: relative; min-height: 460px; border-radius: 28px; background: linear-gradient(170deg, #0f1428, #0a0d1c); border: 1px solid rgba(255,255,255,.1); box-shadow: 0 40px 80px -40px rgba(0,0,0,.9), 0 0 80px -30px rgba(234,67,53,.5); overflow: hidden; }
-.c2-viz canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.c2-tag { position: absolute; font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 6px 12px; border-radius: 99px; z-index: 2; white-space: nowrap; }
-.c2-t1 { left: 5%; top: 14px; color: #aecbfa; background: rgba(26,115,232,.2); border: 1px solid rgba(138,180,248,.4); }
-.c2-t2 { left: 5%; top: 49%; color: #fdd663; background: rgba(251,188,4,.14); border: 1px solid rgba(251,188,4,.4); }
-.c2-t3 { right: 5%; bottom: 16px; color: #f6b0aa; background: rgba(234,67,53,.2); border: 1px solid rgba(242,139,130,.5); }
-.c2-cuenta { position: absolute; right: 5%; top: 14px; text-align: right; z-index: 2; font-size: 11.5px; color: #8c97ab; line-height: 1.3; }
-.c2-cuenta b { display: block; font: 800 24px var(--font); color: #fdd663; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-@media (max-width: 900px) { .c2-grid { grid-template-columns: 1fr; } .c2-viz { min-height: 380px; order: -1; } }
-@media (max-width: 480px) { .c2-t1 { display: none; } .c2-t2 { top: 40%; } }
-@media (prefers-reduced-motion: reduce) { .c2-reloj::before { animation: none; } }
+/* panel del celular */
+.c2-viz { position: relative; min-height: 640px; border-radius: 28px; background: radial-gradient(60% 50% at 50% 40%, rgba(26,115,232,.16), transparent 70%), linear-gradient(170deg, #0f1428, #0a0d1c); border: 1px solid rgba(255,255,255,.1); box-shadow: 0 40px 80px -40px rgba(0,0,0,.9), 0 0 80px -30px rgba(234,67,53,.5); overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 16px 20px; gap: 18px; }
+.c2-cuenta { align-self: flex-end; text-align: right; font-size: 11.5px; color: #8c97ab; line-height: 1.3; position: absolute; right: 22px; top: 18px; z-index: 3; }
+.c2-cuenta b { display: block; font: 800 26px var(--font); color: #fdd663; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.ph { position: relative; width: min(290px, 74%); aspect-ratio: 9 / 18.2; border-radius: 46px; padding: 11px; background: linear-gradient(145deg, #2b3144, #0b0e19 55%, #1c2133); box-shadow: 0 0 0 1.5px #3a4157, 0 0 0 5px #0a0c14, 0 40px 70px -20px rgba(0,0,0,.95), 0 0 60px -10px rgba(26,115,232,.35); margin-top: 26px; }
+.ph::before, .ph::after { content: ""; position: absolute; width: 3px; border-radius: 3px; background: #2a3042; }
+.ph::before { left: -5px; top: 18%; height: 7%; box-shadow: 0 46px 0 #2a3042, 0 92px 0 #2a3042; }
+.ph::after { right: -5px; top: 26%; height: 11%; }
+.ph-isl { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); width: 32%; height: 22px; border-radius: 99px; background: #000; z-index: 5; }
+.ph-scr { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #f1f3f4; color: #202124; display: flex; flex-direction: column; font-family: var(--font); }
+.ph-st { display: flex; justify-content: space-between; padding: 13px 20px 4px; font-size: 11px; font-weight: 700; color: #202124; }
+.ph-sb { margin: 6px 10px 0; background: #fff; border-radius: 99px; box-shadow: 0 1px 4px rgba(60,64,67,.3); display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #3c4043; }
+.ph-sb svg { flex: none; }
+.ph-map { position: relative; height: 31%; margin-top: 8px; background: #e8eaed; overflow: hidden; flex: none; }
+.ph-map::before { content: ""; position: absolute; inset: 0; background: linear-gradient(112deg, transparent 30%, #fff 30% 34%, transparent 34%), linear-gradient(28deg, transparent 52%, #fff 52% 56%, transparent 56%), linear-gradient(80deg, transparent 12%, #fbe9a7 12% 15%, transparent 15%), radial-gradient(circle at 80% 78%, #c8e6c9 0 18%, transparent 19%), radial-gradient(circle at 12% 20%, #c8e6c9 0 12%, transparent 13%), #e6e9ec; }
+.ph-pin { position: absolute; width: 22px; height: 22px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #ea4335; box-shadow: 0 2px 4px rgba(0,0,0,.3); }
+.ph-pin::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #fff; left: 7px; top: 7px; }
+.ph-pin i { position: absolute; left: 24px; top: -4px; transform: rotate(45deg); font: 700 9px var(--font); color: #202124; background: #fff; padding: 1px 5px; border-radius: 6px; white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,.25); font-style: normal; }
+.ph-pin.a { left: 24%; top: 28%; } .ph-pin.b { left: 62%; top: 18%; } .ph-pin.d { left: 70%; top: 56%; }
+.ph-pin.tu { left: 40%; top: 62%; background: #9aa0a6; opacity: .85; } .ph-pin.tu::after { background: #e8eaed; }
+.ph-pin.tu i { color: #5f6368; }
+.ph-list { flex: 1; min-height: 0; overflow: hidden; background: #fff; border-radius: 16px 16px 0 0; margin-top: -10px; position: relative; z-index: 2; padding: 8px 10px 0; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 -4px 10px rgba(60,64,67,.12); }
+.ph-grab { width: 34px; height: 4px; border-radius: 4px; background: #dadce0; align-self: center; flex: none; }
+.ph-r { position: relative; border: 1px solid #e8eaed; border-radius: 12px; padding: 7px 9px; flex: none; }
+.ph-r b { display: block; font-size: 12px; line-height: 1.2; color: #202124; }
+.ph-r small { display: block; font-size: 9.8px; color: #5f6368; line-height: 1.35; margin-top: 1px; }
+.ph-r .st { color: #e37400; font-weight: 700; } .ph-r .st em { color: #fbbc04; font-style: normal; letter-spacing: -1px; }
+.ph-r .ok { color: #188038; font-weight: 600; }
+.ph-bt { display: flex; gap: 5px; margin-top: 6px; }
+.ph-bt span { white-space: nowrap; font-size: 9.5px; font-weight: 700; padding: 4px 9px; border-radius: 99px; border: 1px solid #dadce0; color: #1a73e8; }
+.ph-r1 { border-color: #a8dab5; background: #f6fcf8; } .ph-r1 .ph-bt span:first-child { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+.ph-tag { position: absolute; right: 7px; top: 7px; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 99px; }
+.ph-r1 .ph-tag { background: #e6f4ea; color: #137333; }
+.ph-tu { border: 1.5px dashed #ea4335; background: #fff5f4; }
+.ph-tu .ph-tag { background: #fce8e6; color: #c5221f; }
+.ph-tu .ph-bt span { color: #9aa0a6; background: #f1f3f4; }
+.ph-tu .ph-miss { color: #c5221f; font-weight: 700; }
+.ph-feed { position: absolute; right: 14px; top: 160px; width: 190px; display: flex; flex-direction: column; gap: 8px; z-index: 6; pointer-events: none; }
+.ph-n { display: flex; align-items: center; gap: 9px; padding: 8px 11px; border-radius: 14px; background: rgba(20,24,40,.92); border: 1px solid rgba(242,139,130,.5); box-shadow: 0 14px 30px -10px rgba(0,0,0,.9); font-size: 11px; color: #e8eaed; line-height: 1.25; animation: ph-n 4s ease forwards; backdrop-filter: blur(8px); }
+.ph-n svg { flex: none; width: 20px; height: 20px; padding: 4px; border-radius: 50%; background: rgba(234,67,53,.25); color: #ff8a80; box-sizing: content-box; }
+.ph-n b { display: block; font-size: 11.5px; color: #fff; } .ph-n em { font-style: normal; color: #fdd663; font-weight: 800; }
+@keyframes ph-n { 0% { opacity: 0; transform: translateX(-16px) scale(.9); } 10%, 72% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateX(26px); } }
+.c2-ks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: min(100%, 440px); }
+.c2-k { text-align: center; padding: 9px 6px; border-radius: 14px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); font-size: 10.5px; color: #aab4c5; line-height: 1.25; }
+.c2-k b { display: block; font: 800 20px var(--font); color: #ff8a80; font-variant-numeric: tabular-nums; }
+.c2-nota { font-size: 10.5px; color: #7f8aa0; text-align: center; max-width: 420px; line-height: 1.4; }
+@media (max-width: 900px) { .c2-grid { grid-template-columns: 1fr; } .c2-viz { order: -1; min-height: 600px; } }
+@media (max-width: 560px) { .ph { width: min(256px, 68%); aspect-ratio: 9 / 19; } .ph-map { height: 24%; } .ph-r2 { display: none; } .ph-r1 .ph-bt span:nth-child(3) { display: none; } .ph-tag { position: static; display: inline-block; margin-bottom: 3px; } .ph-bt span { font-size: 9px; padding: 4px 7px; } .ph-feed { right: 8px; top: 190px; width: 150px; } .ph-n { font-size: 10px; padding: 6px 8px; } .c2-cuenta { right: 14px; } }
+@media (prefers-reduced-motion: reduce) { .c2-reloj::before { animation: none; } .ph-n { animation: none; opacity: 1; } }
 
 /* ═══ PLANES 2026 · "Elige tu nivel" (sección 6) ═════════════════════ */
 @property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
@@ -2124,12 +2161,23 @@ a.nav-logo:hover img.nl-txt { filter: drop-shadow(0 0 14px rgba(94,242,255,.95))
           Recupera ese dinero → Solicitar análisis gratis
         </button>
       </div>
-      <div class="c2-viz fade-in" id="c2viz" role="img" aria-label="Ilustración: de todas las personas que ven tu ficha en Google Maps, el 8% serían clientes que no te contactan, y ese dinero se va a la competencia.">
-        <canvas id="c2cv"></canvas>
-        <span class="c2-tag c2-t1">Te ven en Google Maps</span>
-        <span class="c2-tag c2-t2">8% serían clientes</span>
-        <span class="c2-tag c2-t3">Se van a la competencia</span>
+      <div class="c2-viz fade-in" id="c2viz" role="img" aria-label="Ilustración de un celular con una búsqueda en Google Maps: los competidores mejor optimizados aparecen con fotos y reseñas y se llevan las llamadas, mientras un negocio sin optimizar no recibe contactos.">
         <div class="c2-cuenta">clientes perdidos este mes<b id="c2cl">0</b></div>
+        <div class="ph" aria-hidden="true"><i class="ph-isl"></i>
+          <div class="ph-scr">
+            <div class="ph-st"><span>9:41</span><span>5G ▮▮▮</span></div>
+            <div class="ph-sb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>tu servicio cerca de mí</span></div>
+            <div class="ph-map"><span class="ph-pin a"><i>4,8 ★</i></span><span class="ph-pin b"><i>4,6 ★</i></span><span class="ph-pin d"><i>4,5 ★</i></span><span class="ph-pin tu"><i>Tú · 3,4 ★</i></span></div>
+            <div class="ph-list"><span class="ph-grab"></span>
+              <div class="ph-r ph-r1"><span class="ph-tag">Se lleva la llamada</span><b>Competidor A</b><small><span class="st">4,8 <em>★★★★★</em></span> (212) · Servicio local</small><small><span class="ok">Abierto</span> · Cierra 8 p. m. · 120 fotos</small><div class="ph-bt"><span>Llamar</span><span>Cómo llegar</span><span>Sitio web</span></div></div>
+              <div class="ph-r ph-r2"><b>Competidor B</b><small><span class="st">4,6 <em>★★★★☆</em></span> (98) · Servicio local</small><small><span class="ok">Abierto</span> · Cierra 7 p. m. · 64 fotos</small></div>
+              <div class="ph-r ph-tu"><span class="ph-tag">Mal optimizado</span><b>Tu negocio</b><small><span class="st">3,4 <em>★★★☆☆</em></span> (6) · Sin categoría clara</small><small class="ph-miss">Sin fotos · sin horario · sin descripción</small><div class="ph-bt"><span>Llamar</span><span>Cómo llegar</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ph-feed" id="c2feed" aria-hidden="true"></div>
+        <div class="c2-ks"><div class="c2-k"><b id="c2k1">0</b>llamadas perdidas</div><div class="c2-k"><b id="c2k2">0</b>rutas perdidas</div><div class="c2-k"><b id="c2k3">0</b>visitas web perdidas</div></div>
+        <p class="c2-nota">Estimación ilustrativa con la fórmula de la calculadora (impresiones × 8 % × $50.000). El reparto por tipo de contacto es de ejemplo; en la auditoría medimos tus cifras reales.</p>
       </div>
     </div>
   </div>
@@ -2946,58 +2994,29 @@ updateBottomNav();
 </script>
 
 <script>
-/* Calculadora · fuga de dinero. Fórmula original: impresiones × 8 % × $50.000 COP. */
+/* Calculadora · conversiones perdidas en el celular. Fórmula original: impresiones × 8 % × $50.000 COP. */
 (function(){
   var sec=document.getElementById('calculadora'); if(!sec||!sec.classList.contains('c2')) return;
-  var cv=document.getElementById('c2cv'), cx=cv.getContext('2d'), viz=document.getElementById('c2viz');
-  var res=document.getElementById('calcResult'), inp=document.getElementById('calcInput'), sl=document.getElementById('calcSlider'), seg=document.getElementById('c2seg'), clE=document.getElementById('c2cl');
+  var res=document.getElementById('calcResult'), inp=document.getElementById('calcInput'), sl=document.getElementById('calcSlider'), seg=document.getElementById('c2seg'), clE=document.getElementById('c2cl'), feed=document.getElementById('c2feed');
+  var k1=document.getElementById('c2k1'), k2=document.getElementById('c2k2'), k3=document.getElementById('c2k3');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var imp=5000, loss=imp*.08*50000, shown=loss, W=0, H=0, dpr=Math.min(devicePixelRatio||1,2), parts=[], run=false, last=0, acc=0, cubo=0, cuenta=0, t0=0, tw=null;
+  var imp=5000, loss=imp*.08*50000, shown=loss, run=false, t0=0, tw=null, timer=null, raf=null, idx=0;
   var fmt=function(v){ return '$'+Math.round(v).toLocaleString('es-CO'); };
-  function tam(){ var r=viz.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
-  function geo(){ var fx=W*.36; return { fx:fx, top:H*.13, topW:Math.min(W*.5,260), neckY:H*.7, neckW:34, leakY:H*.45, bx:W*.74, by:H*.58, bw:Math.min(W*.22,120), bh:H*.34 }; }
-  function ancho(g,y){ var k=Math.max(0,Math.min(1,(y-g.top)/(g.neckY-g.top))); return (g.topW*(1-k)+g.neckW*k)/2; }
-  function nueva(){ var g=geo(), x=g.fx+(Math.random()*2-1)*(g.topW/2-8); var moneda=Math.random()<.08;
-    return { x:x, y:g.top, vx:0, vy:50+Math.random()*30, mon:moneda, fase:0, a:1, r:moneda?5:2.4, fx:x-g.fx }; }
-  function paso(dt,now){
-    var g=geo();
-    // tasa de aparición según impresiones
-    var rate=Math.max(10,Math.min(70,imp/220)); acc+=rate*dt; while(acc>=1){ acc--; parts.push(nueva()); }
-    for(var i=parts.length-1;i>=0;i--){ var p=parts[i];
-      if(p.fase===0){ p.y+=p.vy*dt; var w=ancho(g,p.y); var tgt=g.fx+p.fx*(w/(g.topW/2)); p.x+=(tgt-p.x)*Math.min(1,dt*6);
-        if(p.mon && p.y>=g.leakY){ p.fase=1; p.t=0; p.sx=p.x; p.sy=p.y; }
-        else if(p.y>=g.neckY){ p.fase=2; } }
-      else if(p.fase===1){ p.t+=dt*.9; var t=Math.min(1,p.t); var ex=g.bx+g.bw/2, ey=g.by+10; p.x=p.sx+(ex-p.sx)*t; p.y=p.sy+(ey-p.sy)*t-Math.sin(t*Math.PI)*28+t*t*40; if(t>=1){ parts.splice(i,1); cubo=Math.min(1,cubo+.012); continue; } }
-      else { p.a-=dt*1.6; p.y+=40*dt; if(p.a<=0){ parts.splice(i,1); continue; } }
-    }
-    cubo=Math.max(0,cubo-.0006);
-  }
-  function dib(){
-    cx.clearRect(0,0,W,H); var g=geo();
-    // embudo
-    cx.beginPath(); cx.moveTo(g.fx-g.topW/2,g.top); cx.lineTo(g.fx+g.topW/2,g.top); cx.lineTo(g.fx+g.neckW/2,g.neckY); cx.lineTo(g.fx-g.neckW/2,g.neckY); cx.closePath();
-    var gr=cx.createLinearGradient(0,g.top,0,g.neckY); gr.addColorStop(0,'rgba(26,115,232,.28)'); gr.addColorStop(1,'rgba(26,115,232,.06)'); cx.fillStyle=gr; cx.fill(); cx.strokeStyle='rgba(138,180,248,.55)'; cx.lineWidth=2; cx.stroke();
-    // tubo de fuga
-    cx.strokeStyle='rgba(242,139,130,.5)'; cx.lineWidth=2; cx.setLineDash([6,6]); cx.beginPath(); var wl=ancho(g,g.leakY); cx.moveTo(g.fx+wl,g.leakY); cx.quadraticCurveTo(g.bx-30,g.leakY-30,g.bx+g.bw/2,g.by+10); cx.stroke(); cx.setLineDash([]);
-    // cubo de la competencia
-    cx.fillStyle='rgba(234,67,53,.08)'; cx.strokeStyle='rgba(242,139,130,.7)'; cx.lineWidth=2; cx.beginPath(); cx.roundRect(g.bx,g.by,g.bw,g.bh,[6,6,16,16]); cx.fill(); cx.stroke();
-    var h=g.bh*Math.min(1,.12+cubo); cx.save(); cx.beginPath(); cx.roundRect(g.bx+2,g.by+g.bh-h,g.bw-4,h-2,[4,4,14,14]); cx.clip(); var g2=cx.createLinearGradient(0,g.by+g.bh-h,0,g.by+g.bh); g2.addColorStop(0,'#fdd663'); g2.addColorStop(1,'#f9ab00'); cx.fillStyle=g2; cx.globalAlpha=.9; cx.fillRect(g.bx,g.by+g.bh-h,g.bw,h); cx.restore();
-    // partículas
-    for(var i=0;i<parts.length;i++){ var p=parts[i]; cx.globalAlpha=p.a;
-      if(p.mon){ cx.fillStyle='#fdd663'; cx.shadowColor='#fbbc04'; cx.shadowBlur=12; cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill(); cx.shadowBlur=0; cx.fillStyle='#8a5a00'; cx.font='700 7px sans-serif'; cx.textAlign='center'; cx.fillText('$',p.x,p.y+2.5); }
-      else { cx.fillStyle=p.fase===2?'#5f6b83':'#8ab4f8'; cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.283); cx.fill(); } }
-    cx.globalAlpha=1;
-  }
-  function frame(now){ if(!run) return; var dt=Math.min(.05,(now-last)/1000); last=now; paso(dt,now); dib();
-    seg.textContent=fmt((now-t0)/1000*loss/2592000); requestAnimationFrame(frame); }
-  function tween(to){ cancelAnimationFrame(tw); var from=shown, t=performance.now(), dur=reduce?1:900; (function f(now){ var k=Math.min(1,(now-t)/dur); k=1-Math.pow(1-k,3); shown=from+(to-from)*k; res.textContent=fmt(shown); if(k<1) tw=requestAnimationFrame(f); else shown=to; })(t); res.classList.add('pulso'); setTimeout(function(){res.classList.remove('pulso')},180); }
-  var cl0=0, clt; function clientes(to){ cancelAnimationFrame(clt); var f0=cl0,t=performance.now(); (function f(now){ var k=Math.min(1,(now-t)/900); k=1-Math.pow(1-k,3); cl0=f0+(to-f0)*k; clE.textContent=Math.round(cl0).toLocaleString('es-CO'); if(k<1) clt=requestAnimationFrame(f); })(t); }
-  window.calcViz=function(v){ imp=v; loss=Math.round(v*.08*50000); tween(loss); inp.value=v; sl.value=Math.min(v,100000); clientes(Math.round(v*.08));
+  var ICO={ call:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
+    ruta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>' };
+  var TIPOS=[['call','Llamada perdida','Competidor A'],['ruta','Ruta perdida','Competidor B'],['call','Llamada perdida','Competidor A'],['web','Visita web perdida','Competidor B'],['ruta','Ruta perdida','Competidor A']];
+  function chip(){ if(!feed) return; var t=TIPOS[idx++%TIPOS.length], d=document.createElement('div'); d.className='ph-n'; d.innerHTML=ICO[t[0]]+'<span><b>'+t[1]+'</b>se fue a '+t[2]+' · <em>−$50.000</em></span>'; feed.appendChild(d); while(feed.children.length>3) feed.removeChild(feed.firstChild); setTimeout(function(){ if(d.parentNode) d.parentNode.removeChild(d); },4100); }
+  function ciclo(){ if(!run) return; chip(); var ms=Math.max(700,Math.min(2600,2900-imp/45)); timer=setTimeout(ciclo,ms); }
+  function tween(to){ cancelAnimationFrame(tw); var from=shown, t=performance.now(), dur=reduce?1:900; (function f(now){ var k=Math.min(1,(now-t)/dur); k=1-Math.pow(1-k,3); shown=from+(to-from)*k; res.textContent=fmt(shown); if(k<1) tw=requestAnimationFrame(f); })(t); }
+  var cur=[0,0,0,0], ct; function contar(a){ cancelAnimationFrame(ct); var f0=cur.slice(), t=performance.now(); (function f(now){ var k=Math.min(1,(now-t)/900); k=1-Math.pow(1-k,3); var el=[clE,k1,k2,k3]; for(var i=0;i<4;i++){ cur[i]=f0[i]+(a[i]-f0[i])*k; el[i].textContent=Math.round(cur[i]).toLocaleString('es-CO'); } if(k<1) ct=requestAnimationFrame(f); })(t); }
+  window.calcViz=function(v){ imp=v; loss=Math.round(v*.08*50000); tween(loss); inp.value=v; sl.value=Math.min(v,100000); var n=Math.round(v*.08); contar([n,Math.round(n*.45),Math.round(n*.35),n-Math.round(n*.45)-Math.round(n*.35)]);
     sec.querySelectorAll('.c2-chip').forEach(function(c){ c.classList.toggle('on',+c.dataset.v===v); }); };
   sec.querySelectorAll('.c2-chip').forEach(function(c){ c.addEventListener('click',function(){ window.calcViz(+c.dataset.v); }); });
-  tam(); addEventListener('resize',tam); if(window.ResizeObserver) new ResizeObserver(tam).observe(viz);
+  function reloj(now){ if(!run) return; seg.textContent=fmt((now-t0)/1000*loss/2592000); raf=requestAnimationFrame(reloj); }
   window.calcViz(5000); shown=loss; res.textContent=fmt(loss);
-  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v&&!run){ run=true; if(!t0) t0=performance.now(); last=performance.now(); if(reduce){ for(var k=0;k<40;k++) parts.push(Object.assign(nueva(),{y:geo().top+k*5})); dib(); run=false; return; } requestAnimationFrame(frame); } else if(!v) run=false; },{threshold:.15}).observe(sec);
+  if(reduce&&feed){ chip(); chip(); }
+  if('IntersectionObserver' in window) new IntersectionObserver(function(en){ var v=en[0].isIntersecting; if(v&&!run){ run=true; if(!t0) t0=performance.now(); if(!reduce) ciclo(); raf=requestAnimationFrame(reloj); } else if(!v){ run=false; clearTimeout(timer); cancelAnimationFrame(raf); } },{threshold:.15}).observe(sec);
 })();
 </script>
 
